@@ -1,4 +1,7 @@
-import cgi
+try:
+    import html
+except ImportError:
+    import cgi as html
 import json
 import os
 import sys
@@ -27,6 +30,7 @@ def guess_content_type(path):
     return "application/octet-stream"
 
 
+
 def filesystem_path(base_path, request, url_base="/"):
     if base_path is None:
         base_path = request.doc_root
@@ -46,7 +50,6 @@ def filesystem_path(base_path, request, url_base="/"):
         raise HTTPException(404)
 
     return new_path
-
 
 class DirectoryHandler(object):
     def __init__(self, base_path=None, url_base="/"):
@@ -76,7 +79,7 @@ class DirectoryHandler(object):
 <ul>
 %(items)s
 </ul>
-""" % {"path": cgi.escape(url_path),
+""" % {"path": html.escape(url_path),
        "items": "\n".join(self.list_items(url_path, path))}  # noqa: E122
 
     def list_items(self, base_path, path):
@@ -93,30 +96,33 @@ class DirectoryHandler(object):
             yield ("""<li class="dir"><a href="%(link)s">%(name)s</a></li>""" %
                    {"link": link, "name": ".."})
         for item in sorted(os.listdir(path)):
-            link = cgi.escape(quote(item))
+            link = html.escape(quote(item))
             if os.path.isdir(os.path.join(path, item)):
                 link += "/"
                 class_ = "dir"
             else:
                 class_ = "file"
             yield ("""<li class="%(class)s"><a href="%(link)s">%(name)s</a></li>""" %
-                   {"link": link, "name": cgi.escape(item), "class": class_})
+                   {"link": link, "name": html.escape(item), "class": class_})
 
 
 def wrap_pipeline(path, request, response):
     query = parse_qs(request.url_parts.query)
+    pipe_string = ""
 
-    pipeline = None
-    if "pipe" in query:
-        pipeline = Pipeline(query["pipe"][-1])
-    elif ".sub." in path:
+    if ".sub." in path:
         ml_extensions = {".html", ".htm", ".xht", ".xhtml", ".xml", ".svg"}
-        escape_type = "html" if os.path.splitext(
-            path)[1] in ml_extensions else "none"
-        pipeline = Pipeline("sub(%s)" % escape_type)
+        escape_type = "html" if os.path.splitext(path)[1] in ml_extensions else "none"
+        pipe_string = "sub(%s)" % escape_type
 
-    if pipeline is not None:
-        response = pipeline(request, response)
+    if "pipe" in query:
+        if pipe_string:
+            pipe_string += "|"
+
+        pipe_string += query["pipe"][-1]
+
+    if pipe_string:
+        response = Pipeline(pipe_string)(request, response)
 
     return response
 
@@ -125,8 +131,7 @@ class FileHandler(object):
     def __init__(self, base_path=None, url_base="/"):
         self.base_path = base_path
         self.url_base = url_base
-        self.directory_handler = DirectoryHandler(
-            self.base_path, self.url_base)
+        self.directory_handler = DirectoryHandler(self.base_path, self.url_base)
 
     def __repr__(self):
         return "<%s base_path:%s url_base:%s>" % (self.__class__.__name__, self.base_path, self.url_base)
@@ -137,17 +142,15 @@ class FileHandler(object):
         if os.path.isdir(path):
             return self.directory_handler(request, response)
         try:
-            # This is probably racy with some other process trying to change the file
+            #This is probably racy with some other process trying to change the file
             file_size = os.stat(path).st_size
             response.headers.update(self.get_headers(request, path))
             if "Range" in request.headers:
                 try:
-                    byte_ranges = RangeParser()(
-                        request.headers['Range'], file_size)
+                    byte_ranges = RangeParser()( request.headers['Range'], file_size)
                 except HTTPException as e:
                     if e.code == 416:
-                        response.headers.set(
-                            "Content-Range", "bytes */%i" % file_size)
+                        response.headers.set("Content-Range", "bytes */%i" % file_size)
                         raise
             else:
                 byte_ranges = None
@@ -163,8 +166,8 @@ class FileHandler(object):
         rv = (self.load_headers(request, os.path.join(os.path.split(path)[0], "__dir__")) +
               self.load_headers(request, path))
 
-        if not any(key.lower() == "content-type" for (key, _) in rv):
-            rv.insert(0, ("Content-Type", guess_content_type(path)))
+        if not any(key.lower() == b"content-type" for (key, _) in rv):
+            rv.insert(0, (b"Content-Type", guess_content_type(path).encode("ascii")))
 
         return rv
 
@@ -177,14 +180,14 @@ class FileHandler(object):
             use_sub = False
 
         try:
-            with open(headers_path) as headers_file:
+            with open(headers_path, "rb") as headers_file:
                 data = headers_file.read()
         except IOError:
             return []
         else:
             if use_sub:
                 data = template(request, data, escape_type="none")
-            return [tuple(item.strip() for item in line.split(":", 1))
+            return [tuple(item.strip() for item in line.split(b":", 1))
                     for line in data.splitlines() if line]
 
     def get_data(self, response, path, byte_ranges):
@@ -205,8 +208,7 @@ class FileHandler(object):
                                             [("Content-Range", byte_range.header_value())])
                     return content
                 else:
-                    response.headers.set(
-                        "Content-Range", byte_ranges[0].header_value())
+                    response.headers.set("Content-Range", byte_ranges[0].header_value())
                     return self.get_range_data(f, byte_ranges[0])
 
     def set_response_multipart(self, response, ranges, f):
@@ -216,8 +218,7 @@ class FileHandler(object):
         else:
             parts_content_type = None
         content = MultipartContent()
-        response.headers.set(
-            "Content-Type", "multipart/byteranges; boundary=%s" % content.boundary)
+        response.headers.set("Content-Type", "multipart/byteranges; boundary=%s" % content.boundary)
         return parts_content_type, content
 
     def get_range_data(self, f, byte_range):
@@ -273,10 +274,10 @@ class PythonScriptHandler(object):
                 handler(request, response)
                 wrap_pipeline(path, request, response)
             else:
-                raise HTTPException(
-                    500, "No main function in script %s" % path)
+                raise HTTPException(500, "No main function in script %s" % path)
 
         self._set_path_and_load_file(request, response, func)
+
 
     def frame_handler(self, request):
         """
@@ -300,15 +301,12 @@ class PythonScriptHandler(object):
                 handler.handle_data = environ["handle_data"]
 
             if handler.func is _main and not hasattr(handler, "handle_headers") and not hasattr(handler, "handle_data"):
-                raise HTTPException(
-                    500, "No main function or handlers in script %s" % path)
+                raise HTTPException(500, "No main function or handlers in script %s" % path)
 
             return handler
         return self._set_path_and_load_file(request, None, func)
 
-
 python_script_handler = PythonScriptHandler()
-
 
 class FunctionHandler(object):
     def __init__(self, func):
@@ -338,10 +336,9 @@ class FunctionHandler(object):
             wrap_pipeline('', request, response)
 
 
-# The generic name here is so that this can be used as a decorator
+#The generic name here is so that this can be used as a decorator
 def handler(func):
     return FunctionHandler(func)
-
 
 class JsonHandler(object):
     def __init__(self, func):
@@ -364,10 +361,8 @@ class JsonHandler(object):
         response.headers.set("Content-Length", length)
         return value
 
-
 def json_handler(func):
     return JsonHandler(func)
-
 
 class AsIsHandler(object):
     def __init__(self, base_path=None, url_base="/"):
@@ -385,9 +380,7 @@ class AsIsHandler(object):
         except IOError:
             raise HTTPException(404)
 
-
 as_is_handler = AsIsHandler()
-
 
 class BasicAuthHandler(object):
     def __init__(self, handler, user, password):
@@ -415,9 +408,7 @@ class BasicAuthHandler(object):
                 return response
             return self.handler(request, response)
 
-
 basic_auth_handler = BasicAuthHandler(file_handler, None, None)
-
 
 class ErrorHandler(object):
     def __init__(self, status):
