@@ -327,6 +327,26 @@ class SessionsApiHandler(ApiHandler):
                 info[0].__name__ + u": " + info[1].args[0])
             response.status = 500
 
+    def push_event(self, request, response):
+        try:
+            uri_parts = self.parse_uri(request)
+            token = uri_parts[3]
+            message = None
+            body = request.body.decode(u"utf-8")
+            if body != u"":
+                message = json.loads(body)
+
+            self._event_dispatcher.dispatch_event(
+                    token,
+                    message["type"],
+                    message["data"])
+        except Exception:
+            info = sys.exc_info()
+            traceback.print_tb(info[2])
+            print(u"Failed to find session: "
+                + info[0].__name__ + u": " + info[1].args[0])
+            response.status = 500
+
     def handle_request(self, request, response):
         method = request.method
         uri_parts = self.parse_uri(request)
@@ -379,6 +399,9 @@ class SessionsApiHandler(ApiHandler):
                     return
                 if function == u"resume":
                     self.resume_session(request, response)
+                    return
+                if function == u"events":
+                    self.push_event(request, response)
                     return
             if method == u"PUT":
                 if function == u"labels":
