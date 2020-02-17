@@ -121,11 +121,13 @@ const NON_IMMERSIVE_VIEWS = [{
 ];
 
 const ALL_FEATURES = [
-    "viewer",
-    "local",
-    "local-floor",
-    "bounded-floor",
-    "unbounded",
+  'viewer',
+  'local',
+  'local-floor',
+  'bounded-floor',
+  'unbounded',
+  'hit-test',
+  'dom-overlay',
 ];
 
 const TRACKED_IMMERSIVE_DEVICE = {

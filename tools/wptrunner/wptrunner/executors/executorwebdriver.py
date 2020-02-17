@@ -1,11 +1,12 @@
+from __future__ import absolute_import
 import json
 import os
 import socket
 import threading
 import time
 import traceback
-import urlparse
 import uuid
+from six.moves.urllib.parse import urljoin
 
 from .base import (CallbackHandler,
                    CrashtestExecutor,
@@ -66,10 +67,17 @@ class WebDriverBaseProtocolPart(BaseProtocolPart):
         while True:
             try:
                 self.webdriver.execute_async_script("")
-            except (client.TimeoutException, client.ScriptTimeoutException):
+            except (client.TimeoutException,
+                    client.ScriptTimeoutException,
+                    client.JavascriptErrorException):
+                # A JavascriptErrorException will happen when we navigate;
+                # by ignoring it it's possible to reload the test whilst the
+                # harness remains paused
                 pass
-            except (socket.timeout, client.NoSuchWindowException,
-                    client.UnknownErrorException, IOError):
+            except (socket.timeout,
+                    client.NoSuchWindowException,
+                    client.UnknownErrorException,
+                    IOError):
                 break
             except Exception as e:
                 self.logger.error(traceback.format_exc(e))
@@ -86,8 +94,8 @@ class WebDriverTestharnessProtocolPart(TestharnessProtocolPart):
     def load_runner(self, url_protocol):
         if self.runner_handle:
             self.webdriver.window_handle = self.runner_handle
-        url = urlparse.urljoin(self.parent.executor.server_url(url_protocol),
-                               "/testharness_runner.html")
+        url = urljoin(self.parent.executor.server_url(url_protocol),
+                      "/testharness_runner.html")
         self.logger.debug("Loading %s" % url)
 
         self.webdriver.url = url

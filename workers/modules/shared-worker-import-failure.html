@@ -18,16 +18,23 @@ promise_test(async () => {
   assert_equals(msg_event.data, 'TypeError');
 }, 'importScripts() on module worker should throw an exception.');
 
+promise_test(() => {
+  const scriptURL = 'resources/non-existent-worker.js';
+  const worker = new SharedWorker(scriptURL, { type: 'module' });
+  return new Promise(resolve => worker.onerror = resolve);
+}, 'Worker construction for non-existent script should dispatch an ' +
+   'ErrorEvent.');
+
 test(() => {
   const scriptURL = 'http://invalid:123$';
-  assert_throws('SyntaxError',
-                () => new SharedWorker(scriptURL, { type: 'module' }));
+  assert_throws_dom('SyntaxError',
+                    () => new SharedWorker(scriptURL, { type: 'module' }));
 }, 'SharedWorker construction for an invalid URL should throw an exception.');
 
 test(() => {
   const scriptURL = 'file:///static-import-worker.js';
-  assert_throws('SecurityError',
-                () => new SharedWorker(scriptURL, { type: 'module' }));
+  assert_throws_dom('SecurityError',
+                    () => new SharedWorker(scriptURL, { type: 'module' }));
 }, 'SharedWorker construction for a file URL should throw an exception.');
 
 </script>
