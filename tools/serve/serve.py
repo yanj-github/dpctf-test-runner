@@ -20,8 +20,9 @@ from collections import defaultdict, OrderedDict
 from itertools import chain, product
 from multiprocessing import Process, Event
 
-import re
-from subprocess import Popen, PIPE, STDOUT
+import subprocess
+from manifest import manifest
+import localpaths
 
 from localpaths import repo_root
 from six.moves import reload_module
@@ -331,7 +332,6 @@ class RoutesBuilder(object):
         self.forbidden = [("*", "/_certs/*", handlers.ErrorHandler(404)),
                           ("*", "/tools/*", handlers.ErrorHandler(404)),
                           ("*", "{spec}/tools/*", handlers.ErrorHandler(404)),
-                          ("*", "/serve.py", handlers.ErrorHandler(404)),
                           ("*", "/results/", handlers.ErrorHandler(404))]
 
         self.extra = []
@@ -403,11 +403,14 @@ def build_routes(aliases, wave_cfg=None):
 
     # Add Wave specific Handler
     if wave_cfg is not None and wave_cfg.get("is_wave") is True:
+        logger.debug("Loading manifest ...")
+        data = load_manifest()
         from wave.wave_server import WaveServer
         wave_server = WaveServer()
         wave_server.initialize(
             configuration_file_path=os.path.abspath("./config.json"),
-            reports_enabled=wave_cfg.get("report"))
+            reports_enabled=wave_cfg.get("report"),
+            tests=data["items"])
 
         class WaveHandler(object):
             def __call__(self, request, response):
@@ -840,16 +843,17 @@ class ConfigBuilder(config.ConfigBuilder):
             "none": {}
         },
         "aliases": [],
-        # wave specific configuration parameters
-        "results": "./results",
-        "timeouts": {
-            "automatic": 60000,
-            "manual": 300000
-        },
-        "enable_results_import": False,
-        "web_root": "/wave",
-        "persisting_interval": 20,
-        "api_titles": []
+        "wave": {  # wave specific configuration parameters
+            "results": "./results",
+            "timeouts": {
+                "automatic": 60000,
+                "manual": 300000
+            },
+            "enable_results_import": False,
+            "web_root": "/wave",
+            "persisting_interval": 20,
+            "api_titles": []
+        }
     }
 
     computed_properties = ["ws_doc_root"] + config.ConfigBuilder.computed_properties
@@ -984,35 +988,44 @@ def run_wave(venv=None, **kwargs):
 
     if kwargs['report'] is True:
         if not is_wptreport_installed():
-            raise Exception("wptreport is not installed. Please install it from https://github.com/w3c/wptreport!!")
+            raise Exception("wptreport is not installed. Please install it from https://github.com/w3c/wptreport")
 
     run(**kwargs)
 
-# used for semantic version comparison
-def is_semver(prefix, line):
-    idx = len(prefix)
-    # slice the prefix, because is not valid semantic versioning
-    line = line[idx:] if line.find(prefix, 0, idx) != -1 else line
-    line = line.strip()
-    # semantic versioning, see: https://semver.org/
-    # regex: https://regex101.com/r/vkijKf/1/
-    regex = re.match(('^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)'
-            '(?:-('
-            '(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)'
-            '(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))'
-            '*))'
-            '?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$'), line)
-    return regex
 
 # execute wptreport version check
 def is_wptreport_installed():
-    report_p = Popen("wptreport --version", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
-    for line in report_p.stdout:
-        if line and not line.isspace():
-            if not is_semver("wptreport", line):
-                return False
-            else:
-                return True
+    try:
+        subprocess.check_output(["wptreport", "--help"])
+        return True
+    except Exception:
+        return False
+
+
+def load_manifest():
+    root = localpaths.repo_root
+    path = os.path.join(root, "MANIFEST.json")
+    manifest_file = manifest.load_and_update(root, path, "/", parallel=False)
+
+    supported_types = ["testharness", "manual"]
+    data = {"items": {},
+            "url_base": "/"}
+    for item_type in supported_types:
+        data["items"][item_type] = {}
+    for item_type, path, tests in manifest_file.itertypes(*supported_types):
+        tests_data = []
+        for item in tests:
+            test_data = [item.url[1:]]
+            if item_type == "reftest":
+                test_data.append(item.references)
+            test_data.append({})
+            if item_type != "manual":
+                test_data[-1]["timeout"] = item.timeout
+            tests_data.append(test_data)
+        assert path not in data["items"][item_type]
+        data["items"][item_type][path] = tests_data
+    return data
+
 
 def main():
     kwargs = vars(get_parser().parse_args())
