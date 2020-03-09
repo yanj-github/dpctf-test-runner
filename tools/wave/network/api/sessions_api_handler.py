@@ -14,7 +14,8 @@ TOKEN_LENGTH = 36
 
 
 class SessionsApiHandler(ApiHandler):
-    def __init__(self, sessions_manager, results_manager, event_dispatcher):
+    def __init__(self, sessions_manager, results_manager, event_dispatcher, web_root):
+        super(SessionsApiHandler, self).__init__(web_root)
         self._sessions_manager = sessions_manager
         self._results_manager = results_manager
         self._event_dispatcher = event_dispatcher
@@ -71,8 +72,7 @@ class SessionsApiHandler(ApiHandler):
     def read_session(self, request, response):
         try:
             uri_parts = self.parse_uri(request)
-            # convert unicode to ascii to get a str type, ignore special chars
-            token = uri_parts[3]
+            token = uri_parts[2]
 
             session = self._sessions_manager.read_session(token)
             if session is None:
@@ -97,8 +97,7 @@ class SessionsApiHandler(ApiHandler):
     def read_session_status(self, request, response):
         try:
             uri_parts = self.parse_uri(request)
-            # convert unicode to ascii to get a str type, ignore special chars
-            token = uri_parts[3]
+            token = uri_parts[2]
 
             session = self._sessions_manager.read_session_status(token)
             if session is None:
@@ -137,8 +136,7 @@ class SessionsApiHandler(ApiHandler):
     def update_session_configuration(self, request, response):
         try:
             uri_parts = self.parse_uri(request)
-            # convert unicode to ascii to get a str type, ignore special chars
-            token = uri_parts[3]
+            token = uri_parts[2]
 
             config = {}
             body = request.body.decode("utf-8")
@@ -180,7 +178,7 @@ class SessionsApiHandler(ApiHandler):
         try:
             uri_parts = self.parse_uri(request)
             # convert unicode to ascii to get a text type, ignore special chars
-            token = uri_parts[3]
+            token = uri_parts[2]
             body = request.body.decode("utf-8")
             labels = None
             if body != "":
@@ -196,7 +194,7 @@ class SessionsApiHandler(ApiHandler):
     def delete_session(self, request, response):
         try:
             uri_parts = self.parse_uri(request)
-            token = uri_parts[3]
+            token = uri_parts[2]
 
             session = self._sessions_manager.read_session(token)
             if session is None:
@@ -212,7 +210,7 @@ class SessionsApiHandler(ApiHandler):
     def start_session(self, request, response):
         try:
             uri_parts = self.parse_uri(request)
-            token = uri_parts[3]
+            token = uri_parts[2]
 
             self._sessions_manager.start_session(token)
         except Exception:
@@ -222,7 +220,7 @@ class SessionsApiHandler(ApiHandler):
     def pause_session(self, request, response):
         try:
             uri_parts = self.parse_uri(request)
-            token = uri_parts[3]
+            token = uri_parts[2]
 
             self._sessions_manager.pause_session(token)
         except Exception:
@@ -232,7 +230,7 @@ class SessionsApiHandler(ApiHandler):
     def stop_session(self, request, response):
         try:
             uri_parts = self.parse_uri(request)
-            token = uri_parts[3]
+            token = uri_parts[2]
 
             self._sessions_manager.stop_session(token)
         except Exception:
@@ -242,7 +240,7 @@ class SessionsApiHandler(ApiHandler):
     def resume_session(self, request, response):
         try:
             uri_parts = self.parse_uri(request)
-            token = uri_parts[3]
+            token = uri_parts[2]
 
             resume_token = None
             body = request.body.decode("utf-8")
@@ -257,7 +255,7 @@ class SessionsApiHandler(ApiHandler):
     def find_session(self, request, response):
         try:
             uri_parts = self.parse_uri(request)
-            fragment = uri_parts[3]
+            fragment = uri_parts[2]
             token = self._sessions_manager.find_token(fragment)
             if token is None:
                 response.status = 404
@@ -270,7 +268,7 @@ class SessionsApiHandler(ApiHandler):
     def register_event_listener(self, request, response):
         try:
             uri_parts = self.parse_uri(request)
-            token = uri_parts[3]
+            token = uri_parts[2]
 
             event = threading.Event()
             http_polling_client = HttpPollingClient(token, event)
@@ -287,17 +285,16 @@ class SessionsApiHandler(ApiHandler):
     def handle_request(self, request, response):
         method = request.method
         uri_parts = self.parse_uri(request)
-        uri_parts = uri_parts[3:]
 
         # /api/sessions
-        if len(uri_parts) == 0:
+        if len(uri_parts) == 2:
             if method == "POST":
                 self.create_session(request, response)
                 return
 
         # /api/sessions/<token>
-        if len(uri_parts) == 1:
-            function = uri_parts[0]
+        if len(uri_parts) == 3:
+            function = uri_parts[2]
             if method == "GET":
                 if function == "public":
                     self.read_public_sessions(request, response)
@@ -315,8 +312,8 @@ class SessionsApiHandler(ApiHandler):
                 return
 
         # /api/sessions/<token>/<function>
-        if len(uri_parts) == 2:
-            function = uri_parts[1]
+        if len(uri_parts) == 4:
+            function = uri_parts[3]
             if method == "GET":
                 if function == "status":
                     self.read_session_status(request, response)

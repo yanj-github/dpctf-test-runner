@@ -11,6 +11,9 @@ logger = logging.getLogger("wave-api-handler")
 
 
 class ApiHandler(object):
+    def __init__(self, web_root):
+        self._web_root = web_root
+
     def set_headers(self, response, headers):
         if not isinstance(response.headers, list):
             response.headers = []
@@ -37,6 +40,9 @@ class ApiHandler(object):
 
     def parse_uri(self, request):
         path = request.url_parts.path
+        if self._web_root is not None:
+            path = path[len(self._web_root):]
+
         uri_parts = list(filter(None, path.split("/")))
         return uri_parts
 

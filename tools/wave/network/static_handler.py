@@ -14,12 +14,12 @@ class StaticHandler(object):
         self._https_port = https_port
 
     def handle_request(self, request, response):
-        file_path = "."
+        file_path = request.request_path
 
-        for part in request.request_path.split("/")[2:]:
-            file_path = file_path + "/" + part
+        if self._web_root is not None:
+            file_path = file_path[len(self._web_root):]
 
-        if file_path == "." or file_path == "./":
+        if file_path == "." or file_path == "./" or file_path == "":
             file_path = "index.html"
 
         file_path = file_path.split("?")[0]

@@ -11,13 +11,15 @@ class HttpHandler(object):
         sessions_api_handler=None,
         tests_api_handler=None,
         results_api_handler=None,
-        http_port=None
+        http_port=None,
+        web_root=None
     ):
         self.static_handler = static_handler
         self.sessions_api_handler = sessions_api_handler
         self.tests_api_handler = tests_api_handler
         self.results_api_handler = results_api_handler
         self._http_port = http_port
+        self._web_root = web_root
 
     def handle_request(self, request, response):
         response.headers = [
@@ -28,13 +30,14 @@ class HttpHandler(object):
         if request.method == "OPTIONS":
             return
 
-        is_api_call = False
+        path = request.request_path
+        if self._web_root is not None:
+            path = path[len(self._web_root):]
 
-        for index, part in enumerate(request.request_path.split("/")):
+        is_api_call = False
+        for index, part in enumerate(path.split("/")):
             if index > 2:
                 break
-            if part == "" or part is None or index != 2:
-                continue
             if part != "api":
                 continue
 

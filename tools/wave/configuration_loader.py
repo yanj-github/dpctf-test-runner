@@ -25,7 +25,7 @@ def load(configuration_file_path):
         "wave", default_configuration["wave"]).get(
         "web_root", default_configuration["wave"]["web_root"])
     if not web_root.startswith("/"):
-        web_root = web_root + "/"
+        web_root = "/" + web_root
     if not web_root.endswith("/"):
         web_root += "/"
     configuration["web_root"] = web_root

@@ -8,13 +8,14 @@ from ...data.exceptions.invalid_data_exception import InvalidDataException
 
 
 class ResultsApiHandler(ApiHandler):
-    def __init__(self, results_manager):
+    def __init__(self, results_manager, web_root):
+        super(ResultsApiHandler, self).__init__(web_root)
         self._results_manager = results_manager
 
     def create_result(self, request, response):
         try:
             uri_parts = self.parse_uri(request)
-            token = uri_parts[3]
+            token = uri_parts[2]
 
             data = None
             body = request.body.decode("utf-8")
@@ -30,7 +31,7 @@ class ResultsApiHandler(ApiHandler):
     def read_results(self, request, response):
         try:
             uri_parts = self.parse_uri(request)
-            token = uri_parts[3]
+            token = uri_parts[2]
 
             results = self._results_manager.read_results(token)
 
@@ -43,7 +44,7 @@ class ResultsApiHandler(ApiHandler):
     def read_results_compact(self, request, response):
         try:
             uri_parts = self.parse_uri(request)
-            token = uri_parts[3]
+            token = uri_parts[2]
 
             results = self._results_manager.read_flattened_results(token)
 
@@ -69,7 +70,7 @@ class ResultsApiHandler(ApiHandler):
     def read_results_api_wpt_report_url(self, request, response):
         try:
             uri_parts = self.parse_uri(request)
-            token = uri_parts[3]
+            token = uri_parts[2]
             api = uri_parts[4]
 
             uri = self._results_manager.read_results_wpt_report_uri(token, api)
@@ -96,7 +97,7 @@ class ResultsApiHandler(ApiHandler):
     def download_results_api_json(self, request, response):
         try:
             uri_parts = self.parse_uri(request)
-            token = uri_parts[3]
+            token = uri_parts[2]
             api = uri_parts[4]
             blob = self._results_manager.export_results_api_json(token, api)
             if blob is None:
@@ -116,7 +117,7 @@ class ResultsApiHandler(ApiHandler):
     def download_results_all_api_jsons(self, request, response):
         try:
             uri_parts = self.parse_uri(request)
-            token = uri_parts[3]
+            token = uri_parts[2]
             blob = self._results_manager.export_results_all_api_jsons(token)
             file_name = token.split("-")[0] + "_results_json.zip"
             self.send_zip(blob, file_name, response)
@@ -127,7 +128,7 @@ class ResultsApiHandler(ApiHandler):
     def download_results(self, request, response):
         try:
             uri_parts = self.parse_uri(request)
-            token = uri_parts[3]
+            token = uri_parts[2]
             blob = self._results_manager.export_results(token)
             if blob is None:
                 response.status = 404
@@ -141,7 +142,7 @@ class ResultsApiHandler(ApiHandler):
     def download_results_overview(self, request, response):
         try:
             uri_parts = self.parse_uri(request)
-            token = uri_parts[3]
+            token = uri_parts[2]
             blob = self._results_manager.export_results_overview(token)
             if blob is None:
                 response.status = 404
@@ -172,12 +173,11 @@ class ResultsApiHandler(ApiHandler):
     def handle_request(self, request, response):
         method = request.method
         uri_parts = self.parse_uri(request)
-        uri_parts = uri_parts[3:]
 
         # /api/results/<token>
-        if len(uri_parts) == 1:
+        if len(uri_parts) == 3:
             if method == "POST":
-                if uri_parts[0] == "import":
+                if uri_parts[2] == "import":
                     self.import_results(request, response)
                     return
                 self.create_result(request, response)
@@ -192,8 +192,8 @@ class ResultsApiHandler(ApiHandler):
                     return
 
         # /api/results/<token>/<function>
-        if len(uri_parts) == 2:
-            function = uri_parts[1]
+        if len(uri_parts) == 4:
+            function = uri_parts[3]
             if method == "GET":
                 if function == "compact":
                     self.read_results_compact(request, response)
@@ -212,8 +212,8 @@ class ResultsApiHandler(ApiHandler):
                     return
 
         # /api/results/<token>/<api>/<function>
-        if len(uri_parts) == 3:
-            function = uri_parts[2]
+        if len(uri_parts) == 5:
+            function = uri_parts[4]
             if method == "GET":
                 if function == "reporturl":
                     self.read_results_api_wpt_report_url(request, response)

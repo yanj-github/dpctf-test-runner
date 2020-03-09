@@ -86,7 +86,8 @@ class WaveServer(object):
         sessions_api_handler = SessionsApiHandler(
             sessions_manager=sessions_manager,
             results_manager=results_manager,
-            event_dispatcher=event_dispatcher
+            event_dispatcher=event_dispatcher,
+            web_root=configuration["web_root"]
         )
         tests_api_handler = TestsApiHandler(
             tests_manager=tests_manager,
@@ -97,7 +98,9 @@ class WaveServer(object):
             web_root=configuration["web_root"],
             test_loader=test_loader
         )
-        results_api_handler = ResultsApiHandler(results_manager)
+        results_api_handler = ResultsApiHandler(
+            results_manager,
+            web_root=configuration["web_root"])
 
         # Initialize HTTP server
         http_handler = HttpHandler(
@@ -105,6 +108,7 @@ class WaveServer(object):
             sessions_api_handler=sessions_api_handler,
             tests_api_handler=tests_api_handler,
             results_api_handler=results_api_handler,
-            http_port=configuration["wpt_port"]
+            http_port=configuration["wpt_port"],
+            web_root=configuration["web_root"]
         )
         self.handle_request = http_handler.handle_request

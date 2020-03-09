@@ -22,6 +22,7 @@ class TestsApiHandler(ApiHandler):
         web_root,
         test_loader
     ):
+        super(TestsApiHandler, self).__init__(web_root)
         self._tests_manager = tests_manager
         self._sessions_manager = sessions_manager
         self._wpt_port = wpt_port
@@ -36,7 +37,7 @@ class TestsApiHandler(ApiHandler):
 
     def read_session_tests(self, request, response):
         uri_parts = self.parse_uri(request)
-        token = uri_parts[3]
+        token = uri_parts[2]
         session = self._sessions_manager.read_session(token)
 
         if session is None:
@@ -54,7 +55,7 @@ class TestsApiHandler(ApiHandler):
     def read_next_test(self, request, response):
         try:
             uri_parts = self.parse_uri(request)
-            token = uri_parts[3]
+            token = uri_parts[2]
 
             hostname = self._hostname
 
@@ -66,7 +67,7 @@ class TestsApiHandler(ApiHandler):
             if session.status == PAUSED:
                 url = self._generate_wave_url(
                     hostname=hostname,
-                    uri="/wave/pause.html",
+                    uri="pause.html",
                     token=token
                 )
                 self.send_json({"next_test": url}, response)
@@ -74,7 +75,7 @@ class TestsApiHandler(ApiHandler):
             if session.status == COMPLETED or session.status == ABORTED:
                 url = self._generate_wave_url(
                     hostname=hostname,
-                    uri="/wave/finish.html",
+                    uri="finish.html",
                     token=token
                 )
                 self.send_json({"next_test": url}, response)
@@ -82,7 +83,7 @@ class TestsApiHandler(ApiHandler):
             if session.status == PENDING:
                 url = self._generate_wave_url(
                     hostname=hostname,
-                    uri="/wave/newsession.html",
+                    uri="newsession.html",
                     token=token
                 )
                 self.send_json({"next_test": url}, response)
@@ -95,7 +96,7 @@ class TestsApiHandler(ApiHandler):
                     return
                 url = self._generate_wave_url(
                     hostname=hostname,
-                    uri="/wave/finish.html",
+                    uri="finish.html",
                     token=token
                 )
                 self.send_json({"next_test": url}, response)
@@ -120,7 +121,7 @@ class TestsApiHandler(ApiHandler):
     def read_last_completed(self, request, response):
         try:
             uri_parts = self.parse_uri(request)
-            token = uri_parts[3]
+            token = uri_parts[2]
             query = self.parse_query_parameters(request)
             count = None
             if "count" in query:
@@ -161,7 +162,7 @@ class TestsApiHandler(ApiHandler):
     def read_malfunctioning(self, request, response):
         try:
             uri_parts = self.parse_uri(request)
-            token = uri_parts[3]
+            token = uri_parts[2]
             tm = self._tests_manager
             malfunctioning_tests = tm.read_malfunctioning_tests(token)
 
@@ -173,7 +174,7 @@ class TestsApiHandler(ApiHandler):
     def update_malfunctioning(self, request, response):
         try:
             uri_parts = self.parse_uri(request)
-            token = uri_parts[3]
+            token = uri_parts[2]
 
             data = None
             body = request.body.decode("utf-8")
@@ -196,26 +197,25 @@ class TestsApiHandler(ApiHandler):
     def handle_request(self, request, response):
         method = request.method
         uri_parts = self.parse_uri(request)
-        uri_parts = uri_parts[3:]
 
         # /api/tests
-        if len(uri_parts) == 0:
+        if len(uri_parts) == 2:
             if method == "GET":
                 self.read_tests(response)
                 return
 
         # /api/tests/<token>
-        if len(uri_parts) == 1:
+        if len(uri_parts) == 3:
             if method == "GET":
-                if uri_parts[0] == "apis":
+                if uri_parts[2] == "apis":
                     self.read_available_apis(request, response)
                     return
                 self.read_session_tests(request, response)
                 return
 
         # /api/tests/<token>/<function>
-        if len(uri_parts) == 2:
-            function = uri_parts[1]
+        if len(uri_parts) == 4:
+            function = uri_parts[3]
             if method == "GET":
                 if function == "next":
                     self.read_next_test(request, response)
@@ -234,6 +234,9 @@ class TestsApiHandler(ApiHandler):
         response.status = 404
 
     def _generate_wave_url(self, hostname, uri, token):
+        if self._web_root is not None:
+            uri = self._web_root + uri
+
         return self._generate_url(
             hostname=hostname,
             uri=uri,
