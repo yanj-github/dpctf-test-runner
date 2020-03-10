@@ -71,7 +71,7 @@ class ResultsApiHandler(ApiHandler):
         try:
             uri_parts = self.parse_uri(request)
             token = uri_parts[2]
-            api = uri_parts[4]
+            api = uri_parts[3]
 
             uri = self._results_manager.read_results_wpt_report_uri(token, api)
             self.send_json({"uri": uri}, response)
@@ -98,7 +98,7 @@ class ResultsApiHandler(ApiHandler):
         try:
             uri_parts = self.parse_uri(request)
             token = uri_parts[2]
-            api = uri_parts[4]
+            api = uri_parts[3]
             blob = self._results_manager.export_results_api_json(token, api)
             if blob is None:
                 response.status = 404
@@ -184,7 +184,7 @@ class ResultsApiHandler(ApiHandler):
                 return
 
             if method == "GET":
-                if uri_parts[0] == "config":
+                if uri_parts[2] == "config":
                     self.read_results_config(request, response)
                     return
                 else:
