@@ -7,8 +7,8 @@
     "virtualenv": false
   },
   "serve-wave": {
-    "path": "wave.py",
-    "script": "run",
+    "path": "serve.py",
+    "script": "run_wave",
     "parser": "get_parser",
     "help": "Run wptserve server for WAVE",
     "virtualenv": true,

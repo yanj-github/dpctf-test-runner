@@ -30,9 +30,7 @@ class HttpHandler(object):
         if request.method == "OPTIONS":
             return
 
-        path = request.request_path
-        if self._web_root is not None:
-            path = path[len(self._web_root):]
+        path = self._remove_web_root(request.request_path)
 
         is_api_call = False
         for index, part in enumerate(path.split("/")):
@@ -52,14 +50,8 @@ class HttpHandler(object):
             self.handle_static_file(request, response)
 
     def handle_api(self, request, response):
-        api_name = None
-
-        for index, part in enumerate(request.request_path.split("/")):
-            if index > 3:
-                break
-            if part == "" or part is None or index != 3:
-                continue
-            api_name = part.replace("?", "")
+        path = self._remove_web_root(request.request_path)
+        api_name = path.split("/")[1]
 
         if api_name is None:
             return
@@ -76,6 +68,12 @@ class HttpHandler(object):
 
     def handle_static_file(self, request, response):
         self.static_handler.handle_request(request, response)
+
+    def _remove_web_root(self, path):
+        if self._web_root is not None:
+            path = path[len(self._web_root):]
+        return path
+
 
     def _proxy(self, request, response):
         host = 'localhost'

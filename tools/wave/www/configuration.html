@@ -277,7 +277,7 @@
           configurationUi.renderResumeView();
         },
         openResultsPage: function(token) {
-          location.href = "results.html?token=" + token;
+          location.href = WEB_ROOT + "results.html?token=" + token;
         },
         handleAddExludedTestsRaw: function() {
           var excludedTestsTextArea = UI.getElement("excluded-tests-text");

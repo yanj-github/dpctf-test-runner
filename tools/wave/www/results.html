@@ -27,7 +27,7 @@
           resultUi.render();
           resultUi.refreshData();
         } else {
-          location.href = "/wave/overview.html" + location.search;
+          location.href = WEB_ROOT + "overview.html" + location.search;
         }
         WaveService.addRecentSession(token);
       };
@@ -140,7 +140,7 @@
           }
         },
         openResultsOverview() {
-          location.href = "/wave/overview.html";
+          location.href = WEB_ROOT + "overview.html";
         },
         stopSession() {
           WaveService.stopSession(token, resultUi.refreshData);

@@ -132,7 +132,7 @@
       });
 
       var resultsUrl =
-        "http://" + location.host + "/overview.html" + location.search;
+        "http://" + location.host + WEB_ROOT + "overview.html" + location.search;
       new QRCode(document.getElementById("qr-code"), resultsUrl);
 
       var resultsButton = document.getElementById("results-button");
