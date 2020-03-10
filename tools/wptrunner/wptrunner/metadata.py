@@ -128,7 +128,7 @@ def unexpected_changes(manifests, change_data, files_changed):
     files_changed = set(files_changed)
 
     root_manifest = None
-    for manifest, paths in manifests.iteritems():
+    for manifest, paths in iteritems(manifests):
         if paths["url_base"] == "/":
             root_manifest = manifest
             break
@@ -258,7 +258,7 @@ def load_test_data(test_paths):
     manifests = manifest_loader.load()
 
     id_test_map = {}
-    for test_manifest, paths in manifests.iteritems():
+    for test_manifest, paths in iteritems(manifests):
         id_test_map.update(create_test_tree(paths["metadata_path"],
                                             test_manifest))
     return id_test_map
@@ -497,6 +497,9 @@ class ExpectedUpdater(object):
         return dir_id, self.id_test_map[dir_id]
 
     def lsan_leak(self, data):
+        if data["scope"] == "/":
+            logger.warning("Not updating lsan annotations for root scope")
+            return
         dir_id, test_data = self.test_for_scope(data)
         test_data.set(dir_id, None, "lsan",
                       self.run_info, (data["frames"], data.get("allowed_match")))
@@ -504,6 +507,9 @@ class ExpectedUpdater(object):
             test_data.set_requires_update()
 
     def mozleak_object(self, data):
+        if data["scope"] == "/":
+            logger.warning("Not updating mozleak annotations for root scope")
+            return
         dir_id, test_data = self.test_for_scope(data)
         test_data.set(dir_id, None, "leak-object",
                       self.run_info, ("%s:%s", (data["process"], data["name"]),
@@ -512,6 +518,9 @@ class ExpectedUpdater(object):
             test_data.set_requires_update()
 
     def mozleak_total(self, data):
+        if data["scope"] == "/":
+            logger.warning("Not updating mozleak annotations for root scope")
+            return
         if data["bytes"]:
             dir_id, test_data = self.test_for_scope(data)
             test_data.set(dir_id, None, "leak-threshold",

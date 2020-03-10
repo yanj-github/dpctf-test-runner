@@ -20,9 +20,6 @@ from collections import defaultdict, OrderedDict
 from itertools import chain, product
 from multiprocessing import Process, Event
 
-import re
-from subprocess import Popen, PIPE, STDOUT
-
 from localpaths import repo_root
 from six.moves import reload_module
 
@@ -38,7 +35,7 @@ from mod_pywebsocket import standalone as pywebsocket
 
 EDIT_HOSTS_HELP = ("Please ensure all the necessary WPT subdomains "
                    "are mapped to a loopback device in /etc/hosts. "
-                   "See https://github.com/web-platform-tests/wpt#running-the-tests "
+                   "See https://web-platform-tests.org/running-tests/from-local-system.html#system-setup "
                    "for instructions.")
 
 
@@ -331,7 +328,6 @@ class RoutesBuilder(object):
         self.forbidden = [("*", "/_certs/*", handlers.ErrorHandler(404)),
                           ("*", "/tools/*", handlers.ErrorHandler(404)),
                           ("*", "{spec}/tools/*", handlers.ErrorHandler(404)),
-                          ("*", "/serve.py", handlers.ErrorHandler(404)),
                           ("*", "/results/", handlers.ErrorHandler(404))]
 
         self.extra = []
@@ -371,6 +367,7 @@ class RoutesBuilder(object):
             ("GET", "*.any.serviceworker.html", ServiceWorkersHandler),
             ("GET", "*.any.worker.js", AnyWorkerHandler),
             ("GET", "*.asis", handlers.AsIsHandler),
+            ("GET", "/.well-known/origin-policy", handlers.PythonScriptHandler),
             ("*", "*.py", handlers.PythonScriptHandler),
             ("GET", "*", handlers.FileHandler)
         ]
@@ -402,18 +399,22 @@ def build_routes(aliases, wave_cfg=None):
 
     # Add Wave specific Handler
     if wave_cfg is not None and wave_cfg.get("is_wave") is True:
-        from wave.wave_server import WaveServer
+        logger.debug("Loading manifest ...")
+        data = load_manifest()
+        from ..wave.wave_server import WaveServer
         wave_server = WaveServer()
         wave_server.initialize(
             configuration_file_path=os.path.abspath("./config.json"),
-            reports_enabled=wave_cfg.get("report"))
+            reports_enabled=wave_cfg.get("report"),
+            tests=data["items"])
 
         class WaveHandler(object):
             def __call__(self, request, response):
                 wave_server.handle_request(request, response)
 
+        web_root = wave_cfg["web_root"]
         wave_handler = WaveHandler()
-        builder.add_handler("*", "/wave*", wave_handler)
+        builder.add_handler("*", web_root + "*", wave_handler)
         # serving wave specifc testharnessreport.js
         builder.add_static(
             "tools/wave/resources/testharnessreport.js",
@@ -618,21 +619,9 @@ class WebSocketDaemon(object):
                     "-w", handlers_root]
 
         if ssl_config is not None:
-            # This is usually done through pywebsocket.main, however we're
-            # working around that to get the server instance and manually
-            # setup the wss server.
-            if pywebsocket._import_ssl():
-                tls_module = pywebsocket._TLS_BY_STANDARD_MODULE
-            elif pywebsocket._import_pyopenssl():
-                tls_module = pywebsocket._TLS_BY_PYOPENSSL
-            else:
-                print("No SSL module available")
-                sys.exit(1)
-
             cmd_args += ["--tls",
                          "--private-key", ssl_config["key_path"],
-                         "--certificate", ssl_config["cert_path"],
-                         "--tls-module", tls_module]
+                         "--certificate", ssl_config["cert_path"]]
 
         if (bind_address):
             cmd_args = ["-H", host] + cmd_args
@@ -787,6 +776,9 @@ def build_config(override_path=None, **kwargs):
 def _make_subdomains_product(s, depth=2):
     return {u".".join(x) for x in chain(*(product(s, repeat=i) for i in range(1, depth+1)))}
 
+def _make_origin_policy_subdomains(limit):
+    return {u"op%d" % x for x in range(1,limit+1)}
+
 
 _subdomains = {u"www",
                u"www1",
@@ -797,6 +789,12 @@ _subdomains = {u"www",
 _not_subdomains = {u"nonexistent"}
 
 _subdomains = _make_subdomains_product(_subdomains)
+
+# Origin policy subdomains need to not be reused by any other tests, since origin policies have
+# origin-wide impacts like installing a CSP or Feature Policy that could interfere with features
+# under test.
+# See https://github.com/web-platform-tests/rfcs/pull/44.
+_subdomains |= _make_origin_policy_subdomains(99)
 
 _not_subdomains = _make_subdomains_product(_not_subdomains)
 
@@ -842,16 +840,17 @@ class ConfigBuilder(config.ConfigBuilder):
             "none": {}
         },
         "aliases": [],
-        # wave specific configuration parameters
-        "results": "./results",
-        "timeouts": {
-            "automatic": 60000,
-            "manual": 300000
-        },
-        "enable_results_import": False,
-        "web_root": "/wave",
-        "persisting_interval": 20,
-        "api_titles": []
+        "wave": {  # wave specific configuration parameters
+            "results": "./results",
+            "timeouts": {
+                "automatic": 60000,
+                "manual": 300000
+            },
+            "enable_results_import": False,
+            "web_root": "/_wave",
+            "persisting_interval": 20,
+            "api_titles": []
+        }
     }
 
     computed_properties = ["ws_doc_root"] + config.ConfigBuilder.computed_properties
@@ -937,7 +936,8 @@ def run(**kwargs):
         if kwargs.get("is_wave") is True:
             wave_cfg = {
                 "is_wave": kwargs.get("is_wave"),
-                "report": kwargs.get("report")
+                "report": kwargs.get("report"),
+                "web_root": config["wave"]["web_root"]
             }
 
 
@@ -986,35 +986,48 @@ def run_wave(venv=None, **kwargs):
 
     if kwargs['report'] is True:
         if not is_wptreport_installed():
-            raise Exception("wptreport is not installed. Please install it from https://github.com/w3c/wptreport!!")
+            raise Exception("wptreport is not installed. Please install it from https://github.com/w3c/wptreport")
 
     run(**kwargs)
 
-# used for semantic version comparison
-def is_semver(prefix, line):
-    idx = len(prefix)
-    # slice the prefix, because is not valid semantic versioning
-    line = line[idx:] if line.find(prefix, 0, idx) != -1 else line
-    line = line.strip()
-    # semantic versioning, see: https://semver.org/
-    # regex: https://regex101.com/r/vkijKf/1/
-    regex = re.match(('^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)'
-            '(?:-('
-            '(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)'
-            '(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))'
-            '*))'
-            '?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$'), line)
-    return regex
 
 # execute wptreport version check
 def is_wptreport_installed():
-    report_p = Popen("wptreport --version", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
-    for line in report_p.stdout:
-        if line and not line.isspace():
-            if not is_semver("wptreport", line):
-                return False
-            else:
-                return True
+    try:
+        import subprocess
+        subprocess.check_output(["wptreport", "--help"])
+        return True
+    except Exception:
+        return False
+
+
+def load_manifest():
+    from manifest import manifest
+    import localpaths
+
+    root = localpaths.repo_root
+    path = os.path.join(root, "MANIFEST.json")
+    manifest_file = manifest.load_and_update(root, path, "/", parallel=False)
+
+    supported_types = ["testharness", "manual"]
+    data = {"items": {},
+            "url_base": "/"}
+    for item_type in supported_types:
+        data["items"][item_type] = {}
+    for item_type, path, tests in manifest_file.itertypes(*supported_types):
+        tests_data = []
+        for item in tests:
+            test_data = [item.url[1:]]
+            if item_type == "reftest":
+                test_data.append(item.references)
+            test_data.append({})
+            if item_type != "manual":
+                test_data[-1]["timeout"] = item.timeout
+            tests_data.append(test_data)
+        assert path not in data["items"][item_type]
+        data["items"][item_type][path] = tests_data
+    return data
+
 
 def main():
     kwargs = vars(get_parser().parse_args())
