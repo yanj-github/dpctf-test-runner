@@ -130,6 +130,7 @@ dictionary RTCSentRtpStreamStats : RTCRtpStreamStats {
 };
 
 dictionary RTCOutboundRtpStreamStats : RTCSentRtpStreamStats {
+             unsigned long        rtxSsrc;
              DOMString            trackId;
              DOMString            mediaSourceId;
              DOMString            senderId;
@@ -188,6 +189,7 @@ dictionary RTCRemoteOutboundRtpStreamStats : RTCSentRtpStreamStats {
 dictionary RTCMediaSourceStats : RTCStats {
              DOMString       trackIdentifier;
              DOMString       kind;
+             boolean         relayedSource;
 };
 
 dictionary RTCAudioSourceStats : RTCMediaSourceStats {
@@ -228,10 +230,8 @@ dictionary RTCRtpTransceiverStats : RTCStats {
 
 dictionary RTCMediaHandlerStats : RTCStats {
              DOMString           trackIdentifier;
-             boolean             remoteSource;
              boolean             ended;
              DOMString           kind;
-             RTCPriorityType     priority;
 };
 
 dictionary RTCVideoHandlerStats : RTCMediaHandlerStats {
@@ -273,7 +273,9 @@ dictionary RTCTransportStats : RTCStats {
              unsigned long long    bytesReceived;
              DOMString             rtcpTransportStatsId;
              RTCIceRole            iceRole;
+             DOMString             iceLocalUsernameFragment;
              RTCDtlsTransportState dtlsState;
+             RTCIceTransportState  iceState;
              DOMString             selectedCandidatePairId;
              DOMString             localCertificateId;
              DOMString             remoteCertificateId;
@@ -285,7 +287,11 @@ dictionary RTCTransportStats : RTCStats {
 };
 
 dictionary RTCSctpTransportStats : RTCStats {
-    double smoothedRoundTripTime;
+            double smoothedRoundTripTime;
+            unsigned long congestionWindow;
+            unsigned long receiverWindow;
+            unsigned long mtu;
+            unsigned long unackData;
 };
 
 dictionary RTCIceCandidateStats : RTCStats {
@@ -329,6 +335,9 @@ dictionary RTCIceCandidatePairStats : RTCStats {
              DOMHighResTimeStamp           consentExpiredTimestamp;
              unsigned long                 packetsDiscardedOnSend;
              unsigned long long            bytesDiscardedOnSend;
+             unsigned long long            requestBytesSent;
+             unsigned long long            consentRequestBytesSent;
+             unsigned long long            responseBytesSent;
 };
 
 enum RTCStatsIceCandidatePairState {

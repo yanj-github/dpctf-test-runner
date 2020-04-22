@@ -34,7 +34,7 @@ from mod_pywebsocket import standalone as pywebsocket
 
 
 EDIT_HOSTS_HELP = ("Please ensure all the necessary WPT subdomains "
-                   "are mapped to a loopback device in /etc/hosts. "
+                   "are mapped to a loopback device in /etc/hosts.\n"
                    "See https://web-platform-tests.org/running-tests/from-local-system.html#system-setup "
                    "for instructions.")
 
@@ -384,7 +384,7 @@ class RoutesBuilder(object):
         self.mountpoint_routes[file_url] = [("GET", file_url, handlers.FileHandler(base_path=base_path, url_base=url_base))]
 
 
-def build_routes(aliases, wave_cfg=None):
+def get_route_builder(aliases, config=None):
     builder = RoutesBuilder()
     for alias in aliases:
         url = alias["url-path"]
@@ -396,32 +396,7 @@ def build_routes(aliases, wave_cfg=None):
             builder.add_mount_point(url, directory)
         else:
             builder.add_file_mount_point(url, directory)
-
-    # Add Wave specific Handler
-    if wave_cfg is not None and wave_cfg.get("is_wave") is True:
-        logger.debug("Loading manifest ...")
-        data = load_manifest()
-        from ..wave.wave_server import WaveServer
-        wave_server = WaveServer()
-        wave_server.initialize(
-            configuration_file_path=os.path.abspath("./config.json"),
-            reports_enabled=wave_cfg.get("report"),
-            tests=data["items"])
-
-        class WaveHandler(object):
-            def __call__(self, request, response):
-                wave_server.handle_request(request, response)
-
-        web_root = wave_cfg["web_root"]
-        wave_handler = WaveHandler()
-        builder.add_handler("*", web_root + "*", wave_handler)
-        # serving wave specifc testharnessreport.js
-        builder.add_static(
-            "tools/wave/resources/testharnessreport.js",
-            {},
-            "text/javascript;charset=utf8",
-            "/resources/testharnessreport.js")
-    return builder.get_routes()
+    return builder
 
 
 class ServerProc(object):
@@ -445,10 +420,10 @@ class ServerProc(object):
         try:
             self.daemon = init_func(host, port, paths, routes, bind_address, config, **kwargs)
         except socket.error:
-            print("Socket error on port %s" % port, file=sys.stderr)
+            logger.critical("Socket error on port %s" % port, file=sys.stderr)
             raise
         except Exception:
-            print(traceback.format_exc(), file=sys.stderr)
+            logger.critical(traceback.format_exc())
             raise
 
         if self.daemon:
@@ -475,18 +450,16 @@ class ServerProc(object):
         return self.proc.is_alive()
 
 
-# NOTE: Added parameter for wave configuration
-def check_subdomains(config, wave_cfg):
+def check_subdomains(config, routes):
     paths = config.paths
     bind_address = config.bind_address
-    aliases = config.aliases
 
     host = config.server_host
     port = get_port()
     logger.debug("Going to use port %d to check subdomains" % port)
 
     wrapper = ServerProc()
-    wrapper.start(start_http_server, host, port, paths, build_routes(aliases, wave_cfg),
+    wrapper.start(start_http_server, host, port, paths, routes,
                   bind_address, config)
 
     url = "http://{}:{}/".format(host, port)
@@ -565,50 +538,68 @@ def start_servers(host, ports, paths, routes, bind_address, config, **kwargs):
     return servers
 
 
+def startup_failed(log=True):
+    # Log=False is a workaround for https://github.com/web-platform-tests/wpt/issues/22719
+    if log:
+        logger.critical(EDIT_HOSTS_HELP)
+    else:
+        print("CRITICAL %s" % EDIT_HOSTS_HELP, file=sys.stderr)
+    sys.exit(1)
+
+
 def start_http_server(host, port, paths, routes, bind_address, config, **kwargs):
-    return wptserve.WebTestHttpd(host=host,
-                                 port=port,
-                                 doc_root=paths["doc_root"],
-                                 routes=routes,
-                                 rewrites=rewrites,
-                                 bind_address=bind_address,
-                                 config=config,
-                                 use_ssl=False,
-                                 key_file=None,
-                                 certificate=None,
-                                 latency=kwargs.get("latency"))
+    try:
+        return wptserve.WebTestHttpd(host=host,
+                                     port=port,
+                                     doc_root=paths["doc_root"],
+                                     routes=routes,
+                                     rewrites=rewrites,
+                                     bind_address=bind_address,
+                                     config=config,
+                                     use_ssl=False,
+                                     key_file=None,
+                                     certificate=None,
+                                     latency=kwargs.get("latency"))
+    except Exception:
+        startup_failed()
 
 
 def start_https_server(host, port, paths, routes, bind_address, config, **kwargs):
-    return wptserve.WebTestHttpd(host=host,
-                                 port=port,
-                                 doc_root=paths["doc_root"],
-                                 routes=routes,
-                                 rewrites=rewrites,
-                                 bind_address=bind_address,
-                                 config=config,
-                                 use_ssl=True,
-                                 key_file=config.ssl_config["key_path"],
-                                 certificate=config.ssl_config["cert_path"],
-                                 encrypt_after_connect=config.ssl_config["encrypt_after_connect"],
-                                 latency=kwargs.get("latency"))
+    try:
+        return wptserve.WebTestHttpd(host=host,
+                                     port=port,
+                                     doc_root=paths["doc_root"],
+                                     routes=routes,
+                                     rewrites=rewrites,
+                                     bind_address=bind_address,
+                                     config=config,
+                                     use_ssl=True,
+                                     key_file=config.ssl_config["key_path"],
+                                     certificate=config.ssl_config["cert_path"],
+                                     encrypt_after_connect=config.ssl_config["encrypt_after_connect"],
+                                     latency=kwargs.get("latency"))
+    except Exception:
+        startup_failed()
 
 
 def start_http2_server(host, port, paths, routes, bind_address, config, **kwargs):
-    return wptserve.WebTestHttpd(host=host,
-                                 port=port,
-                                 handler_cls=wptserve.Http2WebTestRequestHandler,
-                                 doc_root=paths["doc_root"],
-                                 routes=routes,
-                                 rewrites=rewrites,
-                                 bind_address=bind_address,
-                                 config=config,
-                                 use_ssl=True,
-                                 key_file=config.ssl_config["key_path"],
-                                 certificate=config.ssl_config["cert_path"],
-                                 encrypt_after_connect=config.ssl_config["encrypt_after_connect"],
-                                 latency=kwargs.get("latency"),
-                                 http2=True)
+    try:
+        return wptserve.WebTestHttpd(host=host,
+                                     port=port,
+                                     handler_cls=wptserve.Http2WebTestRequestHandler,
+                                     doc_root=paths["doc_root"],
+                                     routes=routes,
+                                     rewrites=rewrites,
+                                     bind_address=bind_address,
+                                     config=config,
+                                     use_ssl=True,
+                                     key_file=config.ssl_config["key_path"],
+                                     certificate=config.ssl_config["cert_path"],
+                                     encrypt_after_connect=config.ssl_config["encrypt_after_connect"],
+                                     latency=kwargs.get("latency"),
+                                     http2=True)
+    except Exception:
+        startup_failed()
 
 
 class WebSocketDaemon(object):
@@ -630,6 +621,12 @@ class WebSocketDaemon(object):
         opts.is_executable_method = None
         self.server = pywebsocket.WebSocketServer(opts)
         ports = [item[0].getsockname()[1] for item in self.server._sockets]
+        if not ports:
+            # TODO: Fix the logging configuration in WebSockets processes
+            # see https://github.com/web-platform-tests/wpt/issues/22719
+            print("Failed to start websocket server on port %s, "
+                  "is something already using that port?" % port, file=sys.stderr)
+            raise OSError()
         assert all(item == ports[0] for item in ports)
         self.port = ports[0]
         self.started = False
@@ -678,12 +675,15 @@ def start_ws_server(host, port, paths, routes, bind_address, config, **kwargs):
     # in the logging module unlocked
     reload_module(logging)
     release_mozlog_lock()
-    return WebSocketDaemon(host,
-                           str(port),
-                           repo_root,
-                           config.paths["ws_doc_root"],
-                           bind_address,
-                           ssl_config=None)
+    try:
+        return WebSocketDaemon(host,
+                               str(port),
+                               repo_root,
+                               config.paths["ws_doc_root"],
+                               bind_address,
+                               ssl_config=None)
+    except Exception:
+        startup_failed(log=False)
 
 
 def start_wss_server(host, port, paths, routes, bind_address, config, **kwargs):
@@ -691,12 +691,15 @@ def start_wss_server(host, port, paths, routes, bind_address, config, **kwargs):
     # in the logging module unlocked
     reload_module(logging)
     release_mozlog_lock()
-    return WebSocketDaemon(host,
-                           str(port),
-                           repo_root,
-                           config.paths["ws_doc_root"],
-                           bind_address,
-                           config.ssl_config)
+    try:
+        return WebSocketDaemon(host,
+                               str(port),
+                               repo_root,
+                               config.paths["ws_doc_root"],
+                               bind_address,
+                               config.ssl_config)
+    except Exception:
+        startup_failed(log=False)
 
 
 def start(config, routes, **kwargs):
@@ -716,61 +719,6 @@ def iter_procs(servers):
     for servers in servers.values():
         for port, server in servers:
             yield server.proc
-
-
-def build_config(override_path=None, **kwargs):
-    rv = ConfigBuilder()
-
-    enable_http2 = kwargs.get("h2")
-    if enable_http2 is None:
-        enable_http2 = True
-    if enable_http2:
-        rv._default["ports"]["h2"] = [9000]
-
-    if override_path and os.path.exists(override_path):
-        with open(override_path) as f:
-            override_obj = json.load(f)
-        rv.update(override_obj)
-
-    if kwargs.get("config_path"):
-        other_path = os.path.abspath(os.path.expanduser(kwargs.get("config_path")))
-        if os.path.exists(other_path):
-            with open(other_path) as f:
-                override_obj = json.load(f)
-            rv.update(override_obj)
-        else:
-            raise ValueError("Config path %s does not exist" % other_path)
-
-    overriding_path_args = [("doc_root", "Document root"),
-                            ("ws_doc_root", "WebSockets document root")]
-    for key, title in overriding_path_args:
-        value = kwargs.get(key)
-        if value is None:
-            continue
-        value = os.path.abspath(os.path.expanduser(value))
-        if not os.path.exists(value):
-            raise ValueError("%s path %s does not exist" % (title, value))
-        setattr(rv, key, value)
-
-    # Add Wave arguments to config to only use wave modules if necessary
-    # regarding the command serve-wave see: tools/serve/commands.json
-    if kwargs.get("report") or kwargs.get("is_wave"):
-        print("")
-        print("build_config: is_wave: {} report: {}".format(
-            kwargs.get("is_wave"),
-            kwargs.get("report")
-        ))
-        if not kwargs.get("is_wave"):
-            err_msg = (
-                "Argument --report can only be used with command "
-                "serve-wave, e.g. \"./wpt serve-wave --report\""
-            )
-            raise Exception(err_msg)
-        else:
-            setattr(rv, "is_wave", kwargs.get("is_wave"))
-            setattr(rv, "report", kwargs.get("report"))
-
-    return rv
 
 
 def _make_subdomains_product(s, depth=2):
@@ -839,18 +787,7 @@ class ConfigBuilder(config.ConfigBuilder):
             },
             "none": {}
         },
-        "aliases": [],
-        "wave": {  # wave specific configuration parameters
-            "results": "./results",
-            "timeouts": {
-                "automatic": 60000,
-                "manual": 300000
-            },
-            "enable_results_import": False,
-            "web_root": "/_wave",
-            "persisting_interval": 20,
-            "api_titles": []
-        }
+        "aliases": []
     }
 
     computed_properties = ["ws_doc_root"] + config.ConfigBuilder.computed_properties
@@ -890,6 +827,43 @@ class ConfigBuilder(config.ConfigBuilder):
         return rv
 
 
+def build_config(override_path=None, config_cls=ConfigBuilder, **kwargs):
+    rv = config_cls()
+
+    enable_http2 = kwargs.get("h2")
+    if enable_http2 is None:
+        enable_http2 = True
+    if enable_http2:
+        rv._default["ports"]["h2"] = [9000]
+
+    if override_path and os.path.exists(override_path):
+        with open(override_path) as f:
+            override_obj = json.load(f)
+        rv.update(override_obj)
+
+    if kwargs.get("config_path"):
+        other_path = os.path.abspath(os.path.expanduser(kwargs.get("config_path")))
+        if os.path.exists(other_path):
+            with open(other_path) as f:
+                override_obj = json.load(f)
+            rv.update(override_obj)
+        else:
+            raise ValueError("Config path %s does not exist" % other_path)
+
+    overriding_path_args = [("doc_root", "Document root"),
+                            ("ws_doc_root", "WebSockets document root")]
+    for key, title in overriding_path_args:
+        value = kwargs.get(key)
+        if value is None:
+            continue
+        value = os.path.abspath(os.path.expanduser(value))
+        if not os.path.exists(value):
+            raise ValueError("%s path %s does not exist" % (title, value))
+        setattr(rv, key, value)
+
+    return rv
+
+
 def get_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument("--latency", type=int,
@@ -906,18 +880,14 @@ def get_parser():
                         help=argparse.SUPPRESS)
     parser.add_argument("--no-h2", action="store_false", dest="h2", default=None,
                         help="Disable the HTTP/2.0 server")
-    # Added wave specific arguments
-    parser.add_argument("--report", action="store_true", dest="report",
-                        help="Flag for enabling the WPTReporting server")
-    parser.set_defaults(report=False)
-    parser.set_defaults(is_wave=False)
     return parser
 
 
-def run(**kwargs):
+def run(config_cls=ConfigBuilder, route_builder=None, **kwargs):
     received_signal = threading.Event()
 
     with build_config(os.path.join(repo_root, "config.json"),
+                      config_cls=config_cls,
                       **kwargs) as config:
         global logger
         logger = config.logger
@@ -931,16 +901,6 @@ def run(**kwargs):
 
         bind_address = config["bind_address"]
 
-        # Creating wave specific config if kwargs is_wave = true
-        wave_cfg = None
-        if kwargs.get("is_wave") is True:
-            wave_cfg = {
-                "is_wave": kwargs.get("is_wave"),
-                "report": kwargs.get("report"),
-                "web_root": config["wave"]["web_root"]
-            }
-
-
         if kwargs.get("alias_file"):
             with open(kwargs["alias_file"], 'r') as alias_file:
                 for line in alias_file:
@@ -950,9 +910,12 @@ def run(**kwargs):
                         'local-dir': doc_root,
                     })
 
+        if route_builder is None:
+            route_builder = get_route_builder
+        routes = route_builder(config.aliases, config).get_routes()
+
         if config["check_subdomains"]:
-            # added wave_cfg to pass on to build_routes to init wave handler
-            check_subdomains(config, wave_cfg)
+            check_subdomains(config, routes)
 
         stash_address = None
         if bind_address:
@@ -960,11 +923,12 @@ def run(**kwargs):
             logger.debug("Going to use port %d for stash" % stash_address[1])
 
         with stash.StashServer(stash_address, authkey=str(uuid.uuid4())):
-            servers = start(config, build_routes(config["aliases"], wave_cfg), **kwargs)
+            servers = start(config, routes, **kwargs)
             signal.signal(signal.SIGTERM, handle_signal)
             signal.signal(signal.SIGINT, handle_signal)
 
-            while all(item.is_alive() for item in iter_procs(servers)) and not received_signal.is_set():
+            while (all(item.is_alive() for item in iter_procs(servers)) and
+                   not received_signal.is_set()):
                 for item in iter_procs(servers):
                     item.join(1)
             exited = [item for item in iter_procs(servers) if not item.is_alive()]
@@ -974,59 +938,6 @@ def run(**kwargs):
 
             for item in iter_procs(servers):
                 logger.info("Status of %s:\t%s" % (item.name, "running" if item.is_alive() else "not running"))
-
-
-# Set command is_wave and start venv with necessary dependencies
-def run_wave(venv=None, **kwargs):
-    kwargs['is_wave'] = True
-    if venv is not None:
-        venv.start()
-    else:
-        raise Exception("Missing virtualenv for serve-wave.")
-
-    if kwargs['report'] is True:
-        if not is_wptreport_installed():
-            raise Exception("wptreport is not installed. Please install it from https://github.com/w3c/wptreport")
-
-    run(**kwargs)
-
-
-# execute wptreport version check
-def is_wptreport_installed():
-    try:
-        import subprocess
-        subprocess.check_output(["wptreport", "--help"])
-        return True
-    except Exception:
-        return False
-
-
-def load_manifest():
-    from manifest import manifest
-    import localpaths
-
-    root = localpaths.repo_root
-    path = os.path.join(root, "MANIFEST.json")
-    manifest_file = manifest.load_and_update(root, path, "/", parallel=False)
-
-    supported_types = ["testharness", "manual"]
-    data = {"items": {},
-            "url_base": "/"}
-    for item_type in supported_types:
-        data["items"][item_type] = {}
-    for item_type, path, tests in manifest_file.itertypes(*supported_types):
-        tests_data = []
-        for item in tests:
-            test_data = [item.url[1:]]
-            if item_type == "reftest":
-                test_data.append(item.references)
-            test_data.append({})
-            if item_type != "manual":
-                test_data[-1]["timeout"] = item.timeout
-            tests_data.append(test_data)
-        assert path not in data["items"][item_type]
-        data["items"][item_type][path] = tests_data
-    return data
 
 
 def main():
