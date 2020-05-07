@@ -33,6 +33,7 @@ rm -rf $WPTBASEDIR/conformance-checkers
 rm -rf $WPTBASEDIR/console
 rm -rf $WPTBASEDIR/content-dpr
 rm -rf $WPTBASEDIR/content-security-policy
+rm -rf $WPTBASEDIR/contenteditable
 rm -rf $WPTBASEDIR/cookies
 rm -rf $WPTBASEDIR/cookie-store
 rm -rf $WPTBASEDIR/core-aam
@@ -67,6 +68,7 @@ rm -rf $WPTBASEDIR/geolocation-API
 rm -rf $WPTBASEDIR/geolocation-sensor
 rm -rf $WPTBASEDIR/graphics-aam
 rm -rf $WPTBASEDIR/gyroscope
+rm -rf $WPTBASEDIR/hit-test
 rm -rf $WPTBASEDIR/hr-time
 rm -rf $WPTBASEDIR/html
 rm -rf $WPTBASEDIR/html-longdesc
@@ -103,6 +105,7 @@ rm -rf $WPTBASEDIR/mimesniff
 rm -rf $WPTBASEDIR/mixed-content
 rm -rf $WPTBASEDIR/mst-content-hint
 rm -rf $WPTBASEDIR/native-file-system
+rm -rf $WPTBASEDIR/native-io
 rm -rf $WPTBASEDIR/navigation-timing
 rm -rf $WPTBASEDIR/netinfo
 rm -rf $WPTBASEDIR/network-error-logging
@@ -111,7 +114,9 @@ rm -rf $WPTBASEDIR/offscreen-canvas
 rm -rf $WPTBASEDIR/old-tests
 rm -rf $WPTBASEDIR/orientation-event
 rm -rf $WPTBASEDIR/orientation-sensor
+rm -rf $WPTBASEDIR/origin-isolation
 rm -rf $WPTBASEDIR/origin-policy
+rm -rf $WPTBASEDIR/page-lifecycle
 rm -rf $WPTBASEDIR/page-visibility
 rm -rf $WPTBASEDIR/paint-timing
 rm -rf $WPTBASEDIR/payment-handler
@@ -142,6 +147,7 @@ rm -rf $WPTBASEDIR/resize-observer
 rm -rf $WPTBASEDIR/resource-timing
 rm -rf $WPTBASEDIR/screen-capture
 rm -rf $WPTBASEDIR/screen-orientation
+rm -rf $WPTBASEDIR/screen-wake-lock
 rm -rf $WPTBASEDIR/scroll-animations
 rm -rf $WPTBASEDIR/scroll-to-text-fragment
 rm -rf $WPTBASEDIR/secure-contexts
@@ -161,6 +167,7 @@ rm -rf $WPTBASEDIR/svg
 rm -rf $WPTBASEDIR/svg-aam
 rm -rf $WPTBASEDIR/timing-entrytypes-registry
 rm -rf $WPTBASEDIR/touch-events
+rm -rf $WPTBASEDIR/trust-tokens
 rm -rf $WPTBASEDIR/trusted-types
 rm -rf $WPTBASEDIR/uievents
 rm -rf $WPTBASEDIR/upgrade-insecure-requests
@@ -168,6 +175,7 @@ rm -rf $WPTBASEDIR/url
 rm -rf $WPTBASEDIR/user-timing
 rm -rf $WPTBASEDIR/vibration
 rm -rf $WPTBASEDIR/video-raf
+rm -rf $WPTBASEDIR/video-rvfc
 rm -rf $WPTBASEDIR/visual-viewport
 rm -rf $WPTBASEDIR/wai-aria
 rm -rf $WPTBASEDIR/wake-lock
@@ -189,6 +197,7 @@ rm -rf $WPTBASEDIR/web-nfc
 rm -rf $WPTBASEDIR/webrtc
 rm -rf $WPTBASEDIR/webrtc-extensions
 rm -rf $WPTBASEDIR/webrtc-identity
+rm -rf $WPTBASEDIR/webrtc-insertable-streams
 rm -rf $WPTBASEDIR/webrtc-quic
 rm -rf $WPTBASEDIR/webrtc-stats
 rm -rf $WPTBASEDIR/webrtc-svc
@@ -209,7 +218,7 @@ rm MANIFEST.json
 
 echo ""
 echo "Importing DPCTF tests ..."
-git clone https://github.com/fraunhoferfokus/dpctf-tests.git dpctf
+git clone https://github.com/cta-wave/dpctf-tests dpctf
 
 # build the MANIFEST.json
 echo ""
