@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Paused - DPCTF Test Runner</title>
+    <script src="../lib/wave-service.js"></script>
+    <script src="../lib/query-parser.js"></script>
+    <script src="../lib/screen-console.js"></script>
+  </head>
+  <body style="font-family: sans-serif; font-size: 1.5em;">
+    <h1>DPCTF Test Runner</h1>
+    <p>Session paused.</p>
+    <p>Session Information:</p>
+    <table>
+      <tr>
+        <td>Token:</td>
+        <td><div id="token" style="font-family: monospace;"></div></td>
+      </tr>
+      <tr>
+        <td>User Agent:</td>
+        <td><div id="user_agent"></div></td>
+      </tr>
+    </table>
+    <p>Device Information:</p>
+    <table>
+      <tr>
+        <td>Name:</td>
+        <td><div id="device-name"></div></td>
+      </tr>
+      <tr>
+        <td>Token:</td>
+        <td><div id="device-token" style="font-family: monospace;"></div></td>
+      </tr>
+      <tr>
+        <td>User Agent:</td>
+        <td><div id="device-user_agent"></div></td>
+      </tr>
+    </table>
+    <p id="console" style="font-family: monospace;"></p>
+    <script>
+      var queryParameters = QueryParser.parseQuery();
+      var consoleElement = document.getElementById("console");
+      var screenConsole = new ScreenConsole(consoleElement);
+      var SESSION_TOKEN = queryParameters["token"];
+      var data = {};
+
+      WaveService.addSessionEventListener(SESSION_TOKEN, function (event) {
+        switch (event.type) {
+          case "status":
+            handleStatusChange(event.data);
+        }
+      });
+
+      WaveService.readSession(SESSION_TOKEN, function (session) {
+        var tokenElement = document.getElementById("token");
+        var userAgentElement = document.getElementById("user_agent");
+
+        tokenElement.innerText = session.token;
+        userAgentElement.innerText = session.userAgent;
+      });
+
+      function handleStatusChange(status) {
+        if (status !== "running") return;
+        var url = WEB_ROOT + "next.html?token=" + SESSION_TOKEN;
+        screenConsole.log("Redirecting to " + url + " ...");
+        location.href = url;
+      }
+
+      WaveService.registerDevice(function (token) {
+        data.deviceToken = token;
+        WaveService.addDeviceEventListener(token, function (event) {
+          switch (event.type) {
+            case WaveService.START_SESSION:
+              handleStartSession(event.data);
+          }
+        });
+
+        WaveService.readDevice(token, function (device) {
+          var nameElement = document.getElementById("device-name");
+          var tokenElement = document.getElementById("device-token");
+          var userAgentElement = document.getElementById("device-user_agent");
+
+          nameElement.innerText = device.name;
+          tokenElement.innerText = device.token;
+          userAgentElement.innerText = device.user_agent;
+        });
+        screenConsole.log("Waiting for new session to start or current session to resume ...");
+      });
+
+      function handleStartSession(config) {
+        var sessionToken = config.session_token;
+        screenConsole.log("Starting session " + sessionToken + " ...");
+        WaveService.updateSession(sessionToken, { type: "dpctf" }, function () {
+          WaveService.startSession(sessionToken, function () {
+            var url = WEB_ROOT + "next.html?";
+            url += "token=" + sessionToken;
+            url += "&device_token=" + data.deviceToken;
+            screenConsole.log("Redirecting to " + url + " ...");
+            location.href = url;
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

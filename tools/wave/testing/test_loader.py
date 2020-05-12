@@ -138,13 +138,13 @@ class TestLoader(object):
 
     def get_tests(
         self,
-        types=None,
+        test_types=None,
         include_list=None,
         exclude_list=None,
         reference_tokens=None
     ):
-        if types is None:
-            types = [AUTOMATIC, MANUAL]
+        if test_types is None:
+            test_types = [AUTOMATIC, MANUAL]
         if include_list is None:
             include_list = []
         if exclude_list is None:
@@ -157,7 +157,7 @@ class TestLoader(object):
         reference_results = self._results_manager.read_common_passed_tests(
             reference_tokens)
 
-        for test_type in types:
+        for test_type in test_types:
             if test_type not in TEST_TYPES:
                 continue
             for api in self._tests[test_type]:

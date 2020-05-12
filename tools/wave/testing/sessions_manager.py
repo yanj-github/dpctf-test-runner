@@ -40,13 +40,14 @@ class SessionsManager(object):
     def create_session(
         self,
         tests=None,
-        types=None,
+        test_types=None,
         timeouts=None,
         reference_tokens=None,
         webhook_urls=None,
         user_agent=None,
         labels=None,
-        expiration_date=None
+        expiration_date=None,
+        type=None
     ):
         if tests is None:
             tests = {}
@@ -69,16 +70,16 @@ class SessionsManager(object):
             timeouts["automatic"] = DEFAULT_TEST_AUTOMATIC_TIMEOUT
         if "manual" not in timeouts:
             timeouts["manual"] = DEFAULT_TEST_MANUAL_TIMEOUT
-        if types is None:
-            types = DEFAULT_TEST_TYPES
+        if test_types is None:
+            test_types = DEFAULT_TEST_TYPES
 
-        for type in types:
-            if type != "automatic" and type != "manual":
-                raise InvalidDataException("Unknown type '{}'".format(type))
+        for test_type in test_types:
+            if test_type != "automatic" and test_type != "manual":
+                raise InvalidDataException("Unknown type '{}'".format(test_type))
 
         token = str(uuid.uuid1())
         pending_tests = self._test_loader.get_tests(
-            types,
+            test_types,
             include_list=tests["include"],
             exclude_list=tests["exclude"],
             reference_tokens=reference_tokens)
@@ -104,7 +105,7 @@ class SessionsManager(object):
             tests=tests,
             user_agent=user_agent,
             browser=browser,
-            types=types,
+            test_types=test_types,
             timeouts=timeouts,
             pending_tests=pending_tests,
             running_tests={},
@@ -113,6 +114,7 @@ class SessionsManager(object):
             reference_tokens=reference_tokens,
             webhook_urls=webhook_urls,
             labels=labels,
+            type=type,
             expiration_date=expiration_date
         )
 
@@ -161,7 +163,7 @@ class SessionsManager(object):
         self._push_to_cache(session)
 
     def update_session_configuration(
-        self, token, tests, types, timeouts, reference_tokens, webhook_urls
+        self, token, tests, test_types, timeouts, reference_tokens, webhook_urls, type
     ):
         session = self.read_session(token)
         if session is None:
@@ -176,14 +178,14 @@ class SessionsManager(object):
                 tests["exclude"] = session.tests["exclude"]
             if reference_tokens is None:
                 reference_tokens = session.reference_tokens
-            if types is None:
-                types = session.types
+            if test_types is None:
+                test_types = session.test_types
 
             pending_tests = self._test_loader.get_tests(
                 include_list=tests["include"],
                 exclude_list=tests["exclude"],
                 reference_tokens=reference_tokens,
-                types=types
+                test_types=test_types
             )
             session.pending_tests = pending_tests
             session.tests = tests
@@ -201,8 +203,8 @@ class SessionsManager(object):
                 }
             session.test_state = test_state
 
-        if types is not None:
-            session.types = types
+        if test_types is not None:
+            session.test_types = test_types
         if timeouts is not None:
             if AUTOMATIC not in timeouts:
                 timeouts[AUTOMATIC] = session.timeouts[AUTOMATIC]
@@ -213,6 +215,8 @@ class SessionsManager(object):
             session.reference_tokens = reference_tokens
         if webhook_urls is not None:
             session.webhook_urls = webhook_urls
+        if type is not None:
+            session.type = type
 
         self._push_to_cache(session)
         return session

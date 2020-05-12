@@ -5,7 +5,7 @@ from urlparse import urlunsplit
 
 from .api_handler import ApiHandler
 from ...utils.serializer import serialize_session
-from ...data.session import PAUSED, COMPLETED, ABORTED, PENDING, RUNNING
+from ...data.session import PAUSED, COMPLETED, ABORTED, PENDING, RUNNING, DPCTF
 
 DEFAULT_LAST_COMPLETED_TESTS_COUNT = 5
 DEFAULT_LAST_COMPLETED_TESTS_STATUS = ["ALL"]
@@ -65,17 +65,23 @@ class TestsApiHandler(ApiHandler):
                 return
 
             if session.status == PAUSED:
+                uri = "pause.html"
+                if session.type == DPCTF:
+                    uri = "dpctf/pause.html"
                 url = self._generate_wave_url(
                     hostname=hostname,
-                    uri="pause.html",
+                    uri=uri,
                     token=token
                 )
                 self.send_json({"next_test": url}, response)
                 return
             if session.status == COMPLETED or session.status == ABORTED:
+                uri = "finish.html"
+                if session.type == DPCTF:
+                    uri = "dpctf/finish.html"
                 url = self._generate_wave_url(
                     hostname=hostname,
-                    uri="finish.html",
+                    uri=uri,
                     token=token
                 )
                 self.send_json({"next_test": url}, response)
@@ -94,9 +100,12 @@ class TestsApiHandler(ApiHandler):
             if test is None:
                 if session.status != RUNNING:
                     return
+                uri = "finish.html"
+                if session.type == DPCTF:
+                    uri = "dpctf/finish.html"
                 url = self._generate_wave_url(
                     hostname=hostname,
-                    uri="finish.html",
+                    uri=uri,
                     token=token
                 )
                 self.send_json({"next_test": url}, response)
