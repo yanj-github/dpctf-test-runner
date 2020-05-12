@@ -5,6 +5,7 @@ import uuid
 import time
 import os
 import json
+import re
 
 from threading import Timer
 
@@ -433,6 +434,20 @@ class SessionsManager(object):
     def is_api_complete(self, api, session):
         return api not in session.pending_tests \
             and api not in session.running_tests
+
+    def get_test_path_with_query(self, test, session):
+        query_string = ""
+        include_list = session.tests["include"]
+        for include_test in include_list:
+            split = include_test.split("?")
+            query = ""
+            if len(split) > 1:
+                include_test = split[0]
+                query = split[1]
+            pattern = re.compile("^" + include_test)
+            if pattern.match(test) is not None:
+                query_string += query + "&"
+        return "{}?{}".format(test, query_string)
 
     def find_token(self, fragment):
         if len(fragment) < 8:

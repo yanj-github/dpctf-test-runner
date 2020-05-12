@@ -100,6 +100,7 @@ class TestLoader(object):
         if include_list is not None and len(include_list) > 0:
             is_valid = False
             for include_test in include_list:
+                include_test = include_test.split("?")[0]
                 pattern = re.compile("^" + include_test)
                 if pattern.match(test_path) is not None:
                     is_valid = True
@@ -111,6 +112,7 @@ class TestLoader(object):
         if exclude_list is not None and len(exclude_list) > 0:
             is_valid = True
             for exclude_test in exclude_list:
+                exclude_test = exclude_test.split("?")[0]
                 pattern = re.compile("^" + exclude_test)
                 if pattern.match(test_path) is not None:
                     is_valid = False
