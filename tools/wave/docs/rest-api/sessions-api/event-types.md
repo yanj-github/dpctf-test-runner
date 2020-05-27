@@ -25,3 +25,18 @@ the provided token.
 **Payload**: `"<String>"`  
 Contains the test case that completed.  
 **Description**: Triggered when the test runner received a result for a test.
+
+## Perform Observation
+
+**Type identifier**: `perform_observation`  
+**Payload**: `"<Object>"`  
+An object, that contains information on how perform an observation.
+**Description**: Triggered by a test that needs an external observation.
+
+## Observation Completed
+
+**Type identifier**: `observation_completed`  
+**Payload**: `"<Object>"`  
+An object, that contains information about a requested observation and its results.
+**Description**: Triggered by an external framework that completed processing 
+a requested observation.
