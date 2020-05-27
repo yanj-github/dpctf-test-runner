@@ -101,6 +101,8 @@ class SessionsManager(object):
                 "total": test_files_count[api],
                 "complete": 0}
 
+        date_created = int(time.time() * 1000)
+
         session = Session(
             token=token,
             tests=tests,
@@ -116,7 +118,8 @@ class SessionsManager(object):
             webhook_urls=webhook_urls,
             labels=labels,
             type=type,
-            expiration_date=expiration_date
+            expiration_date=expiration_date,
+            date_created=date_created
         )
 
         self._push_to_cache(session)
@@ -134,6 +137,21 @@ class SessionsManager(object):
         if session is not None:
             self._push_to_cache(session)
         return session
+
+    def read_sessions(self, index=None, count=None):
+        if index is None:
+            index = 0
+        if count is None:
+            count = 10
+        self.load_all_sessions_info()
+        sessions = []
+        for it_index, token in enumerate(self._sessions):
+            if it_index < index:
+                continue
+            if len(sessions) == count:
+                break
+            sessions.append(token)
+        return sessions
 
     def read_session_status(self, token):
         if token is None:
@@ -314,7 +332,7 @@ class SessionsManager(object):
         if self._expiration_timeout is not None:
             self._expiration_timeout.cancel()
 
-        timeout = next_session.expiration_date / 1000.0 - int(time.time())
+        timeout = next_session.expiration_date / 1000 - time.time()
         if timeout < 0:
             timeout = 0
 
@@ -327,10 +345,10 @@ class SessionsManager(object):
 
     def _delete_expired_sessions(self):
         expiring_sessions = self._read_expiring_sessions()
-        now = int(time.time())
+        now = int(time.time() * 1000)
 
         for session in expiring_sessions:
-            if session.expiration_date / 1000.0 < now:
+            if session.expiration_date < now:
                 self.delete_session(session.token)
 
     def _read_expiring_sessions(self):
@@ -352,7 +370,7 @@ class SessionsManager(object):
             return
 
         if session.status == PENDING:
-            session.date_started = int(time.time()) * 1000
+            session.date_started = int(time.time() * 1000)
             session.expiration_date = None
 
         session.status = RUNNING
@@ -382,7 +400,7 @@ class SessionsManager(object):
         if session.status == ABORTED or session.status == COMPLETED:
             return
         session.status = ABORTED
-        session.date_finished = time.time() * 1000
+        session.date_finished = int(time.time() * 1000)
         self.update_session(session)
         self._event_dispatcher.dispatch_event(
             token,
@@ -406,7 +424,7 @@ class SessionsManager(object):
         if session.status == COMPLETED or session.status == ABORTED:
             return
         session.status = COMPLETED
-        session.date_finished = time.time() * 1000
+        session.date_finished = int(time.time() * 1000)
         self.update_session(session)
         self._event_dispatcher.dispatch_event(
             token,
@@ -459,3 +477,6 @@ class SessionsManager(object):
         if len(tokens) != 1:
             return None
         return tokens[0]
+
+    def get_total_sessions(self):
+        return len(self._sessions)

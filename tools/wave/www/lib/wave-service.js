@@ -76,7 +76,6 @@ var WaveService = {
           isPublic: jsonObject.is_public,
           referenceTokens: jsonObject.reference_tokens,
           webhookUrls: jsonObject.webhook_urls,
-          expirationDate: jsonObject.expiration_date,
         });
       },
       onError
@@ -111,13 +110,26 @@ var WaveService = {
       null,
       function (response) {
         var jsonObject = JSON.parse(response);
+        var dateStarted = null;
+        if (jsonObject.date_started) {
+          dateStarted = new Date(jsonObject.date_started);
+        }
+        var dateFinished = null;
+        if (jsonObject.date_finished) {
+          dateFinished = new Date(jsonObject.date_finished);
+        }
+        var expirationDate = null;
+        if (jsonObject.expiration_date) {
+          expirationDate = new Date(jsonObject.expiration_date);
+        }
         onSuccess({
           token: jsonObject.token,
-          dateStarted: jsonObject.date_started,
-          dateFinished: jsonObject.date_finished,
+          dateStarted: dateStarted,
+          dateFinished: dateFinished,
           testFilesCount: jsonObject.test_files_count,
           testFilesCompleted: jsonObject.test_files_completed,
           status: jsonObject.status,
+          expirationDate: expirationDate,
         });
       },
       function () {
@@ -480,22 +492,6 @@ var WaveService = {
       }
     );
   },
-  readResultsConfig: function (onSuccess, onError) {
-    sendRequest(
-      "GET",
-      "api/results/config",
-      null,
-      null,
-      function (response) {
-        var config = JSON.parse(response);
-        onSuccess({
-          importEnabled: config.import_enabled,
-          reportsEnabled: config.reports_enabled,
-        });
-      },
-      onError
-    );
-  },
   readReportUri: function (token, api, onSuccess, onError) {
     sendRequest(
       "GET",
@@ -664,6 +660,27 @@ var WaveService = {
       { "Content-Type": "application/json" },
       data,
       onSuccess,
+      onError
+    );
+  },
+
+  // GENERAL API
+
+  readConfiguration: function (onSuccess, onError) {
+    sendRequest(
+      "GET",
+      "api/configuration",
+      null,
+      null,
+      function (response) {
+        var data = JSON.parse(response);
+        var configuration = {
+          readSessionsEnabled: data.read_sessions_enabled,
+          importResultsEnabled: data.import_results_enabled,
+          reportsEnabled: data.reports_enabled,
+        };
+        onSuccess(configuration);
+      },
       onError
     );
   },
