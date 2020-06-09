@@ -1,0 +1,41 @@
+{
+  "token": "aef1eed6-a4d6-11ea-95ff-0021ccd76152",
+  "types": [
+    "automatic"
+  ],
+  "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36",
+  "labels": [],
+  "timeouts": {
+    "automatic": 60000,
+    "manual": 300000
+  },
+  "test_state": {
+    "xhr": {
+      "pass": 666,
+      "fail": 95,
+      "timeout": 6,
+      "not_run": 0,
+      "total": 97,
+      "complete": 97
+    }
+  },
+  "last_completed_test": "/xhr/xmlhttprequest-timeout-synconmain.html",
+  "tests": {
+    "include": [
+      "/xhr"
+    ],
+    "exclude": []
+  },
+  "status": "completed",
+  "browser": {
+    "name": "Chrome",
+    "version": "83.0.4103"
+  },
+  "date_started": 1591105271000,
+  "date_finished": 1591105432288.3787,
+  "is_public": false,
+  "reference_tokens": [],
+  "webhook_urls": [],
+  "expiration_date": null,
+  "malfunctioning_tests": []
+}

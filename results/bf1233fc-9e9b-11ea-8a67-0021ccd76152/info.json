@@ -1,0 +1,44 @@
+{
+  "status": "completed", 
+  "tests": {
+    "exclude": [], 
+    "include": [
+      "/selection/Document-open.html"
+    ]
+  }, 
+  "malfunctioning_tests": [], 
+  "expiration_date": null, 
+  "timeouts": {
+    "manual": 300000, 
+    "automatic": 60000
+  }, 
+  "webhook_urls": [], 
+  "last_completed_test": "/selection/Document-open.html", 
+  "labels": [], 
+  "test_state": {
+    "selection": {
+      "complete": 1, 
+      "timeout": 0, 
+      "pass": 0, 
+      "fail": 1, 
+      "total": 1, 
+      "not_run": 0
+    }
+  }, 
+  "reference_tokens": [], 
+  "date_finished": 1590420236076.084, 
+  "token": "bf1233fc-9e9b-11ea-8a67-0021ccd76152", 
+  "user_agent": "PostmanRuntime/7.25.0", 
+  "is_public": false, 
+  "date_created": 1590420235000, 
+  "date_started": 1590420235000, 
+  "type": "wmas", 
+  "types": [
+    "automatic", 
+    "manual"
+  ], 
+  "browser": {
+    "version": "0", 
+    "name": "Other"
+  }
+}

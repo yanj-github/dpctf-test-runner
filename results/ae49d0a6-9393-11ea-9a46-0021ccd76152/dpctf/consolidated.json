@@ -1,0 +1,42 @@
+{
+  "ua": [
+    "Xx00"
+  ],
+  "results": {
+    "/dpctf/sequential_track_playback-manual.html": {
+      "byUA": {
+        "Xx00": "OK"
+      },
+      "UAmessage": {},
+      "totals": {
+        "OK": 1
+      },
+      "subtests": {
+        "The start-up delay is sufficiently low (120ms max)": {
+          "stNum": 0,
+          "byUA": {
+            "Xx00": "FAIL"
+          },
+          "UAmessage": {
+            "Xx00": "assert_true: expected true got false"
+          },
+          "totals": {
+            "FAIL": 1
+          }
+        },
+        "Placeholder subtest: Press Enter": {
+          "stNum": 1,
+          "byUA": {
+            "Xx00": "FAIL"
+          },
+          "UAmessage": {
+            "Xx00": "assert_true: expected true got false"
+          },
+          "totals": {
+            "FAIL": 1
+          }
+        }
+      }
+    }
+  }
+}

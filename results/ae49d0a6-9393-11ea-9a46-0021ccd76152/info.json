@@ -1,0 +1,45 @@
+{
+  "status": "completed", 
+  "tests": {
+    "exclude": [], 
+    "include": [
+      "/dpctf/sequential_track_playback-manual.html"
+    ]
+  }, 
+  "malfunctioning_tests": [], 
+  "timeouts": {
+    "manual": 1000000, 
+    "automatic": 120000
+  }, 
+  "webhook_urls": [], 
+  "last_completed_test": "/dpctf/sequential_track_playback-manual.html", 
+  "labels": [
+    "label1", 
+    "label2"
+  ], 
+  "test_state": {
+    "dpctf": {
+      "complete": 1, 
+      "timeout": 0, 
+      "pass": 0, 
+      "fail": 2, 
+      "total": 1, 
+      "not_run": 0
+    }
+  }, 
+  "reference_tokens": [], 
+  "date_finished": 1589207357850.166, 
+  "token": "ae49d0a6-9393-11ea-9a46-0021ccd76152", 
+  "user_agent": "PostmanRuntime/7.24.1", 
+  "expiration_date": null, 
+  "is_public": false, 
+  "date_started": 1589207332000, 
+  "types": [
+    "automatic", 
+    "manual"
+  ], 
+  "browser": {
+    "version": "0", 
+    "name": "Other"
+  }
+}

@@ -1,0 +1,16 @@
+{
+    "results": [
+        {
+            "test": "/selection/Document-open.html",
+            "status": "OK",
+            "message": null,
+            "subtests": [
+                {
+                    "status": "FAIL",
+                    "message": "Error message",
+                    "name": "Subtest testing feature xy"
+                }
+            ]
+        }
+    ]
+}

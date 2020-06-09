@@ -1,0 +1,21 @@
+{
+    "results": [
+        {
+            "status": "OK",
+            "test": "/dpctf/sequential_track_playback-manual.html",
+            "subtests": [
+                {
+                    "status": "FAIL",
+                    "message": "assert_true: expected true got false",
+                    "name": "The start-up delay is sufficiently low (120ms max)"
+                },
+                {
+                    "status": "FAIL",
+                    "message": "assert_true: expected true got false",
+                    "name": "Placeholder subtest: Press Enter"
+                }
+            ],
+            "message": null
+        }
+    ]
+}

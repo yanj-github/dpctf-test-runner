@@ -1,7 +1,11 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 import json
-from urlparse import urlunsplit
+
+try:
+    from urllib.parse import urlunsplit
+except ImportError:
+    from urlparse import urlunsplit
 
 from .api_handler import ApiHandler
 from ...utils.serializer import serialize_session
@@ -114,7 +118,7 @@ class TestsApiHandler(ApiHandler):
 
             test_timeout = self._tests_manager.get_test_timeout(
                 test=test, session=session)
-            
+
             test = self._sessions_manager.get_test_path_with_query(test, session)
             url = self._generate_test_url(
                 test=test,

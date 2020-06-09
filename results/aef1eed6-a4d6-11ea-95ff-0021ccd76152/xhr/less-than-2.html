@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8'>
+    <title>xhr: Less Than 2 Passes</title>
+    <link rel='stylesheet' href='bootstrap.min.css'>
+    <link rel='stylesheet' href='analysis.css'>
+  </head>
+  <body>
+    <div class='container'>
+      <header>
+        <h1>xhr: Less Than 2 Passes</h1>
+      </header>
+      
+      <p><strong>Test files without 2 passes</strong>: 97; <strong>Subtests without 2 passes: </strong>776; <strong>Failure level</strong>: 776/776 (100.00%)</p>
+      <h3>Test Files</h3>
+<ol class='toc'><li><a href='#test-file-0'>/xhr/FormData-append.html</a> <small>(16/16, 100.00%, 2.06% of total)</small></li>
+<li><a href='#test-file-1'>/xhr/XMLHttpRequest-withCredentials.any.worker.html</a> <small>(5/5, 100.00%, 0.64% of total)</small></li>
+<li><a href='#test-file-2'>/xhr/abort-after-receive.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-3'>/xhr/abort-after-send.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-4'>/xhr/abort-after-timeout.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-5'>/xhr/abort-during-open.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-6'>/xhr/abort-during-unsent.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-7'>/xhr/abort-during-upload.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-8'>/xhr/abort-event-abort.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-9'>/xhr/abort-event-listeners.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-10'>/xhr/abort-event-loadend.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-11'>/xhr/abort-upload-event-abort.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-12'>/xhr/abort-upload-event-loadend.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-13'>/xhr/access-control-and-redirects-async-same-origin.any.worker.html</a> <small>(6/6, 100.00%, 0.77% of total)</small></li>
+<li><a href='#test-file-14'>/xhr/access-control-and-redirects-async.any.worker.html</a> <small>(7/7, 100.00%, 0.90% of total)</small></li>
+<li><a href='#test-file-15'>/xhr/access-control-and-redirects.any.worker.html</a> <small>(6/6, 100.00%, 0.77% of total)</small></li>
+<li><a href='#test-file-16'>/xhr/access-control-basic-allow-access-control-origin-header.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-17'>/xhr/access-control-basic-allow-async.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-18'>/xhr/access-control-basic-allow-non-cors-safelisted-method-async.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-19'>/xhr/access-control-basic-allow-non-cors-safelisted-method.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-20'>/xhr/access-control-basic-allow-preflight-cache-invalidation-by-header.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-21'>/xhr/access-control-basic-allow-preflight-cache-invalidation-by-method.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-22'>/xhr/access-control-basic-allow-preflight-cache-timeout.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-23'>/xhr/access-control-basic-allow-preflight-cache.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-24'>/xhr/access-control-basic-allow-star.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-25'>/xhr/access-control-basic-allow.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-26'>/xhr/access-control-expose-headers-on-redirect.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-27'>/xhr/close-worker-with-xhr-in-progress.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-28'>/xhr/cors-expose-star.sub.any.html</a> <small>(3/3, 100.00%, 0.39% of total)</small></li>
+<li><a href='#test-file-29'>/xhr/event-abort.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-30'>/xhr/event-error-order.sub.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-31'>/xhr/event-error.sub.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-32'>/xhr/event-load.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-33'>/xhr/event-loadend.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-34'>/xhr/event-loadstart-upload.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-35'>/xhr/event-loadstart.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-36'>/xhr/event-progress.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-37'>/xhr/event-readystate-sync-open.any.worker.html</a> <small>(2/2, 100.00%, 0.26% of total)</small></li>
+<li><a href='#test-file-38'>/xhr/event-readystatechange-loaded.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-39'>/xhr/event-timeout-order.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-40'>/xhr/event-timeout.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-41'>/xhr/event-upload-progress-crossorigin.any.worker.html</a> <small>(4/4, 100.00%, 0.52% of total)</small></li>
+<li><a href='#test-file-42'>/xhr/event-upload-progress.any.html</a> <small>(4/4, 100.00%, 0.52% of total)</small></li>
+<li><a href='#test-file-43'>/xhr/firing-events-http-content-length.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-44'>/xhr/firing-events-http-no-content-length.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-45'>/xhr/formdata-foreach.html</a> <small>(4/4, 100.00%, 0.52% of total)</small></li>
+<li><a href='#test-file-46'>/xhr/getresponseheader.any.html</a> <small>(6/6, 100.00%, 0.77% of total)</small></li>
+<li><a href='#test-file-47'>/xhr/historical.html</a> <small>(3/3, 100.00%, 0.39% of total)</small></li>
+<li><a href='#test-file-48'>/xhr/idlharness.any.sharedworker.html</a> <small>(162/162, 100.00%, 20.88% of total)</small></li>
+<li><a href='#test-file-49'>/xhr/idlharness.any.worker.html</a> <small>(162/162, 100.00%, 20.88% of total)</small></li>
+<li><a href='#test-file-50'>/xhr/loadstart-and-state.html</a> <small>(2/2, 100.00%, 0.26% of total)</small></li>
+<li><a href='#test-file-51'>/xhr/overridemimetype-blob.html</a> <small>(74/74, 100.00%, 9.54% of total)</small></li>
+<li><a href='#test-file-52'>/xhr/overridemimetype-done-state.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-53'>/xhr/overridemimetype-unsent-state-force-shiftjis.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-54'>/xhr/progressevent-constructor.html</a> <small>(5/5, 100.00%, 0.64% of total)</small></li>
+<li><a href='#test-file-55'>/xhr/progressevent-interface.html</a> <small>(7/7, 100.00%, 0.90% of total)</small></li>
+<li><a href='#test-file-56'>/xhr/responseText-status.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-57'>/xhr/responseType-document-in-worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-58'>/xhr/responseXML-unavailable-in-worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-59'>/xhr/responsetype.any.html</a> <small>(50/50, 100.00%, 6.44% of total)</small></li>
+<li><a href='#test-file-60'>/xhr/responseurl.html</a> <small>(2/2, 100.00%, 0.26% of total)</small></li>
+<li><a href='#test-file-61'>/xhr/security-consideration.sub.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-62'>/xhr/send-blob-with-no-mime-type.html</a> <small>(8/8, 100.00%, 1.03% of total)</small></li>
+<li><a href='#test-file-63'>/xhr/send-data-arraybuffer.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-64'>/xhr/send-data-arraybufferview.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-65'>/xhr/send-data-es-object.any.worker.html</a> <small>(10/10, 100.00%, 1.29% of total)</small></li>
+<li><a href='#test-file-66'>/xhr/send-data-formdata.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-67'>/xhr/send-data-readablestream.any.sharedworker.html</a> <small>(3/3, 100.00%, 0.39% of total)</small></li>
+<li><a href='#test-file-68'>/xhr/send-data-readablestream.any.worker.html</a> <small>(3/3, 100.00%, 0.39% of total)</small></li>
+<li><a href='#test-file-69'>/xhr/send-data-sharedarraybuffer.any.worker.html</a> <small>(11/11, 100.00%, 1.42% of total)</small></li>
+<li><a href='#test-file-70'>/xhr/send-send.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-71'>/xhr/send-usp.any.html</a> <small>(129/129, 100.00%, 16.62% of total)</small></li>
+<li><a href='#test-file-72'>/xhr/sync-no-progress.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-73'>/xhr/sync-no-timeout.any.sharedworker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-74'>/xhr/sync-no-timeout.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-75'>/xhr/sync-xhr-and-window-onload.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-76'>/xhr/sync-xhr-supported-by-feature-policy.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-77'>/xhr/template-element.html</a> <small>(3/3, 100.00%, 0.39% of total)</small></li>
+<li><a href='#test-file-78'>/xhr/timeout-multiple-fetches.html</a> <small>(2/2, 100.00%, 0.26% of total)</small></li>
+<li><a href='#test-file-79'>/xhr/xmlhttprequest-sync-block-defer-scripts.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-80'>/xhr/xmlhttprequest-sync-block-scripts.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-81'>/xhr/xmlhttprequest-sync-default-feature-policy.sub.html</a> <small>(5/5, 100.00%, 0.64% of total)</small></li>
+<li><a href='#test-file-82'>/xhr/xmlhttprequest-sync-not-hang-scriptloader.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-83'>/xhr/xmlhttprequest-timeout-aborted.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-84'>/xhr/xmlhttprequest-timeout-abortedonmain.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-85'>/xhr/xmlhttprequest-timeout-overrides.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-86'>/xhr/xmlhttprequest-timeout-overridesexpires.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-87'>/xhr/xmlhttprequest-timeout-reused.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-88'>/xhr/xmlhttprequest-timeout-simple.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-89'>/xhr/xmlhttprequest-timeout-synconmain.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-90'>/xhr/xmlhttprequest-timeout-twice.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-91'>/xhr/xmlhttprequest-timeout-worker-aborted.html</a> <small>(3/3, 100.00%, 0.39% of total)</small></li>
+<li><a href='#test-file-92'>/xhr/xmlhttprequest-timeout-worker-overrides.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-93'>/xhr/xmlhttprequest-timeout-worker-overridesexpires.html</a> <small>(3/3, 100.00%, 0.39% of total)</small></li>
+<li><a href='#test-file-94'>/xhr/xmlhttprequest-timeout-worker-simple.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-95'>/xhr/xmlhttprequest-timeout-worker-synconworker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+<li><a href='#test-file-96'>/xhr/xmlhttprequest-timeout-worker-twice.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></li>
+</ol>
+      <table class='table persist-area'>
+        <thead><tr class='persist-header'><th>Test <span class='message_toggle'>Show/Hide Messages</span></th><th>Ch83</th></tr></thead>
+<tr class='test' id='test-file-0'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/FormData-append.html' target='_blank'>/xhr/FormData-append.html</a> <small>(16/16, 100.00%, 2.06% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-0-0' class='subtest'><td>Passing a String object to FormData.append should work.</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "name=value,\n" but got "b'name'=b'value',\n"</td></tr>
+</table></td></tr>
+<tr id='subtest-0-1' class='subtest'><td>testFormDataAppend1</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-0-2' class='subtest'><td>testFormDataAppend2</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-0-15' class='subtest'><td>testFormDataAppendEmptyBlob</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-0-5' class='subtest'><td>testFormDataAppendNull1</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-0-6' class='subtest'><td>testFormDataAppendNull2</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-0-7' class='subtest'><td>testFormDataAppendToForm1</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-0-8' class='subtest'><td>testFormDataAppendToForm2</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-0-11' class='subtest'><td>testFormDataAppendToFormNull1</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-0-12' class='subtest'><td>testFormDataAppendToFormNull2</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-0-13' class='subtest'><td>testFormDataAppendToFormString</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-0-9' class='subtest'><td>testFormDataAppendToFormUndefined1</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-0-10' class='subtest'><td>testFormDataAppendToFormUndefined2</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-0-14' class='subtest'><td>testFormDataAppendToFormWrongPlatformObject</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-0-3' class='subtest'><td>testFormDataAppendUndefined1</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-0-4' class='subtest'><td>testFormDataAppendUndefined2</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-1'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/XMLHttpRequest-withCredentials.any.worker.html' target='_blank'>/xhr/XMLHttpRequest-withCredentials.any.worker.html</a> <small>(5/5, 100.00%, 0.64% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-1-1' class='subtest'><td>can also be set in OPEN state</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-1-0' class='subtest'><td>default value is false, set value is true</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-1-2' class='subtest'><td>setting on synchronous XHR</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-1-4' class='subtest'><td>setting withCredentials when in DONE state (synchronous)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-1-3' class='subtest'><td>setting withCredentials when not in UNSENT, OPENED state (asynchronous)</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-2'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/abort-after-receive.any.worker.html' target='_blank'>/xhr/abort-after-receive.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-2-0' class='subtest'><td>XMLHttpRequest: abort() after successful receive should not fire "abort" event</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-3'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/abort-after-send.any.html' target='_blank'>/xhr/abort-after-send.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-3-0' class='subtest'><td>XMLHttpRequest: abort() after send()</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "abort(0,0,false)" but got "upload.abort(0,0,false)"</td></tr>
+</table></td></tr>
+<tr class='test' id='test-file-4'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/abort-after-timeout.any.html' target='_blank'>/xhr/abort-after-timeout.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-4-0' class='subtest'><td>XMLHttpRequest: abort() after a timeout should not fire "abort" event</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-5'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/abort-during-open.any.worker.html' target='_blank'>/xhr/abort-during-open.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-5-0' class='subtest'><td>XMLHttpRequest: abort() during OPEN</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-6'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/abort-during-unsent.any.html' target='_blank'>/xhr/abort-during-unsent.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-6-0' class='subtest'><td>XMLHttpRequest: abort() during UNSENT</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-7'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/abort-during-upload.any.html' target='_blank'>/xhr/abort-during-upload.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-7-0' class='subtest'><td>XMLHttpRequest: abort() while sending data</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-8'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/abort-event-abort.any.worker.html' target='_blank'>/xhr/abort-event-abort.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-8-0' class='subtest'><td>XMLHttpRequest: The abort() method: do not fire abort event in OPENED state when send() flag is unset.</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-9'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/abort-event-listeners.any.html' target='_blank'>/xhr/abort-event-listeners.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-9-0' class='subtest'><td>XMLHttpRequest: abort() should not reset event listeners</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-10'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/abort-event-loadend.any.html' target='_blank'>/xhr/abort-event-loadend.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-10-0' class='subtest'><td>XMLHttpRequest: The abort() method: Fire a progress event named loadend</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-11'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/abort-upload-event-abort.any.worker.html' target='_blank'>/xhr/abort-upload-event-abort.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-11-0' class='subtest'><td>XMLHttpRequest: The abort() method: Fire a progress event named abort on the XMLHttpRequestUpload object</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-12'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/abort-upload-event-loadend.any.html' target='_blank'>/xhr/abort-upload-event-loadend.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-12-0' class='subtest'><td>XMLHttpRequest: The abort() method: Fire a progress event named loadend on the XMLHttpRequestUpload object</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-13'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/access-control-and-redirects-async-same-origin.any.worker.html' target='_blank'>/xhr/access-control-and-redirects-async-same-origin.any.worker.html</a> <small>(6/6, 100.00%, 0.77% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-13-1' class='subtest'><td>Request with credentials is redirected to a cross-origin response with Access-Control-Allow-Origin=* (with star)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-13-3' class='subtest'><td>Request with credentials is redirected to a cross-origin response with a specific Access-Control-Allow-Origin</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_false: expected false got true</td></tr>
+</table></td></tr>
+<tr id='subtest-13-5' class='subtest'><td>Request with credentials is redirected to a cross-origin response with a specific Access-Control-Allow-Origin (no credentials)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-13-0' class='subtest'><td>Request without credentials is redirected to a cross-origin response with Access-Control-Allow-Origin=* (with star)</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_false: expected false got true</td></tr>
+</table></td></tr>
+<tr id='subtest-13-2' class='subtest'><td>Request without credentials is redirected to a cross-origin response with a specific Access-Control-Allow-Origin</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_false: expected false got true</td></tr>
+</table></td></tr>
+<tr id='subtest-13-4' class='subtest'><td>Request without credentials is redirected to a cross-origin response with a specific Access-Control-Allow-Origin (no credentials)</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_false: expected false got true</td></tr>
+</table></td></tr>
+<tr class='test' id='test-file-14'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/access-control-and-redirects-async.any.worker.html' target='_blank'>/xhr/access-control-and-redirects-async.any.worker.html</a> <small>(7/7, 100.00%, 0.90% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-14-4' class='subtest'><td>Preflighted request is redirected to a response with Access-Control-Allow-Origin=*</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-14-5' class='subtest'><td>Preflighted request is redirected to a response with Access-Control-Allow-Origin=* and header allowed</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-14-3' class='subtest'><td>Request is redirect to a bad URL</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-14-1' class='subtest'><td>Request is redirected to a response with Access-Control-Allow-Origin=*</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_false: expected false got true</td></tr>
+</table></td></tr>
+<tr id='subtest-14-6' class='subtest'><td>Request is redirected to a same-origin resource file</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_true: expected true got false</td></tr>
+</table></td></tr>
+<tr id='subtest-14-0' class='subtest'><td>Request is redirected without CORS headers to a response with Access-Control-Allow-Origin=*</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-14-2' class='subtest'><td>Request with user info is redirected to a response with Access-Control-Allow-Origin=*</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-15'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/access-control-and-redirects.any.worker.html' target='_blank'>/xhr/access-control-and-redirects.any.worker.html</a> <small>(6/6, 100.00%, 0.77% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-15-1' class='subtest'><td>Local async redirect to remote origin</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-15-0' class='subtest'><td>Local sync redirect to remote origin</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "PASS: Cross-domain access allowed." but got "{\"error\": {\"code\": 500, \"message\": \"Traceback (most recent call last):\\n  File \\\"/home/fritz/development/WAVE/tools/wptserve/wptserve/handlers.py\\\", line 332, in __call__\\n    rv = self.func(request, response)\\n  File \\\"/home/fritz/development/WAVE/xhr/resources/redirect-cors.py\\\", line 2, in main\\n    location = request.GET.first(\\\"location\\\")\\n  File \\\"/home/fritz/development/WAVE/tools/wptserve/wptserve/request.py\\\", line 542, in first\\n    raise KeyError(key)\\nKeyError: 'location'\\n\"}}"</td></tr>
+</table></td></tr>
+<tr id='subtest-15-3' class='subtest'><td>Remote async redirect to local origin</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-15-5' class='subtest'><td>Remote async redirect to same remote origin</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-15-2' class='subtest'><td>Remote sync redirect to local origin</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> Failed to execute 'send' on 'XMLHttpRequest': Failed to load 'http://www1.web-platform.test:8000/xhr/resources/redirect-cors.py?location=http://web-platform.test:8000/xhr/resources/access-control-basic-allow.py&amp;allow_origin=true'.</td></tr>
+</table></td></tr>
+<tr id='subtest-15-4' class='subtest'><td>Remote sync redirect to same remote origin</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> Failed to execute 'send' on 'XMLHttpRequest': Failed to load 'http://www1.web-platform.test:8000/xhr/resources/redirect-cors.py?location=http://www1.web-platform.test:8000/xhr/resources/access-control-basic-allow.py&amp;allow_origin=true'.</td></tr>
+</table></td></tr>
+<tr class='test' id='test-file-16'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/access-control-basic-allow-access-control-origin-header.any.html' target='_blank'>/xhr/access-control-basic-allow-access-control-origin-header.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-16-0' class='subtest'><td>Access control test with origin header</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> Failed to execute 'send' on 'XMLHttpRequest': Failed to load 'http://www1.web-platform.test:8000/xhr/resources/access-control-origin-header.py'.</td></tr>
+</table></td></tr>
+<tr class='test' id='test-file-17'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/access-control-basic-allow-async.any.html' target='_blank'>/xhr/access-control-basic-allow-async.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-17-0' class='subtest'><td>Basic async cross-origin XHR request</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-18'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/access-control-basic-allow-non-cors-safelisted-method-async.any.worker.html' target='_blank'>/xhr/access-control-basic-allow-non-cors-safelisted-method-async.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-18-0' class='subtest'><td>Allow async PUT request</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "PASS: Cross-domain access allowed.\nPASS: PUT data received" but got "PASS: Cross-domain access allowed.Could not read in content."</td></tr>
+</table></td></tr>
+<tr class='test' id='test-file-19'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/access-control-basic-allow-non-cors-safelisted-method.any.worker.html' target='_blank'>/xhr/access-control-basic-allow-non-cors-safelisted-method.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-19-0' class='subtest'><td>Allow PUT request</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "PASS: Cross-domain access allowed.\nPASS: PUT data received" but got "PASS: Cross-domain access allowed.Could not read in content."</td></tr>
+</table></td></tr>
+<tr class='test' id='test-file-20'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/access-control-basic-allow-preflight-cache-invalidation-by-header.any.html' target='_blank'>/xhr/access-control-basic-allow-preflight-cache-invalidation-by-header.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-20-0' class='subtest'><td>Preflight cache should be invalidated in presence of custom header</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_unreached: FAIL: Network error. Reached unreachable code</td></tr>
+</table></td></tr>
+<tr class='test' id='test-file-21'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/access-control-basic-allow-preflight-cache-invalidation-by-method.any.worker.html' target='_blank'>/xhr/access-control-basic-allow-preflight-cache-invalidation-by-method.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-21-0' class='subtest'><td>Preflight cache should be invalidated by changed method</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_unreached: FAIL: Network error. Reached unreachable code</td></tr>
+</table></td></tr>
+<tr class='test' id='test-file-22'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/access-control-basic-allow-preflight-cache-timeout.any.html' target='_blank'>/xhr/access-control-basic-allow-preflight-cache-timeout.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-22-0' class='subtest'><td>Preflight cache should be invalidated on timeout</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_unreached: FAIL: Network error. Reached unreachable code</td></tr>
+</table></td></tr>
+<tr class='test' id='test-file-23'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/access-control-basic-allow-preflight-cache.any.html' target='_blank'>/xhr/access-control-basic-allow-preflight-cache.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-23-0' class='subtest'><td>Preflight cache should allow second request</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_unreached: FAIL: Network error. Reached unreachable code</td></tr>
+</table></td></tr>
+<tr class='test' id='test-file-24'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/access-control-basic-allow-star.any.worker.html' target='_blank'>/xhr/access-control-basic-allow-star.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-24-0' class='subtest'><td>Allow star</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-25'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/access-control-basic-allow.any.worker.html' target='_blank'>/xhr/access-control-basic-allow.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-25-0' class='subtest'><td>Allow basic</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-26'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/access-control-expose-headers-on-redirect.html' target='_blank'>/xhr/access-control-expose-headers-on-redirect.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-26-0' class='subtest'><td>XHR should respect access-control-expose-headers header on redirect</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_unreached: Unexpected error. Reached unreachable code</td></tr>
+</table></td></tr>
+<tr class='test' id='test-file-27'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/close-worker-with-xhr-in-progress.html' target='_blank'>/xhr/close-worker-with-xhr-in-progress.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-27-0' class='subtest'><td>Terminating a worker with a XHR in progress doesn't crash</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-28'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/cors-expose-star.sub.any.html' target='_blank'>/xhr/cors-expose-star.sub.any.html</a> <small>(3/3, 100.00%, 0.39% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-28-2' class='subtest'><td>* can be one of several values</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-28-1' class='subtest'><td>* for credentialed fetches only matches literally</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-28-0' class='subtest'><td>Basic Access-Control-Expose-Headers: * support</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-29'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/event-abort.any.worker.html' target='_blank'>/xhr/event-abort.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-29-0' class='subtest'><td>XMLHttpRequest: abort event</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-30'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/event-error-order.sub.html' target='_blank'>/xhr/event-error-order.sub.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-30-0' class='subtest'><td>XMLHttpRequest: event - error (order of events)</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-31'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/event-error.sub.any.html' target='_blank'>/xhr/event-error.sub.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-31-0' class='subtest'><td>XMLHttpRequest Test: event - error</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-32'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/event-load.any.html' target='_blank'>/xhr/event-load.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-32-0' class='subtest'><td>XMLHttpRequest: The send() method: Fire an event named load (synchronous flag is unset)</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-33'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/event-loadend.any.worker.html' target='_blank'>/xhr/event-loadend.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-33-0' class='subtest'><td>XMLHttpRequest: loadend event</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-34'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/event-loadstart-upload.any.worker.html' target='_blank'>/xhr/event-loadstart-upload.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-34-0' class='subtest'><td>XMLHttpRequest: The send() method: Fire a progress event named loadstart on upload object (synchronous flag is unset)</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-35'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/event-loadstart.any.worker.html' target='_blank'>/xhr/event-loadstart.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-35-0' class='subtest'><td>XMLHttpRequest: loadstart event</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-36'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/event-progress.any.html' target='_blank'>/xhr/event-progress.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-36-0' class='subtest'><td>XMLHttpRequest: The send() method: Fire a progress event named progress (synchronous flag is unset)</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_unreached: onprogress not called. Reached unreachable code</td></tr>
+</table></td></tr>
+<tr class='test' id='test-file-37'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/event-readystate-sync-open.any.worker.html' target='_blank'>/xhr/event-readystate-sync-open.any.worker.html</a> <small>(2/2, 100.00%, 0.26% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-37-1' class='subtest'><td>XMLHttpRequest: open() call fires sync readystate event (async)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-37-0' class='subtest'><td>XMLHttpRequest: open() call fires sync readystate event (sync)</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-38'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/event-readystatechange-loaded.any.worker.html' target='_blank'>/xhr/event-readystatechange-loaded.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-38-0' class='subtest'><td>XMLHttpRequest: the LOADING state change may be emitted multiple times</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_greater_than: LOADING state change may be emitted multiple times expected a number greater than 1 but got 0</td></tr>
+</table></td></tr>
+<tr class='test' id='test-file-39'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/event-timeout-order.any.worker.html' target='_blank'>/xhr/event-timeout-order.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-39-0' class='subtest'><td>XMLHttpRequest: event - timeout (order of events)</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-40'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/event-timeout.any.html' target='_blank'>/xhr/event-timeout.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-40-0' class='subtest'><td>XMLHttpRequest: timeout event</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-41'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/event-upload-progress-crossorigin.any.worker.html' target='_blank'>/xhr/event-upload-progress-crossorigin.any.worker.html</a> <small>(4/4, 100.00%, 0.52% of total)</small></td><td class='TIMEOUT'>TIMEOUT</td></tr>
+<tr id='subtest-41-0' class='subtest'><td>Upload events registered on time (http://www1.web-platform.test:8000/xhr/resources/corsenabled.py)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-41-1' class='subtest'><td>Upload events registered on time (resources/redirect.py?code=307&amp;location=http://www1.web-platform.test:8000/xhr/resources/corsenabled.py)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-41-2' class='subtest'><td>Upload events registered too late (http://www1.web-platform.test:8000/xhr/resources/corsenabled.py)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-41-3' class='subtest'><td>Upload events registered too late (resources/redirect.py?code=307&amp;location=http://www1.web-platform.test:8000/xhr/resources/corsenabled.py)</td><td class='TIMEOUT'>TIMEOUT</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> Test timed out</td></tr>
+</table></td></tr>
+<tr class='test' id='test-file-42'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/event-upload-progress.any.html' target='_blank'>/xhr/event-upload-progress.any.html</a> <small>(4/4, 100.00%, 0.52% of total)</small></td><td class='TIMEOUT'>TIMEOUT</td></tr>
+<tr id='subtest-42-0' class='subtest'><td>Upload events registered on time (http://www1.web-platform.test:8000/xhr/resources/corsenabled.py)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-42-1' class='subtest'><td>Upload events registered on time (resources/redirect.py?code=307&amp;location=http://www1.web-platform.test:8000/xhr/resources/corsenabled.py)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-42-2' class='subtest'><td>Upload events registered too late (http://www1.web-platform.test:8000/xhr/resources/corsenabled.py)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-42-3' class='subtest'><td>Upload events registered too late (resources/redirect.py?code=307&amp;location=http://www1.web-platform.test:8000/xhr/resources/corsenabled.py)</td><td class='TIMEOUT'>TIMEOUT</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> Test timed out</td></tr>
+</table></td></tr>
+<tr class='test' id='test-file-43'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/firing-events-http-content-length.html' target='_blank'>/xhr/firing-events-http-content-length.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-43-0' class='subtest'><td>ProgressEvent: firing events for HTTP with Content-Length</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_true: expected true got false</td></tr>
+</table></td></tr>
+<tr class='test' id='test-file-44'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/firing-events-http-no-content-length.html' target='_blank'>/xhr/firing-events-http-no-content-length.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-44-0' class='subtest'><td>ProgressEvent: firing events for HTTP with no Content-Length</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_true: expected true got false</td></tr>
+</table></td></tr>
+<tr class='test' id='test-file-45'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/formdata-foreach.html' target='_blank'>/xhr/formdata-foreach.html</a> <small>(4/4, 100.00%, 0.52% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-45-1' class='subtest'><td>Entries iterator should return duplicate keys and non-deleted values</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-45-0' class='subtest'><td>Iterator should return duplicate keys and non-deleted values</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-45-2' class='subtest'><td>Keys iterator should return duplicates</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-45-3' class='subtest'><td>Values iterator should return non-deleted values</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-46'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/getresponseheader.any.html' target='_blank'>/xhr/getresponseheader.any.html</a> <small>(6/6, 100.00%, 0.77% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-46-0' class='subtest'><td>getResponseHeader('content-length') expects 0</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-46-1' class='subtest'><td>getResponseHeader('content-length') expects 0, 0</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-46-2' class='subtest'><td>getResponseHeader('double-trouble') expects , </td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-46-3' class='subtest'><td>getResponseHeader('foo-test') expects 1, 2, 3</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-46-4' class='subtest'><td>getResponseHeader('heya') expects , , 1, , , 2</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-46-5' class='subtest'><td>getResponseHeader('www-authenticate') expects 1, 2, 3, 4</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-47'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/historical.html' target='_blank'>/xhr/historical.html</a> <small>(3/3, 100.00%, 0.39% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-47-0' class='subtest'><td>Support for responseType = moz-blob</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-47-2' class='subtest'><td>Support for responseType = moz-chunked-arraybuffer</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-47-1' class='subtest'><td>Support for responseType = moz-chunked-text</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-48'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/idlharness.any.sharedworker.html' target='_blank'>/xhr/idlharness.any.sharedworker.html</a> <small>(162/162, 100.00%, 20.88% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-48-8' class='subtest'><td>Document includes DocumentAndElementEventHandlers: member names are unique</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-7' class='subtest'><td>Document includes GlobalEventHandlers: member names are unique</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-4' class='subtest'><td>Document includes NonElementParentNode: member names are unique</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-5' class='subtest'><td>Document includes ParentNode: member names are unique</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-6' class='subtest'><td>Document includes XPathEvaluatorBase: member names are unique</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-161' class='subtest'><td>Document interface: existence and properties of interface object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-114' class='subtest'><td>FormData interface object length</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-115' class='subtest'><td>FormData interface object name</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-133' class='subtest'><td>FormData interface: calling append(USVString, Blob, optional USVString) on new FormData() with too few arguments must throw TypeError</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-131' class='subtest'><td>FormData interface: calling append(USVString, USVString) on new FormData() with too few arguments must throw TypeError</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-135' class='subtest'><td>FormData interface: calling delete(USVString) on new FormData() with too few arguments must throw TypeError</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-137' class='subtest'><td>FormData interface: calling get(USVString) on new FormData() with too few arguments must throw TypeError</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-139' class='subtest'><td>FormData interface: calling getAll(USVString) on new FormData() with too few arguments must throw TypeError</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-141' class='subtest'><td>FormData interface: calling has(USVString) on new FormData() with too few arguments must throw TypeError</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-145' class='subtest'><td>FormData interface: calling set(USVString, Blob, optional USVString) on new FormData() with too few arguments must throw TypeError</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-143' class='subtest'><td>FormData interface: calling set(USVString, USVString) on new FormData() with too few arguments must throw TypeError</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-113' class='subtest'><td>FormData interface: existence and properties of interface object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-116' class='subtest'><td>FormData interface: existence and properties of interface prototype object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-117' class='subtest'><td>FormData interface: existence and properties of interface prototype object's "constructor" property</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-118' class='subtest'><td>FormData interface: existence and properties of interface prototype object's @@unscopables property</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-127' class='subtest'><td>FormData interface: iterable&lt;USVString, FormDataEntryValue&gt;</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-132' class='subtest'><td>FormData interface: new FormData() must inherit property "append(USVString, Blob, optional USVString)" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-130' class='subtest'><td>FormData interface: new FormData() must inherit property "append(USVString, USVString)" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-134' class='subtest'><td>FormData interface: new FormData() must inherit property "delete(USVString)" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-136' class='subtest'><td>FormData interface: new FormData() must inherit property "get(USVString)" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-138' class='subtest'><td>FormData interface: new FormData() must inherit property "getAll(USVString)" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-140' class='subtest'><td>FormData interface: new FormData() must inherit property "has(USVString)" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-144' class='subtest'><td>FormData interface: new FormData() must inherit property "set(USVString, Blob, optional USVString)" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-142' class='subtest'><td>FormData interface: new FormData() must inherit property "set(USVString, USVString)" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-120' class='subtest'><td>FormData interface: operation append(USVString, Blob, optional USVString)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-119' class='subtest'><td>FormData interface: operation append(USVString, USVString)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-121' class='subtest'><td>FormData interface: operation delete(USVString)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-122' class='subtest'><td>FormData interface: operation get(USVString)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-123' class='subtest'><td>FormData interface: operation getAll(USVString)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-124' class='subtest'><td>FormData interface: operation has(USVString)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-126' class='subtest'><td>FormData interface: operation set(USVString, Blob, optional USVString)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-125' class='subtest'><td>FormData interface: operation set(USVString, USVString)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-128' class='subtest'><td>FormData must be primary interface of new FormData()</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-160' class='subtest'><td>Node interface: existence and properties of interface object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-2' class='subtest'><td>Partial interface Document: member names are unique</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-3' class='subtest'><td>Partial interface Document[2]: member names are unique</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-147' class='subtest'><td>ProgressEvent interface object length</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-148' class='subtest'><td>ProgressEvent interface object name</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-152' class='subtest'><td>ProgressEvent interface: attribute lengthComputable</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-153' class='subtest'><td>ProgressEvent interface: attribute loaded</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-154' class='subtest'><td>ProgressEvent interface: attribute total</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-146' class='subtest'><td>ProgressEvent interface: existence and properties of interface object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-149' class='subtest'><td>ProgressEvent interface: existence and properties of interface prototype object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-150' class='subtest'><td>ProgressEvent interface: existence and properties of interface prototype object's "constructor" property</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-151' class='subtest'><td>ProgressEvent interface: existence and properties of interface prototype object's @@unscopables property</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-157' class='subtest'><td>ProgressEvent interface: new ProgressEvent("type") must inherit property "lengthComputable" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-158' class='subtest'><td>ProgressEvent interface: new ProgressEvent("type") must inherit property "loaded" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-159' class='subtest'><td>ProgressEvent interface: new ProgressEvent("type") must inherit property "total" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-155' class='subtest'><td>ProgressEvent must be primary interface of new ProgressEvent("type")</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-29' class='subtest'><td>Stringification of (new XMLHttpRequest()).upload</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-129' class='subtest'><td>Stringification of new FormData()</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-156' class='subtest'><td>Stringification of new ProgressEvent("type")</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-74' class='subtest'><td>Stringification of new XMLHttpRequest()</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-38' class='subtest'><td>XMLHttpRequest interface object length</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-39' class='subtest'><td>XMLHttpRequest interface object name</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-43' class='subtest'><td>XMLHttpRequest interface: attribute onreadystatechange</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-54' class='subtest'><td>XMLHttpRequest interface: attribute readyState</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-70' class='subtest'><td>XMLHttpRequest interface: attribute response</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-71' class='subtest'><td>XMLHttpRequest interface: attribute responseText</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-69' class='subtest'><td>XMLHttpRequest interface: attribute responseType</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-63' class='subtest'><td>XMLHttpRequest interface: attribute responseURL</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-64' class='subtest'><td>XMLHttpRequest interface: attribute status</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-65' class='subtest'><td>XMLHttpRequest interface: attribute statusText</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-58' class='subtest'><td>XMLHttpRequest interface: attribute timeout</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-60' class='subtest'><td>XMLHttpRequest interface: attribute upload</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-59' class='subtest'><td>XMLHttpRequest interface: attribute withCredentials</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-98' class='subtest'><td>XMLHttpRequest interface: calling getResponseHeader(ByteString) on new XMLHttpRequest() with too few arguments must throw TypeError</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-83' class='subtest'><td>XMLHttpRequest interface: calling open(ByteString, USVString) on new XMLHttpRequest() with too few arguments must throw TypeError</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-85' class='subtest'><td>XMLHttpRequest interface: calling open(ByteString, USVString, boolean, optional USVString?, optional USVString?) on new XMLHttpRequest() with too few arguments must throw TypeError</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-101' class='subtest'><td>XMLHttpRequest interface: calling overrideMimeType(DOMString) on new XMLHttpRequest() with too few arguments must throw TypeError</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-92' class='subtest'><td>XMLHttpRequest interface: calling send(optional (Document or BodyInit)?) on new XMLHttpRequest() with too few arguments must throw TypeError</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-87' class='subtest'><td>XMLHttpRequest interface: calling setRequestHeader(ByteString, ByteString) on new XMLHttpRequest() with too few arguments must throw TypeError</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-52' class='subtest'><td>XMLHttpRequest interface: constant DONE on interface object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-53' class='subtest'><td>XMLHttpRequest interface: constant DONE on interface prototype object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-48' class='subtest'><td>XMLHttpRequest interface: constant HEADERS_RECEIVED on interface object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-49' class='subtest'><td>XMLHttpRequest interface: constant HEADERS_RECEIVED on interface prototype object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-50' class='subtest'><td>XMLHttpRequest interface: constant LOADING on interface object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-51' class='subtest'><td>XMLHttpRequest interface: constant LOADING on interface prototype object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-46' class='subtest'><td>XMLHttpRequest interface: constant OPENED on interface object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-47' class='subtest'><td>XMLHttpRequest interface: constant OPENED on interface prototype object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-44' class='subtest'><td>XMLHttpRequest interface: constant UNSENT on interface object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-45' class='subtest'><td>XMLHttpRequest interface: constant UNSENT on interface prototype object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-37' class='subtest'><td>XMLHttpRequest interface: existence and properties of interface object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-40' class='subtest'><td>XMLHttpRequest interface: existence and properties of interface prototype object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-41' class='subtest'><td>XMLHttpRequest interface: existence and properties of interface prototype object's "constructor" property</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-42' class='subtest'><td>XMLHttpRequest interface: existence and properties of interface prototype object's @@unscopables property</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-72' class='subtest'><td>XMLHttpRequest interface: member responseXML</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_false: The prototype object must not have a property "responseXML" expected false got true</td></tr>
+</table></td></tr>
+<tr id='subtest-48-80' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "DONE" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-78' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "HEADERS_RECEIVED" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-79' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "LOADING" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-77' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "OPENED" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-76' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "UNSENT" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-93' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "abort()" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-99' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "getAllResponseHeaders()" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-97' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "getResponseHeader(ByteString)" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-75' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "onreadystatechange" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-82' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "open(ByteString, USVString)" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-84' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "open(ByteString, USVString, boolean, optional USVString?, optional USVString?)" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-100' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "overrideMimeType(DOMString)" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-81' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "readyState" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-103' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "response" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-104' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "responseText" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-102' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "responseType" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-94' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "responseURL" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-91' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "send(optional (Document or BodyInit)?)" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-86' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "setRequestHeader(ByteString, ByteString)" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-95' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "status" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-96' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "statusText" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-88' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "timeout" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-90' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "upload" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-89' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "withCredentials" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-105' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must not have property "responseXML"</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_false: expected false got true</td></tr>
+</table></td></tr>
+<tr id='subtest-48-62' class='subtest'><td>XMLHttpRequest interface: operation abort()</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-67' class='subtest'><td>XMLHttpRequest interface: operation getAllResponseHeaders()</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-66' class='subtest'><td>XMLHttpRequest interface: operation getResponseHeader(ByteString)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-55' class='subtest'><td>XMLHttpRequest interface: operation open(ByteString, USVString)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-56' class='subtest'><td>XMLHttpRequest interface: operation open(ByteString, USVString, boolean, optional USVString?, optional USVString?)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-68' class='subtest'><td>XMLHttpRequest interface: operation overrideMimeType(DOMString)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-61' class='subtest'><td>XMLHttpRequest interface: operation send(optional (Document or BodyInit)?)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-57' class='subtest'><td>XMLHttpRequest interface: operation setRequestHeader(ByteString, ByteString)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-73' class='subtest'><td>XMLHttpRequest must be primary interface of new XMLHttpRequest()</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-10' class='subtest'><td>XMLHttpRequestEventTarget interface object length</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-11' class='subtest'><td>XMLHttpRequestEventTarget interface object name</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-32' class='subtest'><td>XMLHttpRequestEventTarget interface: (new XMLHttpRequest()).upload must inherit property "onabort" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-33' class='subtest'><td>XMLHttpRequestEventTarget interface: (new XMLHttpRequest()).upload must inherit property "onerror" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-34' class='subtest'><td>XMLHttpRequestEventTarget interface: (new XMLHttpRequest()).upload must inherit property "onload" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-36' class='subtest'><td>XMLHttpRequestEventTarget interface: (new XMLHttpRequest()).upload must inherit property "onloadend" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-30' class='subtest'><td>XMLHttpRequestEventTarget interface: (new XMLHttpRequest()).upload must inherit property "onloadstart" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-31' class='subtest'><td>XMLHttpRequestEventTarget interface: (new XMLHttpRequest()).upload must inherit property "onprogress" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-35' class='subtest'><td>XMLHttpRequestEventTarget interface: (new XMLHttpRequest()).upload must inherit property "ontimeout" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-17' class='subtest'><td>XMLHttpRequestEventTarget interface: attribute onabort</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-18' class='subtest'><td>XMLHttpRequestEventTarget interface: attribute onerror</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-19' class='subtest'><td>XMLHttpRequestEventTarget interface: attribute onload</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-21' class='subtest'><td>XMLHttpRequestEventTarget interface: attribute onloadend</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-15' class='subtest'><td>XMLHttpRequestEventTarget interface: attribute onloadstart</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-16' class='subtest'><td>XMLHttpRequestEventTarget interface: attribute onprogress</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-20' class='subtest'><td>XMLHttpRequestEventTarget interface: attribute ontimeout</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-9' class='subtest'><td>XMLHttpRequestEventTarget interface: existence and properties of interface object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-12' class='subtest'><td>XMLHttpRequestEventTarget interface: existence and properties of interface prototype object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-13' class='subtest'><td>XMLHttpRequestEventTarget interface: existence and properties of interface prototype object's "constructor" property</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-14' class='subtest'><td>XMLHttpRequestEventTarget interface: existence and properties of interface prototype object's @@unscopables property</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-108' class='subtest'><td>XMLHttpRequestEventTarget interface: new XMLHttpRequest() must inherit property "onabort" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-109' class='subtest'><td>XMLHttpRequestEventTarget interface: new XMLHttpRequest() must inherit property "onerror" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-110' class='subtest'><td>XMLHttpRequestEventTarget interface: new XMLHttpRequest() must inherit property "onload" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-112' class='subtest'><td>XMLHttpRequestEventTarget interface: new XMLHttpRequest() must inherit property "onloadend" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-106' class='subtest'><td>XMLHttpRequestEventTarget interface: new XMLHttpRequest() must inherit property "onloadstart" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-107' class='subtest'><td>XMLHttpRequestEventTarget interface: new XMLHttpRequest() must inherit property "onprogress" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-111' class='subtest'><td>XMLHttpRequestEventTarget interface: new XMLHttpRequest() must inherit property "ontimeout" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-23' class='subtest'><td>XMLHttpRequestUpload interface object length</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-24' class='subtest'><td>XMLHttpRequestUpload interface object name</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-22' class='subtest'><td>XMLHttpRequestUpload interface: existence and properties of interface object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-25' class='subtest'><td>XMLHttpRequestUpload interface: existence and properties of interface prototype object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-26' class='subtest'><td>XMLHttpRequestUpload interface: existence and properties of interface prototype object's "constructor" property</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-27' class='subtest'><td>XMLHttpRequestUpload interface: existence and properties of interface prototype object's @@unscopables property</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-28' class='subtest'><td>XMLHttpRequestUpload must be primary interface of (new XMLHttpRequest()).upload</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-0' class='subtest'><td>idl_test setup</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-48-1' class='subtest'><td>idl_test validation</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-49'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/idlharness.any.worker.html' target='_blank'>/xhr/idlharness.any.worker.html</a> <small>(162/162, 100.00%, 20.88% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-49-8' class='subtest'><td>Document includes DocumentAndElementEventHandlers: member names are unique</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-7' class='subtest'><td>Document includes GlobalEventHandlers: member names are unique</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-4' class='subtest'><td>Document includes NonElementParentNode: member names are unique</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-5' class='subtest'><td>Document includes ParentNode: member names are unique</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-6' class='subtest'><td>Document includes XPathEvaluatorBase: member names are unique</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-161' class='subtest'><td>Document interface: existence and properties of interface object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-114' class='subtest'><td>FormData interface object length</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-115' class='subtest'><td>FormData interface object name</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-133' class='subtest'><td>FormData interface: calling append(USVString, Blob, optional USVString) on new FormData() with too few arguments must throw TypeError</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-131' class='subtest'><td>FormData interface: calling append(USVString, USVString) on new FormData() with too few arguments must throw TypeError</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-135' class='subtest'><td>FormData interface: calling delete(USVString) on new FormData() with too few arguments must throw TypeError</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-137' class='subtest'><td>FormData interface: calling get(USVString) on new FormData() with too few arguments must throw TypeError</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-139' class='subtest'><td>FormData interface: calling getAll(USVString) on new FormData() with too few arguments must throw TypeError</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-141' class='subtest'><td>FormData interface: calling has(USVString) on new FormData() with too few arguments must throw TypeError</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-145' class='subtest'><td>FormData interface: calling set(USVString, Blob, optional USVString) on new FormData() with too few arguments must throw TypeError</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-143' class='subtest'><td>FormData interface: calling set(USVString, USVString) on new FormData() with too few arguments must throw TypeError</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-113' class='subtest'><td>FormData interface: existence and properties of interface object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-116' class='subtest'><td>FormData interface: existence and properties of interface prototype object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-117' class='subtest'><td>FormData interface: existence and properties of interface prototype object's "constructor" property</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-118' class='subtest'><td>FormData interface: existence and properties of interface prototype object's @@unscopables property</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-127' class='subtest'><td>FormData interface: iterable&lt;USVString, FormDataEntryValue&gt;</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-132' class='subtest'><td>FormData interface: new FormData() must inherit property "append(USVString, Blob, optional USVString)" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-130' class='subtest'><td>FormData interface: new FormData() must inherit property "append(USVString, USVString)" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-134' class='subtest'><td>FormData interface: new FormData() must inherit property "delete(USVString)" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-136' class='subtest'><td>FormData interface: new FormData() must inherit property "get(USVString)" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-138' class='subtest'><td>FormData interface: new FormData() must inherit property "getAll(USVString)" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-140' class='subtest'><td>FormData interface: new FormData() must inherit property "has(USVString)" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-144' class='subtest'><td>FormData interface: new FormData() must inherit property "set(USVString, Blob, optional USVString)" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-142' class='subtest'><td>FormData interface: new FormData() must inherit property "set(USVString, USVString)" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-120' class='subtest'><td>FormData interface: operation append(USVString, Blob, optional USVString)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-119' class='subtest'><td>FormData interface: operation append(USVString, USVString)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-121' class='subtest'><td>FormData interface: operation delete(USVString)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-122' class='subtest'><td>FormData interface: operation get(USVString)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-123' class='subtest'><td>FormData interface: operation getAll(USVString)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-124' class='subtest'><td>FormData interface: operation has(USVString)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-126' class='subtest'><td>FormData interface: operation set(USVString, Blob, optional USVString)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-125' class='subtest'><td>FormData interface: operation set(USVString, USVString)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-128' class='subtest'><td>FormData must be primary interface of new FormData()</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-160' class='subtest'><td>Node interface: existence and properties of interface object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-2' class='subtest'><td>Partial interface Document: member names are unique</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-3' class='subtest'><td>Partial interface Document[2]: member names are unique</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-147' class='subtest'><td>ProgressEvent interface object length</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-148' class='subtest'><td>ProgressEvent interface object name</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-152' class='subtest'><td>ProgressEvent interface: attribute lengthComputable</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-153' class='subtest'><td>ProgressEvent interface: attribute loaded</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-154' class='subtest'><td>ProgressEvent interface: attribute total</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-146' class='subtest'><td>ProgressEvent interface: existence and properties of interface object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-149' class='subtest'><td>ProgressEvent interface: existence and properties of interface prototype object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-150' class='subtest'><td>ProgressEvent interface: existence and properties of interface prototype object's "constructor" property</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-151' class='subtest'><td>ProgressEvent interface: existence and properties of interface prototype object's @@unscopables property</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-157' class='subtest'><td>ProgressEvent interface: new ProgressEvent("type") must inherit property "lengthComputable" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-158' class='subtest'><td>ProgressEvent interface: new ProgressEvent("type") must inherit property "loaded" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-159' class='subtest'><td>ProgressEvent interface: new ProgressEvent("type") must inherit property "total" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-155' class='subtest'><td>ProgressEvent must be primary interface of new ProgressEvent("type")</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-29' class='subtest'><td>Stringification of (new XMLHttpRequest()).upload</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-129' class='subtest'><td>Stringification of new FormData()</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-156' class='subtest'><td>Stringification of new ProgressEvent("type")</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-74' class='subtest'><td>Stringification of new XMLHttpRequest()</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-38' class='subtest'><td>XMLHttpRequest interface object length</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-39' class='subtest'><td>XMLHttpRequest interface object name</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-43' class='subtest'><td>XMLHttpRequest interface: attribute onreadystatechange</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-54' class='subtest'><td>XMLHttpRequest interface: attribute readyState</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-70' class='subtest'><td>XMLHttpRequest interface: attribute response</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-71' class='subtest'><td>XMLHttpRequest interface: attribute responseText</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-69' class='subtest'><td>XMLHttpRequest interface: attribute responseType</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-63' class='subtest'><td>XMLHttpRequest interface: attribute responseURL</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-64' class='subtest'><td>XMLHttpRequest interface: attribute status</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-65' class='subtest'><td>XMLHttpRequest interface: attribute statusText</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-58' class='subtest'><td>XMLHttpRequest interface: attribute timeout</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-60' class='subtest'><td>XMLHttpRequest interface: attribute upload</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-59' class='subtest'><td>XMLHttpRequest interface: attribute withCredentials</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-98' class='subtest'><td>XMLHttpRequest interface: calling getResponseHeader(ByteString) on new XMLHttpRequest() with too few arguments must throw TypeError</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-83' class='subtest'><td>XMLHttpRequest interface: calling open(ByteString, USVString) on new XMLHttpRequest() with too few arguments must throw TypeError</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-85' class='subtest'><td>XMLHttpRequest interface: calling open(ByteString, USVString, boolean, optional USVString?, optional USVString?) on new XMLHttpRequest() with too few arguments must throw TypeError</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-101' class='subtest'><td>XMLHttpRequest interface: calling overrideMimeType(DOMString) on new XMLHttpRequest() with too few arguments must throw TypeError</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-92' class='subtest'><td>XMLHttpRequest interface: calling send(optional (Document or BodyInit)?) on new XMLHttpRequest() with too few arguments must throw TypeError</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-87' class='subtest'><td>XMLHttpRequest interface: calling setRequestHeader(ByteString, ByteString) on new XMLHttpRequest() with too few arguments must throw TypeError</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-52' class='subtest'><td>XMLHttpRequest interface: constant DONE on interface object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-53' class='subtest'><td>XMLHttpRequest interface: constant DONE on interface prototype object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-48' class='subtest'><td>XMLHttpRequest interface: constant HEADERS_RECEIVED on interface object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-49' class='subtest'><td>XMLHttpRequest interface: constant HEADERS_RECEIVED on interface prototype object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-50' class='subtest'><td>XMLHttpRequest interface: constant LOADING on interface object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-51' class='subtest'><td>XMLHttpRequest interface: constant LOADING on interface prototype object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-46' class='subtest'><td>XMLHttpRequest interface: constant OPENED on interface object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-47' class='subtest'><td>XMLHttpRequest interface: constant OPENED on interface prototype object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-44' class='subtest'><td>XMLHttpRequest interface: constant UNSENT on interface object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-45' class='subtest'><td>XMLHttpRequest interface: constant UNSENT on interface prototype object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-37' class='subtest'><td>XMLHttpRequest interface: existence and properties of interface object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-40' class='subtest'><td>XMLHttpRequest interface: existence and properties of interface prototype object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-41' class='subtest'><td>XMLHttpRequest interface: existence and properties of interface prototype object's "constructor" property</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-42' class='subtest'><td>XMLHttpRequest interface: existence and properties of interface prototype object's @@unscopables property</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-72' class='subtest'><td>XMLHttpRequest interface: member responseXML</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_false: The prototype object must not have a property "responseXML" expected false got true</td></tr>
+</table></td></tr>
+<tr id='subtest-49-80' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "DONE" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-78' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "HEADERS_RECEIVED" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-79' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "LOADING" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-77' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "OPENED" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-76' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "UNSENT" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-93' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "abort()" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-99' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "getAllResponseHeaders()" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-97' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "getResponseHeader(ByteString)" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-75' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "onreadystatechange" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-82' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "open(ByteString, USVString)" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-84' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "open(ByteString, USVString, boolean, optional USVString?, optional USVString?)" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-100' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "overrideMimeType(DOMString)" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-81' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "readyState" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-103' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "response" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-104' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "responseText" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-102' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "responseType" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-94' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "responseURL" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-91' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "send(optional (Document or BodyInit)?)" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-86' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "setRequestHeader(ByteString, ByteString)" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-95' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "status" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-96' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "statusText" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-88' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "timeout" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-90' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "upload" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-89' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must inherit property "withCredentials" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-105' class='subtest'><td>XMLHttpRequest interface: new XMLHttpRequest() must not have property "responseXML"</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_false: expected false got true</td></tr>
+</table></td></tr>
+<tr id='subtest-49-62' class='subtest'><td>XMLHttpRequest interface: operation abort()</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-67' class='subtest'><td>XMLHttpRequest interface: operation getAllResponseHeaders()</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-66' class='subtest'><td>XMLHttpRequest interface: operation getResponseHeader(ByteString)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-55' class='subtest'><td>XMLHttpRequest interface: operation open(ByteString, USVString)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-56' class='subtest'><td>XMLHttpRequest interface: operation open(ByteString, USVString, boolean, optional USVString?, optional USVString?)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-68' class='subtest'><td>XMLHttpRequest interface: operation overrideMimeType(DOMString)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-61' class='subtest'><td>XMLHttpRequest interface: operation send(optional (Document or BodyInit)?)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-57' class='subtest'><td>XMLHttpRequest interface: operation setRequestHeader(ByteString, ByteString)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-73' class='subtest'><td>XMLHttpRequest must be primary interface of new XMLHttpRequest()</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-10' class='subtest'><td>XMLHttpRequestEventTarget interface object length</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-11' class='subtest'><td>XMLHttpRequestEventTarget interface object name</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-32' class='subtest'><td>XMLHttpRequestEventTarget interface: (new XMLHttpRequest()).upload must inherit property "onabort" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-33' class='subtest'><td>XMLHttpRequestEventTarget interface: (new XMLHttpRequest()).upload must inherit property "onerror" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-34' class='subtest'><td>XMLHttpRequestEventTarget interface: (new XMLHttpRequest()).upload must inherit property "onload" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-36' class='subtest'><td>XMLHttpRequestEventTarget interface: (new XMLHttpRequest()).upload must inherit property "onloadend" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-30' class='subtest'><td>XMLHttpRequestEventTarget interface: (new XMLHttpRequest()).upload must inherit property "onloadstart" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-31' class='subtest'><td>XMLHttpRequestEventTarget interface: (new XMLHttpRequest()).upload must inherit property "onprogress" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-35' class='subtest'><td>XMLHttpRequestEventTarget interface: (new XMLHttpRequest()).upload must inherit property "ontimeout" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-17' class='subtest'><td>XMLHttpRequestEventTarget interface: attribute onabort</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-18' class='subtest'><td>XMLHttpRequestEventTarget interface: attribute onerror</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-19' class='subtest'><td>XMLHttpRequestEventTarget interface: attribute onload</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-21' class='subtest'><td>XMLHttpRequestEventTarget interface: attribute onloadend</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-15' class='subtest'><td>XMLHttpRequestEventTarget interface: attribute onloadstart</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-16' class='subtest'><td>XMLHttpRequestEventTarget interface: attribute onprogress</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-20' class='subtest'><td>XMLHttpRequestEventTarget interface: attribute ontimeout</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-9' class='subtest'><td>XMLHttpRequestEventTarget interface: existence and properties of interface object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-12' class='subtest'><td>XMLHttpRequestEventTarget interface: existence and properties of interface prototype object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-13' class='subtest'><td>XMLHttpRequestEventTarget interface: existence and properties of interface prototype object's "constructor" property</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-14' class='subtest'><td>XMLHttpRequestEventTarget interface: existence and properties of interface prototype object's @@unscopables property</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-108' class='subtest'><td>XMLHttpRequestEventTarget interface: new XMLHttpRequest() must inherit property "onabort" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-109' class='subtest'><td>XMLHttpRequestEventTarget interface: new XMLHttpRequest() must inherit property "onerror" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-110' class='subtest'><td>XMLHttpRequestEventTarget interface: new XMLHttpRequest() must inherit property "onload" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-112' class='subtest'><td>XMLHttpRequestEventTarget interface: new XMLHttpRequest() must inherit property "onloadend" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-106' class='subtest'><td>XMLHttpRequestEventTarget interface: new XMLHttpRequest() must inherit property "onloadstart" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-107' class='subtest'><td>XMLHttpRequestEventTarget interface: new XMLHttpRequest() must inherit property "onprogress" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-111' class='subtest'><td>XMLHttpRequestEventTarget interface: new XMLHttpRequest() must inherit property "ontimeout" with the proper type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-23' class='subtest'><td>XMLHttpRequestUpload interface object length</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-24' class='subtest'><td>XMLHttpRequestUpload interface object name</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-22' class='subtest'><td>XMLHttpRequestUpload interface: existence and properties of interface object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-25' class='subtest'><td>XMLHttpRequestUpload interface: existence and properties of interface prototype object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-26' class='subtest'><td>XMLHttpRequestUpload interface: existence and properties of interface prototype object's "constructor" property</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-27' class='subtest'><td>XMLHttpRequestUpload interface: existence and properties of interface prototype object's @@unscopables property</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-28' class='subtest'><td>XMLHttpRequestUpload must be primary interface of (new XMLHttpRequest()).upload</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-0' class='subtest'><td>idl_test setup</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-49-1' class='subtest'><td>idl_test validation</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-50'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/loadstart-and-state.html' target='_blank'>/xhr/loadstart-and-state.html</a> <small>(2/2, 100.00%, 0.26% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-50-1' class='subtest'><td>abort() during loadstart</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-50-0' class='subtest'><td>open() during loadstart</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-51'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/overridemimetype-blob.html' target='_blank'>/xhr/overridemimetype-blob.html</a> <small>(74/74, 100.00%, 9.54% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-51-73' class='subtest'><td>71) MIME types need to be parsed and serialized: "text/html"</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-51-72' class='subtest'><td>70) MIME types need to be parsed and serialized: text/ html</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "application/octet-stream" but got "text/ html"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-71' class='subtest'><td>69) MIME types need to be parsed and serialized: text /html</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "application/octet-stream" but got "text /html"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-70' class='subtest'><td>68) MIME types need to be parsed and serialized: Ā/Ā</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-51-69' class='subtest'><td>67) MIME types need to be parsed and serialized: {/}</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "application/octet-stream" but got "{/}"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-68' class='subtest'><td>66) MIME types need to be parsed and serialized: text/html(;doesnot=matter</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-51-67' class='subtest'><td>65) MIME types need to be parsed and serialized: ÿ/ÿ</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-51-66' class='subtest'><td>64) MIME types need to be parsed and serialized: (/)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-51-65' class='subtest'><td>63) MIME types need to be parsed and serialized: &lt;/&gt;</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-51-64' class='subtest'><td>62) MIME types need to be parsed and serialized: bogus/bogus/;</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-51-63' class='subtest'><td>61) MIME types need to be parsed and serialized: bogus/ </td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-51-62' class='subtest'><td>60) MIME types need to be parsed and serialized: bogus/</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-51-61' class='subtest'><td>59) MIME types need to be parsed and serialized: bogus</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-51-60' class='subtest'><td>58) MIME types need to be parsed and serialized: /</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-51-59' class='subtest'><td>57) MIME types need to be parsed and serialized: 	</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-51-58' class='subtest'><td>56) MIME types need to be parsed and serialized: </td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-51-57' class='subtest'><td>55) MIME types need to be parsed and serialized: x/x</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-51-56' class='subtest'><td>54) MIME types need to be parsed and serialized: x/x</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-51-55' class='subtest'><td>53) MIME types need to be parsed and serialized: x/x</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-51-54' class='subtest'><td>52) MIME types need to be parsed and serialized: x/x</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-51-53' class='subtest'><td>51) MIME types need to be parsed and serialized: x/x;test=�;x=x</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "x/x;x=x" but got "application/octet-stream"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-52' class='subtest'><td>50) MIME types need to be parsed and serialized: text/html;test=ÿ;charset=gbk</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;test=\"ÿ\";charset=gbk" but got "application/octet-stream"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-51' class='subtest'><td>49) MIME types need to be parsed and serialized: x/x;
+	 x=x
+	 ;x=y</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "x/x;x=x" but got "application/octet-stream"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-50' class='subtest'><td>48) MIME types need to be parsed and serialized: 
+	 x/x;x=x
+	 </td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "x/x;x=x" but got "application/octet-stream"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-49' class='subtest'><td>47) MIME types need to be parsed and serialized: x/x
+	 ;x=x</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "x/x;x=x" but got "application/octet-stream"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-48' class='subtest'><td>46) MIME types need to be parsed and serialized: x/x;x=	</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "x/x" but got "application/octet-stream"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-47' class='subtest'><td>45) MIME types need to be parsed and serialized: x/x;x= </td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "x/x" but got "application/octet-stream"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-46' class='subtest'><td>44) MIME types need to be parsed and serialized: x/x;test="\</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "x/x;test=\"\\\\\"" but got "application/octet-stream"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-45' class='subtest'><td>43) MIME types need to be parsed and serialized: x/x;test</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "x/x" but got "application/octet-stream"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-44' class='subtest'><td>42) MIME types need to be parsed and serialized: x/x;x="	 !\"#$%&amp;'()*+,-./0123456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ"</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "x/x;x=\"\t !\\\"#$%&amp;'()*+,-./0123456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ\"" but got "x/x"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-43' class='subtest'><td>41) MIME types need to be parsed and serialized: !#$%&amp;'*+-.^_`|~0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz/!#$%&amp;'*+-.^_`|~0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz;!#$%&amp;'*+-.^_`|~0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz=!#$%&amp;'*+-.^_`|~0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "!#$%&amp;'*+-.^_`|~0123456789abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz/!#$%&amp;'*+-.^_`|~0123456789abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz;!#$%&amp;'*+-.^_`|~0123456789abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz=!#$%&amp;'*+-.^_`|~0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" but got "!#$%&amp;'*+-.^_`|~0123456789abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz/!#$%&amp;'*+-.^_`|~0123456789abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-42' class='subtest'><td>40) MIME types need to be parsed and serialized: 0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789/0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-51-41' class='subtest'><td>39) MIME types need to be parsed and serialized: text/html;0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789=x;charset=gbk</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789=x;charset=gbk" but got "text/html"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-40' class='subtest'><td>38) MIME types need to be parsed and serialized: text/html;charset={gbk}</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset=\"{gbk}\"" but got "text/html"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-39' class='subtest'><td>37) MIME types need to be parsed and serialized: text/html;charset=";charset=GBK</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset=\";charset=GBK\"" but got "application/octet-stream"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-38' class='subtest'><td>36) MIME types need to be parsed and serialized: text/html;charset="";charset=GBK</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset=\"\"" but got "text/html"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-37' class='subtest'><td>35) MIME types need to be parsed and serialized: text/html;charset="gbk"x</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset=gbk" but got "application/octet-stream"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-36' class='subtest'><td>34) MIME types need to be parsed and serialized: text/html;charset="\g\b\k"</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset=gbk" but got "text/html"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-35' class='subtest'><td>33) MIME types need to be parsed and serialized: text/html;charset="\ gbk"</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset=\" gbk\"" but got "text/html"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-34' class='subtest'><td>32) MIME types need to be parsed and serialized: text/html;charset="gbk "</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset=\"gbk \"" but got "text/html"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-33' class='subtest'><td>31) MIME types need to be parsed and serialized: text/html;charset=" gbk"</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset=\" gbk\"" but got "text/html"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-32' class='subtest'><td>30) MIME types need to be parsed and serialized: text/html;charset=gbk"</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset=\"gbk\\\"\"" but got "application/octet-stream"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-31' class='subtest'><td>29) MIME types need to be parsed and serialized: text/html;charset="gbk</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset=gbk" but got "application/octet-stream"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-30' class='subtest'><td>28) MIME types need to be parsed and serialized: text/html;charset="gbk"</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset=gbk" but got "text/html"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-29' class='subtest'><td>27) MIME types need to be parsed and serialized: text/html;charset=";charset=foo";charset=GBK</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset=GBK" but got "text/html"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-28' class='subtest'><td>26) MIME types need to be parsed and serialized: text/html;charset= ";charset=GBK</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset=GBK" but got "application/octet-stream"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-27' class='subtest'><td>25) MIME types need to be parsed and serialized: text/html;;;;charset=gbk</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset=gbk" but got "application/octet-stream"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-26' class='subtest'><td>24) MIME types need to be parsed and serialized: text/html ; ; charset=gbk</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset=gbk" but got "application/octet-stream"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-25' class='subtest'><td>23) MIME types need to be parsed and serialized: text/html;";charset=gbk</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset=gbk" but got "application/octet-stream"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-24' class='subtest'><td>22) MIME types need to be parsed and serialized: text/html;';charset=gbk</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset=gbk" but got "application/octet-stream"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-23' class='subtest'><td>21) MIME types need to be parsed and serialized: text/html;test=;charset=gbk</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset=gbk" but got "application/octet-stream"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-22' class='subtest'><td>20) MIME types need to be parsed and serialized: text/html;test;charset=gbk</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset=gbk" but got "application/octet-stream"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-21' class='subtest'><td>19) MIME types need to be parsed and serialized: text/html;charset=';charset=GBK</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset='" but got "text/html"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-20' class='subtest'><td>18) MIME types need to be parsed and serialized: text/html;charset=gbk'</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset=gbk'" but got "text/html"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-19' class='subtest'><td>17) MIME types need to be parsed and serialized: text/html;charset='gbk</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset='gbk" but got "text/html"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-18' class='subtest'><td>16) MIME types need to be parsed and serialized: text/html;charset='gbk'</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset='gbk'" but got "text/html"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-17' class='subtest'><td>15) MIME types need to be parsed and serialized: text/html;charset=gbk</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html" but got "application/octet-stream"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-16' class='subtest'><td>14) MIME types need to be parsed and serialized: text/html;charset=gbk</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html" but got "application/octet-stream"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-15' class='subtest'><td>13) MIME types need to be parsed and serialized: text/html;charset=gbk</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html" but got "application/octet-stream"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-14' class='subtest'><td>12) MIME types need to be parsed and serialized: text/html;charset=gbk</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html" but got "application/octet-stream"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-13' class='subtest'><td>11) MIME types need to be parsed and serialized: text/html;charset= "gbk"</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset=\" \\\"gbk\\\"\"" but got "text/html"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-12' class='subtest'><td>10) MIME types need to be parsed and serialized: text/html;charset= gbk</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset=\" gbk\"" but got "text/html"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-11' class='subtest'><td>9) MIME types need to be parsed and serialized: text/html; charset=gbk</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset=gbk" but got "text/html"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-10' class='subtest'><td>8) MIME types need to be parsed and serialized: text/html ;charset=gbk</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset=gbk" but got "text/html"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-9' class='subtest'><td>7) MIME types need to be parsed and serialized: text/html;charset =gbk</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-51-8' class='subtest'><td>6) MIME types need to be parsed and serialized: text/html;charset=();charset=GBK</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset=\"()\"" but got "application/octet-stream"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-7' class='subtest'><td>5) MIME types need to be parsed and serialized: text/html;charset=gbk;charset=windows-1255</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset=gbk" but got "text/html"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-6' class='subtest'><td>4) MIME types need to be parsed and serialized: text/html;x=(;charset=gbk</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;x=\"(\";charset=gbk" but got "application/octet-stream"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-5' class='subtest'><td>3) MIME types need to be parsed and serialized: text/html;charset=gbk(</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset=\"gbk(\"" but got "application/octet-stream"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-4' class='subtest'><td>2) MIME types need to be parsed and serialized: TEXT/HTML;CHARSET=GBK</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset=GBK" but got "text/html"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-3' class='subtest'><td>1) MIME types need to be parsed and serialized: text/html;charset=gbk</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "text/html;charset=gbk" but got "text/html"</td></tr>
+</table></td></tr>
+<tr id='subtest-51-2' class='subtest'><td>Loading data…</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-51-0' class='subtest'><td>Use text/xml as fallback MIME type</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-51-1' class='subtest'><td>Use text/xml as fallback MIME type, 2</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-52'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/overridemimetype-done-state.any.worker.html' target='_blank'>/xhr/overridemimetype-done-state.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-52-0' class='subtest'><td>overridemimetype-done-state</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-53'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/overridemimetype-unsent-state-force-shiftjis.any.worker.html' target='_blank'>/xhr/overridemimetype-unsent-state-force-shiftjis.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-53-0' class='subtest'><td>XMLHttpRequest: overrideMimeType() in unsent state, enforcing Shift-JIS encoding</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "テスト" but got "{\"error\": {\"code\": 500, \"message\": \"Traceback (most recent call last):\\n  File \\\"/home/fritz/development/WAVE/tools/wptserve/wptserve/handlers.py\\\", line 332, in __call__\\n    rv = self.func(request, response)\\n  File \\\"/home/fritz/development/WAVE/xhr/resources/status.py\\\", line 2, in main\\n    code = int(request.GET.first(\\\"code\\\", 200))\\n  File \\\"/home/fritz/development/WAVE/tools/wptserve/wptserve/request.py\\\", line 300, in GET\\n    self._GET.add(isomorphic_encode(key), isomorphic_encode(value))\\n  File \\\"/home/fritz/development/WAVE/tools/wptserve/wptserve/utils.py\\\", line 38, in isomorphic_encode\\n    return s.encode(\\\"iso-8859-1\\\")\\nUnicodeEncodeError: 'latin-1' codec can't encode character '\\\\ufffd' in position 0: ordinal not in range(256)\\n\"}}"</td></tr>
+</table></td></tr>
+<tr class='test' id='test-file-54'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/progressevent-constructor.html' target='_blank'>/xhr/progressevent-constructor.html</a> <small>(5/5, 100.00%, 0.64% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-54-2' class='subtest'><td>Basic test.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-54-0' class='subtest'><td>Default event values.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-54-3' class='subtest'><td>ECMAScript value conversion test.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-54-4' class='subtest'><td>ProgressEventInit members must be matched case-sensitively.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-54-1' class='subtest'><td>There must not be a initProgressEvent().</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-55'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/progressevent-interface.html' target='_blank'>/xhr/progressevent-interface.html</a> <small>(7/7, 100.00%, 0.90% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-55-5' class='subtest'><td>Interface objects properties should not be Enumerable</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-55-6' class='subtest'><td>Should be able to delete ProgressEvent.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-55-0' class='subtest'><td>The ProgressEvent interface</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-55-2' class='subtest'><td>The ProgressEvent interface 1</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-55-3' class='subtest'><td>The ProgressEvent interface 2</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-55-4' class='subtest'><td>The ProgressEvent interface 3</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-55-1' class='subtest'><td>interface prototype object</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-56'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/responseText-status.html' target='_blank'>/xhr/responseText-status.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-56-0' class='subtest'><td>XMLHttpRequest Test: responseText - status</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-57'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/responseType-document-in-worker.html' target='_blank'>/xhr/responseType-document-in-worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-57-0' class='subtest'><td>Setting XMLHttpRequest responseType to 'document' in a worker should have no effect.</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_not_equals: got disallowed value "document"</td></tr>
+</table></td></tr>
+<tr class='test' id='test-file-58'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/responseXML-unavailable-in-worker.html' target='_blank'>/xhr/responseXML-unavailable-in-worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-58-0' class='subtest'><td>XMLHttpRequest's responseXML property should not be exposed in workers.</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_false: responseXML should not be on the prototype. expected false got true</td></tr>
+</table></td></tr>
+<tr class='test' id='test-file-59'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/responsetype.any.html' target='_blank'>/xhr/responsetype.any.html</a> <small>(50/50, 100.00%, 6.44% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-59-0' class='subtest'><td>Initial value of responseType</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-7' class='subtest'><td>Set responseType to "" when readyState is DONE and the sync flag is set.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-5' class='subtest'><td>Set responseType to "" when readyState is DONE.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-3' class='subtest'><td>Set responseType to "" when readyState is HEADERS_RECEIVED.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-4' class='subtest'><td>Set responseType to "" when readyState is LOADING.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-6' class='subtest'><td>Set responseType to "" when readyState is OPENED and the sync flag is set.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-2' class='subtest'><td>Set responseType to "" when readyState is OPENED.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-1' class='subtest'><td>Set responseType to "" when readyState is UNSENT.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-28' class='subtest'><td>Set responseType to "arraybuffer" when readyState is DONE and the sync flag is set.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-26' class='subtest'><td>Set responseType to "arraybuffer" when readyState is DONE.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-24' class='subtest'><td>Set responseType to "arraybuffer" when readyState is HEADERS_RECEIVED.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-25' class='subtest'><td>Set responseType to "arraybuffer" when readyState is LOADING.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-27' class='subtest'><td>Set responseType to "arraybuffer" when readyState is OPENED and the sync flag is set.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-23' class='subtest'><td>Set responseType to "arraybuffer" when readyState is OPENED.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-22' class='subtest'><td>Set responseType to "arraybuffer" when readyState is UNSENT.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-35' class='subtest'><td>Set responseType to "blob" when readyState is DONE and the sync flag is set.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-33' class='subtest'><td>Set responseType to "blob" when readyState is DONE.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-31' class='subtest'><td>Set responseType to "blob" when readyState is HEADERS_RECEIVED.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-32' class='subtest'><td>Set responseType to "blob" when readyState is LOADING.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-34' class='subtest'><td>Set responseType to "blob" when readyState is OPENED and the sync flag is set.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-30' class='subtest'><td>Set responseType to "blob" when readyState is OPENED.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-29' class='subtest'><td>Set responseType to "blob" when readyState is UNSENT.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-21' class='subtest'><td>Set responseType to "document" when readyState is DONE and the sync flag is set.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-19' class='subtest'><td>Set responseType to "document" when readyState is DONE.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-17' class='subtest'><td>Set responseType to "document" when readyState is HEADERS_RECEIVED.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-18' class='subtest'><td>Set responseType to "document" when readyState is LOADING.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-20' class='subtest'><td>Set responseType to "document" when readyState is OPENED and the sync flag is set.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-16' class='subtest'><td>Set responseType to "document" when readyState is OPENED.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-15' class='subtest'><td>Set responseType to "document" when readyState is UNSENT.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-14' class='subtest'><td>Set responseType to "json" when readyState is DONE and the sync flag is set.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-12' class='subtest'><td>Set responseType to "json" when readyState is DONE.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-10' class='subtest'><td>Set responseType to "json" when readyState is HEADERS_RECEIVED.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-11' class='subtest'><td>Set responseType to "json" when readyState is LOADING.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-13' class='subtest'><td>Set responseType to "json" when readyState is OPENED and the sync flag is set.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-9' class='subtest'><td>Set responseType to "json" when readyState is OPENED.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-8' class='subtest'><td>Set responseType to "json" when readyState is UNSENT.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-49' class='subtest'><td>Set responseType to "nosuchtype" when readyState is DONE and the sync flag is set.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-47' class='subtest'><td>Set responseType to "nosuchtype" when readyState is DONE.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-45' class='subtest'><td>Set responseType to "nosuchtype" when readyState is HEADERS_RECEIVED.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-46' class='subtest'><td>Set responseType to "nosuchtype" when readyState is LOADING.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-48' class='subtest'><td>Set responseType to "nosuchtype" when readyState is OPENED and the sync flag is set.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-44' class='subtest'><td>Set responseType to "nosuchtype" when readyState is OPENED.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-43' class='subtest'><td>Set responseType to "nosuchtype" when readyState is UNSENT.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-42' class='subtest'><td>Set responseType to "text" when readyState is DONE and the sync flag is set.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-40' class='subtest'><td>Set responseType to "text" when readyState is DONE.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-38' class='subtest'><td>Set responseType to "text" when readyState is HEADERS_RECEIVED.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-39' class='subtest'><td>Set responseType to "text" when readyState is LOADING.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-41' class='subtest'><td>Set responseType to "text" when readyState is OPENED and the sync flag is set.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-37' class='subtest'><td>Set responseType to "text" when readyState is OPENED.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-59-36' class='subtest'><td>Set responseType to "text" when readyState is UNSENT.</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-60'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/responseurl.html' target='_blank'>/xhr/responseurl.html</a> <small>(2/2, 100.00%, 0.26% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-60-0' class='subtest'><td>404 response has proper responseURL</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "http://web-platform.test:8000/xhr/responseurl.html?token=aef1eed6-a4d6-11ea-95ff-0021ccd76152&amp;timeout=60000&amp;https_port=8443&amp;web_root=/_wave/foo.html" but got "http://web-platform.test:8000/xhr/foo.html"</td></tr>
+</table></td></tr>
+<tr id='subtest-60-1' class='subtest'><td>Redirected response has proper responseURL</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> Failed to execute 'send' on 'XMLHttpRequest': Failed to load 'http://web-platform.test:8000/xhr/resources/redirect.py?location=image.gif'.</td></tr>
+</table></td></tr>
+<tr class='test' id='test-file-61'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/security-consideration.sub.html' target='_blank'>/xhr/security-consideration.sub.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-61-0' class='subtest'><td>ProgressEvent: security consideration</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-62'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/send-blob-with-no-mime-type.html' target='_blank'>/xhr/send-blob-with-no-mime-type.html</a> <small>(8/8, 100.00%, 1.03% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-62-5' class='subtest'><td>Asynchronous blob loading with invalid mime type [POST]</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-62-7' class='subtest'><td>Asynchronous blob loading with invalid mime type [PUT]</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-62-1' class='subtest'><td>Asynchronous blob loading with no mime type [POST]</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-62-3' class='subtest'><td>Asynchronous blob loading with no mime type [PUT]</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-62-4' class='subtest'><td>Synchronous blob loading with invalid mime type [POST]</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-62-6' class='subtest'><td>Synchronous blob loading with invalid mime type [PUT]</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-62-0' class='subtest'><td>Synchronous blob loading with no mime type [POST]</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-62-2' class='subtest'><td>Synchronous blob loading with no mime type [PUT]</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-63'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/send-data-arraybuffer.any.worker.html' target='_blank'>/xhr/send-data-arraybuffer.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-63-0' class='subtest'><td>XMLHttpRequest.send(arraybuffer)</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-64'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/send-data-arraybufferview.any.html' target='_blank'>/xhr/send-data-arraybufferview.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-64-0' class='subtest'><td>XMLHttpRequest.send(arraybufferview)</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-65'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/send-data-es-object.any.worker.html' target='_blank'>/xhr/send-data-es-object.any.worker.html</a> <small>(10/10, 100.00%, 1.29% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-65-6' class='subtest'><td>object that stringifies to JSON string</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-65-5' class='subtest'><td>object that stringifies to query string</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-65-8' class='subtest'><td>object whose toString() returns a document, expected to throw</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-65-9' class='subtest'><td>object whose toString() throws, expected to throw</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-65-7' class='subtest'><td>object whose valueOf() returns a document - ignore valueOf(), stringify</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-65-2' class='subtest'><td>sending a new XHR instance</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-65-0' class='subtest'><td>sending a plain empty object</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-65-4' class='subtest'><td>sending object that stringifies to null</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-65-3' class='subtest'><td>sending object that stringifies to undefined</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-65-1' class='subtest'><td>sending the ES Math object</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-66'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/send-data-formdata.any.html' target='_blank'>/xhr/send-data-formdata.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-66-0' class='subtest'><td>XMLHttpRequest.send(formdata)</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected 200 but got 500</td></tr>
+</table></td></tr>
+<tr class='test' id='test-file-67'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/send-data-readablestream.any.sharedworker.html' target='_blank'>/xhr/send-data-readablestream.any.sharedworker.html</a> <small>(3/3, 100.00%, 0.39% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-67-0' class='subtest'><td>XMLHttpRequest: send() with a stream on which getReader() is called</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_throws_js: function "() =&gt; client.send(stream)" did not throw</td></tr>
+</table></td></tr>
+<tr id='subtest-67-2' class='subtest'><td>XMLHttpRequest: send() with a stream on which read() and releaseLock() are called</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_throws_js: function "() =&gt; client.send(stream)" did not throw</td></tr>
+</table></td></tr>
+<tr id='subtest-67-1' class='subtest'><td>XMLHttpRequest: send() with a stream on which read() is called</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_throws_js: function "() =&gt; client.send(stream)" did not throw</td></tr>
+</table></td></tr>
+<tr class='test' id='test-file-68'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/send-data-readablestream.any.worker.html' target='_blank'>/xhr/send-data-readablestream.any.worker.html</a> <small>(3/3, 100.00%, 0.39% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-68-0' class='subtest'><td>XMLHttpRequest: send() with a stream on which getReader() is called</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_throws_js: function "() =&gt; client.send(stream)" did not throw</td></tr>
+</table></td></tr>
+<tr id='subtest-68-2' class='subtest'><td>XMLHttpRequest: send() with a stream on which read() and releaseLock() are called</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_throws_js: function "() =&gt; client.send(stream)" did not throw</td></tr>
+</table></td></tr>
+<tr id='subtest-68-1' class='subtest'><td>XMLHttpRequest: send() with a stream on which read() is called</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_throws_js: function "() =&gt; client.send(stream)" did not throw</td></tr>
+</table></td></tr>
+<tr class='test' id='test-file-69'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/send-data-sharedarraybuffer.any.worker.html' target='_blank'>/xhr/send-data-sharedarraybuffer.any.worker.html</a> <small>(11/11, 100.00%, 1.42% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-69-10' class='subtest'><td>sending a DataView backed by a SharedArrayBuffer</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-69-8' class='subtest'><td>sending a Float32Array backed by a SharedArrayBuffer</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-69-9' class='subtest'><td>sending a Float64Array backed by a SharedArrayBuffer</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-69-4' class='subtest'><td>sending a Int16Array backed by a SharedArrayBuffer</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-69-6' class='subtest'><td>sending a Int32Array backed by a SharedArrayBuffer</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-69-1' class='subtest'><td>sending a Int8Array backed by a SharedArrayBuffer</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-69-0' class='subtest'><td>sending a SharedArrayBuffer</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_throws_js: function "function() {
+        xhr.send(buf)
+    }" did not throw</td></tr>
+</table></td></tr>
+<tr id='subtest-69-5' class='subtest'><td>sending a Uint16Array backed by a SharedArrayBuffer</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-69-7' class='subtest'><td>sending a Uint32Array backed by a SharedArrayBuffer</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-69-2' class='subtest'><td>sending a Uint8Array backed by a SharedArrayBuffer</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-69-3' class='subtest'><td>sending a Uint8ClampedArray backed by a SharedArrayBuffer</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-70'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/send-send.any.html' target='_blank'>/xhr/send-send.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-70-0' class='subtest'><td>XMLHttpRequest: send() - send()</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-71'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/send-usp.any.html' target='_blank'>/xhr/send-usp.any.html</a> <small>(129/129, 100.00%, 16.62% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-71-0' class='subtest'><td>Overall fetch with URLSearchParams</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-1' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (0)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-2' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (1)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-11' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (10)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-101' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (100)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-102' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (101)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-103' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (102)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-104' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (103)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-105' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (104)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-106' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (105)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-107' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (106)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-108' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (107)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-109' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (108)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-110' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (109)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-12' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (11)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-111' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (110)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-112' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (111)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-113' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (112)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-114' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (113)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-115' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (114)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-116' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (115)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-117' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (116)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-118' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (117)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-119' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (118)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-120' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (119)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-13' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (12)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-121' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (120)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-122' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (121)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-123' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (122)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-124' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (123)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-125' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (124)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-126' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (125)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-127' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (126)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-128' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (127)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-14' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (13)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-15' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (14)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-16' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (15)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-17' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (16)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-18' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (17)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-19' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (18)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-20' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (19)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-3' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (2)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-21' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (20)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-22' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (21)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-23' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (22)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-24' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (23)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-25' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (24)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-26' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (25)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-27' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (26)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-28' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (27)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-29' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (28)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-30' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (29)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-4' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (3)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-31' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (30)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-32' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (31)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-33' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (32)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-34' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (33)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-35' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (34)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-36' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (35)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-37' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (36)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-38' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (37)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-39' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (38)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-40' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (39)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-5' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (4)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-41' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (40)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-42' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (41)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-43' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (42)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-44' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (43)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-45' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (44)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-46' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (45)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-47' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (46)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-48' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (47)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-49' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (48)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-50' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (49)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-6' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (5)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-51' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (50)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-52' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (51)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-53' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (52)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-54' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (53)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-55' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (54)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-56' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (55)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-57' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (56)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-58' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (57)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-59' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (58)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-60' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (59)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-7' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (6)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-61' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (60)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-62' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (61)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-63' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (62)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-64' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (63)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-65' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (64)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-66' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (65)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-67' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (66)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-68' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (67)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-69' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (68)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-70' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (69)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-8' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (7)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-71' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (70)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-72' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (71)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-73' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (72)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-74' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (73)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-75' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (74)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-76' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (75)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-77' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (76)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-78' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (77)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-79' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (78)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-80' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (79)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-9' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (8)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-81' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (80)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-82' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (81)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-83' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (82)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-84' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (83)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-85' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (84)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-86' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (85)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-87' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (86)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-88' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (87)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-89' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (88)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-90' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (89)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-10' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (9)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-91' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (90)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-92' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (91)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-93' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (92)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-94' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (93)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-95' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (94)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-96' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (95)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-97' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (96)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-98' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (97)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-99' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (98)</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-71-100' class='subtest'><td>XMLHttpRequest.send(URLSearchParams) (99)</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-72'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/sync-no-progress.any.html' target='_blank'>/xhr/sync-no-progress.any.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-72-0' class='subtest'><td>progress event should not be fired by sync XHR</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-73'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/sync-no-timeout.any.sharedworker.html' target='_blank'>/xhr/sync-no-timeout.any.sharedworker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-73-0' class='subtest'><td>Sync XHR should not have a timeout</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-74'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/sync-no-timeout.any.worker.html' target='_blank'>/xhr/sync-no-timeout.any.worker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-74-0' class='subtest'><td>Sync XHR should not have a timeout</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-75'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/sync-xhr-and-window-onload.html' target='_blank'>/xhr/sync-xhr-and-window-onload.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-75-0' class='subtest'><td>sync XHR should not fire window.onload synchronously</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-76'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/sync-xhr-supported-by-feature-policy.html' target='_blank'>/xhr/sync-xhr-supported-by-feature-policy.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-76-0' class='subtest'><td>document.featurePolicy.features should advertise sync-xhr.</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-77'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/template-element.html' target='_blank'>/xhr/template-element.html</a> <small>(3/3, 100.00%, 0.39% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-77-0' class='subtest'><td>XMLHttpRequest: template element parsing</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-77-1' class='subtest'><td>XMLHttpRequest: template element parsing 1</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-77-2' class='subtest'><td>XMLHttpRequest: template element parsing 2</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-78'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/timeout-multiple-fetches.html' target='_blank'>/xhr/timeout-multiple-fetches.html</a> <small>(2/2, 100.00%, 0.26% of total)</small></td><td class='TIMEOUT'>TIMEOUT</td></tr>
+<tr id='subtest-78-1' class='subtest'><td>CORS preflights should not reset the timer</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-78-0' class='subtest'><td>Redirects should not reset the timer</td><td class='TIMEOUT'>TIMEOUT</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> Test timed out</td></tr>
+</table></td></tr>
+<tr class='test' id='test-file-79'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/xmlhttprequest-sync-block-defer-scripts.html' target='_blank'>/xhr/xmlhttprequest-sync-block-defer-scripts.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-79-0' class='subtest'><td>Check that a sync XHR in a defer script blocks later defer scripts from running</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-80'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/xmlhttprequest-sync-block-scripts.html' target='_blank'>/xhr/xmlhttprequest-sync-block-scripts.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-80-0' class='subtest'><td>Check that while a sync XHR is in flight async script loads don't complete and run script</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-81'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/xmlhttprequest-sync-default-feature-policy.sub.html' target='_blank'>/xhr/xmlhttprequest-sync-default-feature-policy.sub.html</a> <small>(5/5, 100.00%, 0.64% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-81-2' class='subtest'><td>Default "sync-xhr" feature policy ["*"] allows cross-origin iframes.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-81-1' class='subtest'><td>Default "sync-xhr" feature policy ["*"] allows same-origin iframes.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-81-0' class='subtest'><td>Default "sync-xhr" feature policy ["*"] allows the top-level document.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-81-3' class='subtest'><td>Feature policy "sync-xhr" can be disabled in cross-origin iframes using "allow" attribute.</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-81-4' class='subtest'><td>Feature policy "sync-xhr" can be disabled in same-origin iframes using "allow" attribute.</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-82'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/xmlhttprequest-sync-not-hang-scriptloader.html' target='_blank'>/xhr/xmlhttprequest-sync-not-hang-scriptloader.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-82-0' class='subtest'><td>Ensure that an async script added during a defer script that then does a
+  sync XHR still runs</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-83'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/xmlhttprequest-timeout-aborted.html' target='_blank'>/xhr/xmlhttprequest-timeout-aborted.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='ERROR'>ERROR</td></tr>
+<tr id='subtest-83-0' class='subtest'><td>/xhr/xmlhttprequest-timeout-aborted.html</td><td class='ERROR'>ERROR</td></tr>
+<tr class='test' id='test-file-84'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/xmlhttprequest-timeout-abortedonmain.html' target='_blank'>/xhr/xmlhttprequest-timeout-abortedonmain.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='ERROR'>ERROR</td></tr>
+<tr id='subtest-84-0' class='subtest'><td>/xhr/xmlhttprequest-timeout-abortedonmain.html</td><td class='ERROR'>ERROR</td></tr>
+<tr class='test' id='test-file-85'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/xmlhttprequest-timeout-overrides.html' target='_blank'>/xhr/xmlhttprequest-timeout-overrides.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='ERROR'>ERROR</td></tr>
+<tr id='subtest-85-0' class='subtest'><td>/xhr/xmlhttprequest-timeout-overrides.html</td><td class='ERROR'>ERROR</td></tr>
+<tr class='test' id='test-file-86'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/xmlhttprequest-timeout-overridesexpires.html' target='_blank'>/xhr/xmlhttprequest-timeout-overridesexpires.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='ERROR'>ERROR</td></tr>
+<tr id='subtest-86-0' class='subtest'><td>/xhr/xmlhttprequest-timeout-overridesexpires.html</td><td class='ERROR'>ERROR</td></tr>
+<tr class='test' id='test-file-87'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/xmlhttprequest-timeout-reused.html' target='_blank'>/xhr/xmlhttprequest-timeout-reused.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='TIMEOUT'>TIMEOUT</td></tr>
+<tr id='subtest-87-0' class='subtest'><td>undefined</td><td class='TIMEOUT'>TIMEOUT</td></tr>
+<tr class='test' id='test-file-88'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/xmlhttprequest-timeout-simple.html' target='_blank'>/xhr/xmlhttprequest-timeout-simple.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='TIMEOUT'>TIMEOUT</td></tr>
+<tr id='subtest-88-0' class='subtest'><td>undefined</td><td class='TIMEOUT'>TIMEOUT</td></tr>
+<tr class='test' id='test-file-89'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/xmlhttprequest-timeout-synconmain.html' target='_blank'>/xhr/xmlhttprequest-timeout-synconmain.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='TIMEOUT'>TIMEOUT</td></tr>
+<tr id='subtest-89-0' class='subtest'><td>undefined</td><td class='TIMEOUT'>TIMEOUT</td></tr>
+<tr class='test' id='test-file-90'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/xmlhttprequest-timeout-twice.html' target='_blank'>/xhr/xmlhttprequest-timeout-twice.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='ERROR'>ERROR</td></tr>
+<tr id='subtest-90-0' class='subtest'><td>/xhr/xmlhttprequest-timeout-twice.html</td><td class='ERROR'>ERROR</td></tr>
+<tr class='test' id='test-file-91'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/xmlhttprequest-timeout-worker-aborted.html' target='_blank'>/xhr/xmlhttprequest-timeout-worker-aborted.html</a> <small>(3/3, 100.00%, 0.39% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-91-0' class='subtest'><td>Timeout test: No events should fire for an unsent, unaborted request</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-91-1' class='subtest'><td>Timeout test: time to abort is -1, timeout set at 2000</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-91-2' class='subtest'><td>Timeout test: time to abort is 5000, timeout set at 2000</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "timeout" but got "load"</td></tr>
+</table></td></tr>
+<tr class='test' id='test-file-92'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/xmlhttprequest-timeout-worker-overrides.html' target='_blank'>/xhr/xmlhttprequest-timeout-worker-overrides.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='ERROR'>ERROR</td></tr>
+<tr id='subtest-92-0' class='subtest'><td>/xhr/xmlhttprequest-timeout-worker-overrides.html</td><td class='ERROR'>ERROR</td></tr>
+<tr class='test' id='test-file-93'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/xmlhttprequest-timeout-worker-overridesexpires.html' target='_blank'>/xhr/xmlhttprequest-timeout-worker-overridesexpires.html</a> <small>(3/3, 100.00%, 0.39% of total)</small></td><td class='OK'>OK</td></tr>
+<tr id='subtest-93-1' class='subtest'><td>Timeout test: timeout set to expired value before load fires, original timeout at 5000, reset at 2000 to 1100</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "timeout" but got "load"</td></tr>
+</table></td></tr>
+<tr id='subtest-93-0' class='subtest'><td>Timeout test: timeout set to expiring value after load fires, original timeout at 5000, reset at 4000 to 1000</td><td class='PASS'>PASS</td></tr>
+<tr id='subtest-93-2' class='subtest'><td>Timeout test: timeout set to non-expiring value after timeout fires, original timeout at 1000, reset at 2000 to 500</td><td class='FAIL'>FAIL</td></tr>
+<tr class='messages'><td colspan='2'><table><tr class='message'><td class='ua'>Ch83:</td><td> assert_equals: expected "timeout" but got "load"</td></tr>
+</table></td></tr>
+<tr class='test' id='test-file-94'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/xmlhttprequest-timeout-worker-simple.html' target='_blank'>/xhr/xmlhttprequest-timeout-worker-simple.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='ERROR'>ERROR</td></tr>
+<tr id='subtest-94-0' class='subtest'><td>/xhr/xmlhttprequest-timeout-worker-simple.html</td><td class='ERROR'>ERROR</td></tr>
+<tr class='test' id='test-file-95'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/xmlhttprequest-timeout-worker-synconworker.html' target='_blank'>/xhr/xmlhttprequest-timeout-worker-synconworker.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='ERROR'>ERROR</td></tr>
+<tr id='subtest-95-0' class='subtest'><td>/xhr/xmlhttprequest-timeout-worker-synconworker.html</td><td class='ERROR'>ERROR</td></tr>
+<tr class='test' id='test-file-96'><td><a href='https://github.com/cta-wave/WMAS/blob/wmas2018-tests/xhr/xmlhttprequest-timeout-worker-twice.html' target='_blank'>/xhr/xmlhttprequest-timeout-worker-twice.html</a> <small>(1/1, 100.00%, 0.13% of total)</small></td><td class='ERROR'>ERROR</td></tr>
+<tr id='subtest-96-0' class='subtest'><td>/xhr/xmlhttprequest-timeout-worker-twice.html</td><td class='ERROR'>ERROR</td></tr>
+
+      </table>
+    </div>
+    <script src='jquery.min.js'></script>
+    <script src='sticky-headers.js'></script>
+    <script type='application/javascript'>
+      window.setTimeout(function() { 
+ $('.message_toggle').show();
+ $('.messages').toggle(); 
+ $('.message_toggle').on('click', function() {
+$('.messages').toggle();
+});
+}, 1000);
+    </script>
+  </body>
+</html>

@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <title>Service Worker Global Scope Interfaces</title>
+<meta name="timeout" content="long">
 <script src="/resources/testharness.js"></script>
 <script src="/resources/testharnessreport.js"></script>
 <script src="resources/test-helpers.sub.js"></script>
 <script>
 'use strict';
 
+<<<<<<< HEAD:service-workers/service-worker/idlharness-sw.https.html
 // NOTE: affected when 'resources/idlharness-worker.sub.js' srcs change:
 // const srcs = ['dom', 'html', 'service-workers'];
 service_worker_test(
   'resources/idlharness-worker.sub.js',
+=======
+// interface-requirements-worker.sub.js checks additional interface
+// requirements, on top of the basic IDL that is validated in
+// service-workers/idlharness.any.js
+service_worker_test(
+  'resources/interface-requirements-worker.sub.js',
+>>>>>>> wave-v2.1.0:service-workers/service-worker/interface-requirements-sw.https.html
   'Interfaces and attributes in ServiceWorkerGlobalScope');
 </script>

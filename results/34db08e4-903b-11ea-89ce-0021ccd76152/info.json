@@ -1,0 +1,42 @@
+{
+  "status": "completed", 
+  "tests": {
+    "exclude": [], 
+    "include": [
+      "/dpctf"
+    ]
+  }, 
+  "malfunctioning_tests": [], 
+  "timeouts": {
+    "automatic": 60000, 
+    "manual": 300000
+  }, 
+  "webhook_urls": [], 
+  "last_completed_test": "/dpctf/sequential_track_playback-manual.html", 
+  "labels": [], 
+  "test_state": {
+    "dpctf": {
+      "complete": 1, 
+      "timeout": 1, 
+      "pass": 0, 
+      "fail": 0, 
+      "total": 1, 
+      "not_run": 0
+    }
+  }, 
+  "reference_tokens": [], 
+  "date_finished": 1588839822768.9568, 
+  "token": "34db08e4-903b-11ea-89ce-0021ccd76152", 
+  "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36", 
+  "expiration_date": null, 
+  "is_public": false, 
+  "date_started": 1588839522000, 
+  "types": [
+    "automatic", 
+    "manual"
+  ], 
+  "browser": {
+    "version": "81.0.4044", 
+    "name": "Chrome"
+  }
+}
