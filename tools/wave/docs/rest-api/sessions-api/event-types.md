@@ -6,15 +6,19 @@ The [`event`](./events.md) functions of the sessions API make use of these event
 ## Status change
 
 **Type identifier**: `status`  
+
 **Payload**: `"<String>"`  
 Possible Values: `paused`, `running`, `completed`, `aborted`  
+
 **Description**: Triggered once the status of the session changes.
 
 ## Resume 
 
 **Type identifier**: `resume`  
+
 **Payload**: `"<String>"`  
-Contains the token of the session to resume.  
+Contains the token of the session to resume.
+
 **Description**: Triggered when a specific session is supposed to be resumed. 
 This will discard the current session and continue executing the session with 
 the provided token.
@@ -22,21 +26,59 @@ the provided token.
 ## Test Completed 
 
 **Type identifier**: `test_completed`  
+
 **Payload**: `"<String>"`  
-Contains the test case that completed.  
+Contains the test case that completed.
+
 **Description**: Triggered when the test runner received a result for a test.
 
 ## Perform Observation
 
 **Type identifier**: `perform_observation`  
-**Payload**: `"<Object>"`  
-An object, that contains information on how perform an observation.
+
+**Payload**:
+
+An object, that contains information of the test case to make observations for.
+
+```json
+{
+  "test_path": "<String>",
+  "test_name": "<String>",
+  "test_description": "<String"
+}
+```
+
+- **test_path**: The path of the test, relative to the DPCTF Test Runner root
+- **test_name**: The name of the test
+- **test_description**: A description of the test
+
 **Description**: Triggered by a test that needs an external observation.
 
 ## Observation Completed
 
 **Type identifier**: `observation_completed`  
-**Payload**: `"<Object>"`  
-An object, that contains information about a requested observation and its results.
+
+**Payload**:
+
+The payload contains all results of the observation.
+
+```json
+[
+  {
+    "name": "String",
+    "status": "Enum['PASS', 'FAIL', 'TIMEOUT', 'NOT_RUN']",
+    "message": "String"
+  },
+  ...
+]
+```
+- **name**: The name of the test.
+- **status**: The status of the result:
+  - **PASS**: The test was executed successfully.
+  - **FAIL**: The test did not meet at least one assertion.
+  - **TIMEOUT**: It took too long for this test to execute.
+  - **NOT_RUN**: This test was skipped.
+- **message** contains the reason for the tests failure. `null` if the test passed
+
 **Description**: Triggered by an external framework that completed processing 
 a requested observation.
