@@ -32,13 +32,13 @@ Contains the test case that completed.
 
 **Description**: Triggered when the test runner received a result for a test.
 
-## Perform Observation
+## Test Ready
 
-**Type identifier**: `perform_observation`  
+**Type identifier**: `test_ready`  
 
 **Payload**:
 
-An object, that contains information of the test case to make observations for.
+An object, that contains information of the test case that finished loading.
 
 ```json
 {
@@ -52,7 +52,28 @@ An object, that contains information of the test case to make observations for.
 - **test_name**: The name of the test
 - **test_description**: A description of the test
 
-**Description**: Triggered by a test that needs an external observation.
+**Description**: Triggered by a test that is done loading and waits for the 
+observation framework to be ready.
+
+## Observation Ready
+
+**Type identifier**: `observation_ready`  
+
+**Payload**:
+
+An object, that contains the path of the test that the observation framework 
+is ready to observe.
+
+```json
+{
+  "test_path": "<String>"
+}
+```
+
+- **test_path**: The path of the test, relative to the DPCTF Test Runner root
+
+**Description**: Triggered by an external framework that is ready to perform 
+observations for a specific test.
 
 ## Observation Completed
 
