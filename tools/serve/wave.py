@@ -5,6 +5,7 @@ from manifest import manifest
 import localpaths
 import logging
 import os
+import json
 
 try:
     from serve import serve
@@ -33,6 +34,13 @@ def get_route_builder_func(report):
 
         class WaveHandler(object):
             def __call__(self, request, response):
+                path = request.request_path
+                if path == "/resources/wave-config":
+                    json_string = json.dumps(wave_cfg, indent=4)
+                    response.content = json_string
+                    response.headers = [("Content-Type", "application/json")]
+                    return
+
                 wave_server.handle_request(request, response)
 
         web_root = "wave"
@@ -43,6 +51,7 @@ def get_route_builder_func(report):
 
         wave_handler = WaveHandler()
         builder.add_handler("*", web_root + "*", wave_handler)
+        builder.add_handler("*", "/resources/wave-config", wave_handler)
         # serving wave specifc testharnessreport.js
         file_path = os.path.join(wpt.localpaths.repo_root, "tools/wave/resources/testharnessreport.js")
         builder.add_static(
