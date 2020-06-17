@@ -42,15 +42,29 @@ An object, that contains information of the test case that finished loading.
 
 ```json
 {
-  "test_path": "<String>",
-  "test_name": "<String>",
-  "test_description": "<String"
+  "path": "<String>",
+  "title": "<String>",
+  "description": "<String>",
+  "params": "<Object>",
+  "observations": [
+    {
+      "id": "<String>",
+      "name": "<String>",
+      "description": "<String>",
+    },
+    ...
+  ]
 }
 ```
 
-- **test_path**: The path of the test, relative to the DPCTF Test Runner root
-- **test_name**: The name of the test
-- **test_description**: A description of the test
+- **path**: The path of the test, relative to the DPCTF Test Runner root
+- **title**: The name of the test
+- **description**: A description of the test
+- **params**: A key-value object containing all query parameters and its values
+- **observations**: A list of observation that are required for this test
+  - **id**: A unique identifier for the observation
+  - **name**: The name of the observation
+  - **description**: Details on how to perform the observation
 
 **Description**: Triggered by a test that is done loading and waits for the 
 observation framework to be ready.
@@ -86,6 +100,7 @@ The payload contains all results of the observation.
 ```json
 [
   {
+    "id": "String",
     "name": "String",
     "status": "Enum['PASS', 'FAIL', 'TIMEOUT', 'NOT_RUN']",
     "message": "String"
@@ -93,6 +108,7 @@ The payload contains all results of the observation.
   ...
 ]
 ```
+- **id**: The id of the observation
 - **name**: The name of the test.
 - **status**: The status of the result:
   - **PASS**: The test was executed successfully.
@@ -103,3 +119,23 @@ The payload contains all results of the observation.
 
 **Description**: Triggered by an external framework that completed processing 
 a requested observation.
+
+## Playback event
+
+**Type identifier**: `playback`
+
+**Payload**:
+
+The payload contains the type of event that was triggered by the video. See 
+[MediaElement Events](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement#Events).
+The payload is any data related to that event.
+
+```json
+{
+  "type": "String",
+  "data": "Object|String|Number",
+}
+```
+
+**Description**: The playback events are video element events that are 
+forwared to the session event channel.
