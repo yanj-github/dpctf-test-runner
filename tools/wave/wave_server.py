@@ -20,6 +20,7 @@ from .testing.test_loader import TestLoader
 from .testing.event_dispatcher import EventDispatcher
 
 VERSION_STRING = "v2.1.0"
+DPCTF_VERSION_STRING = "v0.4.0"
 
 
 class WaveServer(object):
@@ -122,7 +123,8 @@ class WaveServer(object):
             read_sessions_enabled=configuration["read_sessions_enabled"],
             import_results_enabled=configuration["import_results_enabled"],
             reports_enabled=reports_enabled,
-            version_string=VERSION_STRING
+            version_string=VERSION_STRING,
+            dpctf_version_string=DPCTF_VERSION_STRING
         )
 
         # Initialize HTTP server
