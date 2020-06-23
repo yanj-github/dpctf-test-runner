@@ -46,9 +46,6 @@ class SessionsApiHandler(ApiHandler):
             reference_tokens = []
             if "reference_tokens" in config:
                 reference_tokens = config["reference_tokens"]
-            webhook_urls = []
-            if "webhook_urls" in config:
-                webhook_urls = config["webhook_urls"]
             user_agent = headers[b"user-agent"].decode("utf-8")
             labels = []
             if "labels" in config:
@@ -65,7 +62,6 @@ class SessionsApiHandler(ApiHandler):
                 test_types,
                 timeouts,
                 reference_tokens,
-                webhook_urls,
                 user_agent,
                 labels,
                 expiration_date,
@@ -225,9 +221,6 @@ class SessionsApiHandler(ApiHandler):
             reference_tokens = []
             if "reference_tokens" in config:
                 reference_tokens = config["reference_tokens"]
-            webhook_urls = []
-            if "webhook_urls" in config:
-                webhook_urls = config["webhook_urls"]
             type = None
             if "type" in config:
                 type = config["type"]
@@ -238,7 +231,6 @@ class SessionsApiHandler(ApiHandler):
                 test_types,
                 timeouts,
                 reference_tokens,
-                webhook_urls,
                 type
             )
         except NotFoundException:
@@ -344,9 +336,14 @@ class SessionsApiHandler(ApiHandler):
             uri_parts = self.parse_uri(request)
             token = uri_parts[2]
 
+            query_parameters = self.parse_query_parameters(request)
+            last_event_number = None
+            if ("last_event" in query_parameters):
+                last_event_number = int(query_parameters["last_event"])
+
             event = threading.Event()
             http_polling_event_listener = HttpPollingEventListener(token, event)
-            event_listener_token = self._event_dispatcher.add_event_listener(http_polling_event_listener)
+            event_listener_token = self._event_dispatcher.add_event_listener(http_polling_event_listener, last_event_number)
 
             event.wait()
 

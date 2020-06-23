@@ -34,7 +34,6 @@ class Session(object):
             is_public=None,
             reference_tokens=None,
             browser=None,
-            webhook_urls=None,
             expiration_date=None,
             type=None,
             malfunctioning_tests=None
@@ -51,14 +50,8 @@ class Session(object):
         if labels is None:
             labels = []
         self.labels = labels
-        if tests is None:
-            tests = {}
         self.tests = tests
-        if pending_tests is None:
-            pending_tests = {}
         self.pending_tests = pending_tests
-        if running_tests is None:
-            running_tests = {}
         self.running_tests = running_tests
         if timeouts is None:
             timeouts = {}
@@ -66,8 +59,6 @@ class Session(object):
         if status is None:
             status = UNKNOWN
         self.status = status
-        if test_state is None:
-            test_state = {}
         self.test_state = test_state
         self.last_completed_test = last_completed_test
         if recent_completed_count is None:
@@ -83,9 +74,6 @@ class Session(object):
             reference_tokens = []
         self.reference_tokens = reference_tokens
         self.browser = browser
-        if webhook_urls is None:
-            webhook_urls = []
-        self.webhook_urls = webhook_urls
         self.expiration_date = expiration_date
         if type is None:
             type = WMAS

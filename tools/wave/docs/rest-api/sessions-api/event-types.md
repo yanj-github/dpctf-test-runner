@@ -100,10 +100,10 @@ The payload contains all results of the observation.
 ```json
 [
   {
-    "id": "String",
-    "name": "String",
+    "id": "<String>",
+    "name": "<String>",
     "status": "Enum['PASS', 'FAIL', 'TIMEOUT', 'NOT_RUN']",
-    "message": "String"
+    "message": "<String>"
   },
   ...
 ]
@@ -132,8 +132,8 @@ The payload is any data related to that event.
 
 ```json
 {
-  "type": "String",
-  "data": "Object|String|Number",
+  "type": "<String>",
+  "data": "<Object|String|Number>",
 }
 ```
 

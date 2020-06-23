@@ -19,7 +19,7 @@ from .testing.devices_manager import DevicesManager
 from .testing.test_loader import TestLoader
 from .testing.event_dispatcher import EventDispatcher
 
-VERSION_STRING = "v2.1.0"
+VERSION_STRING = "v3.0.0"
 DPCTF_VERSION_STRING = "v0.4.0"
 
 
@@ -42,7 +42,9 @@ class WaveServer(object):
         configuration = configuration_loader.load(configuration_file_path)
 
         # Initialize Managers
-        event_dispatcher = EventDispatcher()
+        event_dispatcher = EventDispatcher(
+            event_cache_duration=configuration["event_cache_duration"]
+        )
         sessions_manager = SessionsManager()
         results_manager = ResultsManager()
         tests_manager = TestsManager()
