@@ -581,16 +581,28 @@ var WaveService = {
   listenDeviceEvents: function (token) {
     var listeners = WaveService._deviceEventListeners;
     if (!listeners[token] || listeners.length === 0) return;
+    var url = "api/devices/" + token + "/events";
+    var lastEventNumber = this._eventNumbers[token];
+    if (lastEventNumber) {
+      url += "?last_active=" + lastEventNumber;
+    }
     WaveService.listenHttpPolling(
-      "api/devices/" + token + "/events",
+      url,
       function (response) {
         if (!response) {
           WaveService.listenDeviceEvents(token);
           return;
         }
+        var lastEventNumber = 0;
         for (var listener of listeners[token]) {
-          listener(response);
+          for (var event of response) {
+            if (event.number > lastEventNumber) {
+              lastEventNumber = event.number;
+            }
+            listener(event);
+          }
         }
+        this._eventNumbers[token] = lastEventNumber;
         WaveService.listenDeviceEvents(token);
       },
       function () {
@@ -753,7 +765,7 @@ var WaveService = {
   },
   _globalDeviceEventListeners: [],
   _sessionEventListeners: {},
-  _sessionEventNumbers: {},
+  _eventNumbers: {},
   listenHttpPolling: function (url, onSuccess, onError) {
     var uniqueId = new Date().getTime();
     if (url.indexOf("?") === -1) {
@@ -798,7 +810,7 @@ var WaveService = {
     var listeners = WaveService._sessionEventListeners;
     if (!listeners[token] || listeners.length === 0) return;
     var url = "api/sessions/" + token + "/events";
-    var lastEventNumber = WaveService._sessionEventNumbers[token];
+    var lastEventNumber = WaveService._eventNumbers[token];
     if (lastEventNumber) {
       url += "?last_event=" + lastEventNumber;
     }
@@ -818,7 +830,7 @@ var WaveService = {
             listener(event);
           }
         }
-        WaveService._sessionEventNumbers[token] = lastEventNumber;
+        WaveService._eventNumbers[token] = lastEventNumber;
         WaveService.listenSessionEvents(token);
       },
       function () {
