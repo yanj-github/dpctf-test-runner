@@ -19,8 +19,8 @@ from .testing.devices_manager import DevicesManager
 from .testing.test_loader import TestLoader
 from .testing.event_dispatcher import EventDispatcher
 
-VERSION_STRING = "v3.0.1"
-DPCTF_VERSION_STRING = "v0.4.1"
+VERSION_STRING = "v3.0.2"
+DPCTF_VERSION_STRING = "v0.4.2"
 
 
 class WaveServer(object):
@@ -56,7 +56,8 @@ class WaveServer(object):
             event_dispatcher=event_dispatcher,
             tests_manager=tests_manager,
             results_directory=configuration["results_directory_path"],
-            results_manager=results_manager
+            results_manager=results_manager,
+            configuration=configuration
         )
 
         results_manager.initialize(

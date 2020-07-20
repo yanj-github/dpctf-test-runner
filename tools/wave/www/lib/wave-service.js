@@ -765,7 +765,7 @@ var WaveService = {
   },
   _globalDeviceEventListeners: [],
   _sessionEventListeners: {},
-  _eventNumbers: {},
+  _sessionEventNumbers: {},
   listenHttpPolling: function (url, onSuccess, onError) {
     var uniqueId = new Date().getTime();
     if (url.indexOf("?") === -1) {
@@ -810,7 +810,7 @@ var WaveService = {
     var listeners = WaveService._sessionEventListeners;
     if (!listeners[token] || listeners.length === 0) return;
     var url = "api/sessions/" + token + "/events";
-    var lastEventNumber = WaveService._eventNumbers[token];
+    var lastEventNumber = WaveService._sessionEventNumbers[token];
     if (lastEventNumber) {
       url += "?last_event=" + lastEventNumber;
     }
@@ -830,7 +830,7 @@ var WaveService = {
             listener(event);
           }
         }
-        WaveService._eventNumbers[token] = lastEventNumber;
+        WaveService._sessionEventNumbers[token] = lastEventNumber;
         WaveService.listenSessionEvents(token);
       },
       function () {
