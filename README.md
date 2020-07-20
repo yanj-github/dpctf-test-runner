@@ -72,6 +72,13 @@ commands are:
 * `wpt serve-wave` - For starting the wpt http server and the WMAS test runner
   (requires to generate MANIFEST.json using `wpt manifest`). More details on how to use the WMAS test runner see the [documentation](./tools/wptserve/wptserve/wave/docs/usage/usage.md).
 
+DPCTF Info
+==========
+
+The DPCTF Test Runner can be run by checking out this repository and using the start command `wpt serve-wave`. However, we recommend using the deploy method provided by the [DPCTF deploy repository](https://github.com/cta-wave/dpctf-deploy/https://github.com/cta-wave/dpctf-deploy/).
+
+Currently, the DPCTF tests are under development. To skip the communication with the observation framework press `Enter`.
+
 <span id="windows-notes">Windows Notes</span>
 =============================================
 
