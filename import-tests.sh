@@ -41,6 +41,7 @@ rm -rf $WPTBASEDIR/cors
 rm -rf $WPTBASEDIR/credential-management
 rm -rf $WPTBASEDIR/css
 rm -rf $WPTBASEDIR/custom-elements
+rm -rf $WPTBASEDIR/delegated-ink
 rm -rf $WPTBASEDIR/device-memory
 rm -rf $WPTBASEDIR/document-policy
 rm -rf $WPTBASEDIR/dom
@@ -92,6 +93,7 @@ rm -rf $WPTBASEDIR/lifecycle
 rm -rf $WPTBASEDIR/loading
 rm -rf $WPTBASEDIR/longtask-timing
 rm -rf $WPTBASEDIR/magnetometer
+rm -rf $WPTBASEDIR/manifest
 rm -rf $WPTBASEDIR/mathml
 rm -rf $WPTBASEDIR/media-capabilities
 rm -rf $WPTBASEDIR/mediacapture-depth
@@ -125,6 +127,7 @@ rm -rf $WPTBASEDIR/payment-method-id
 rm -rf $WPTBASEDIR/payment-request
 rm -rf $WPTBASEDIR/performance-timeline
 rm -rf $WPTBASEDIR/PeriodicBackgroundSync
+rm -rf $WPTBASEDIR/periodic-background-sync
 rm -rf $WPTBASEDIR/permissions
 rm -rf $WPTBASEDIR/permissions-request
 rm -rf $WPTBASEDIR/permissions-revoke
@@ -146,6 +149,7 @@ rm -rf $WPTBASEDIR/requestidlecallback
 rm -rf $WPTBASEDIR/resize-observer
 rm -rf $WPTBASEDIR/resource-timing
 rm -rf $WPTBASEDIR/screen-capture
+rm -rf $WPTBASEDIR/screen_enumeration
 rm -rf $WPTBASEDIR/screen-orientation
 rm -rf $WPTBASEDIR/screen-wake-lock
 rm -rf $WPTBASEDIR/scroll-animations
@@ -198,12 +202,14 @@ rm -rf $WPTBASEDIR/webrtc
 rm -rf $WPTBASEDIR/webrtc-extensions
 rm -rf $WPTBASEDIR/webrtc-identity
 rm -rf $WPTBASEDIR/webrtc-insertable-streams
+rm -rf $WPTBASEDIR/webrtc-priority
 rm -rf $WPTBASEDIR/webrtc-quic
 rm -rf $WPTBASEDIR/webrtc-stats
 rm -rf $WPTBASEDIR/webrtc-svc
 rm -rf $WPTBASEDIR/web-share
 rm -rf $WPTBASEDIR/websockets
 rm -rf $WPTBASEDIR/webstorage
+rm -rf $WPTBASEDIR/webtransport
 rm -rf $WPTBASEDIR/webusb
 rm -rf $WPTBASEDIR/webvr
 rm -rf $WPTBASEDIR/webvtt
