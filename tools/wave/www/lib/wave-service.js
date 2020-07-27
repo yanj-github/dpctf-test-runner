@@ -527,6 +527,7 @@ var WaveService = {
   // DEVICES API
   _device_token: null,
   _deviceEventListeners: {},
+  _deviceEventNumbers: {},
   registerDevice: function (onSuccess, onError) {
     sendRequest(
       "POST",
@@ -582,7 +583,7 @@ var WaveService = {
     var listeners = WaveService._deviceEventListeners;
     if (!listeners[token] || listeners.length === 0) return;
     var url = "api/devices/" + token + "/events";
-    var lastEventNumber = this._eventNumbers[token];
+    var lastEventNumber = WaveService._deviceEventNumbers[token];
     if (lastEventNumber) {
       url += "?last_active=" + lastEventNumber;
     }
@@ -602,7 +603,7 @@ var WaveService = {
             listener(event);
           }
         }
-        this._eventNumbers[token] = lastEventNumber;
+        WaveService._deviceEventNumbers[token] = lastEventNumber;
         WaveService.listenDeviceEvents(token);
       },
       function () {

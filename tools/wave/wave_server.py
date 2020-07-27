@@ -20,7 +20,7 @@ from .testing.test_loader import TestLoader
 from .testing.event_dispatcher import EventDispatcher
 
 VERSION_STRING = "v3.0.2"
-DPCTF_VERSION_STRING = "v0.4.2"
+DPCTF_VERSION_STRING = "v0.4.3"
 
 
 class WaveServer(object):
