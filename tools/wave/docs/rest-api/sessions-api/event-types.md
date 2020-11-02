@@ -34,6 +34,8 @@ Contains the test case that completed.
 
 ## Test Ready
 
+DPCTF only
+
 **Type identifier**: `test_ready`  
 
 **Payload**:
@@ -71,6 +73,8 @@ observation framework to be ready.
 
 ## Observation Ready
 
+DPCTF only
+
 **Type identifier**: `observation_ready`  
 
 **Payload**:
@@ -90,6 +94,8 @@ is ready to observe.
 observations for a specific test.
 
 ## Observation Completed
+
+DPCTF only
 
 **Type identifier**: `observation_completed`  
 
@@ -121,6 +127,8 @@ The payload contains all results of the observation.
 a requested observation.
 
 ## Playback event
+
+DPCTF only
 
 **Type identifier**: `playback`
 
