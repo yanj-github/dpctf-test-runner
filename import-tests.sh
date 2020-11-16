@@ -225,11 +225,13 @@ rm MANIFEST.json
 echo ""
 echo "Importing DPCTF tests ..."
 git clone https://github.com/cta-wave/dpctf-tests dpctf
+mv dpctf/generated/* .
+rm -rf dpctf
 
 # build the MANIFEST.json
-echo ""
-echo "Building MANIFEST.json ..."
-./wpt manifest -r --no-download
+# echo ""
+# echo "Building MANIFEST.json ..."
+# ./wpt manifest -r --no-download
 
 echo ""
 echo "Start WAVE server using ./wpt serve-wave"
