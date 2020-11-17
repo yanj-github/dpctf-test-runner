@@ -1,0 +1,87 @@
+<!DOCTYPE >
+
+<html>
+  <head>
+    <link rel="stylesheet" href="css/bulma-0.7.5/bulma.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <script src="lib/davidshimjs/qrcode.js"></script>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-family: sans-serif;
+      }
+      .text {
+        font-size: 26pt;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="text">Next test is about to start</div>
+    <div id="details-wrapper">
+      <h3 class="title is-5 is-spaced">Details</h3>
+      <div class="detail">
+        <div>Session Token:</div>
+        <div id="token">014278a2-1eb9-11eb-be1f-0021ccd76152</div>
+      </div>
+      <div class="detail">
+        <div>Test:</div>
+        <div id="test-path">
+          Folder1/fullscreen-playback-of-switching-sets-manual_ToS_MultiRate_fragmented.html
+        </div>
+      </div>
+    </div>
+    <div id="qr-code" style="margin-top: 20px;"></div>
+  </body>
+  <script>
+    var HOSTNAME = location.hostname;
+    var PORT = location.port;
+    var PROTOCOL = location.protocol.replace(/:/, "");
+    var QUERY = location.search.replace(/\?/, "");
+    var match = QUERY.match(/token=([^&]+)/);
+    var TOKEN = match ? match[1] : null;
+    if (TOKEN)
+      document.cookie =
+        "resume_token=" + TOKEN + "; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+    match = QUERY.match(/redirect_time=([^&]+)/);
+    var REDIRECT_TIME = match ? match[1] : null;
+    if (!REDIRECT_TIME) REDIRECT_TIME = 5;
+    match = QUERY.match(/test_url=([^&]+)/);
+    var TEST_URL = match ? match[1] : null;
+    TEST_URL = decodeURIComponent(TEST_URL);
+    var TEST_ID = TEST_URL.split("?")[0];
+    var split = TEST_ID.split("/");
+    TEST_ID = "";
+    for (var i = 0; i < split.length; i++) {
+      if (i < 3) continue;
+      TEST_ID += "/" + split[i];
+    }
+
+    var tokenElement = document.getElementById("token");
+    tokenElement.innerText = TOKEN;
+
+    var testUrlElement = document.getElementById("test-path");
+    testUrlElement.innerText = TEST_ID;
+
+    var qrCodeContent = JSON.stringify({
+      session_token: TOKEN,
+      test_url: TEST_ID,
+    });
+    new QRCode(document.getElementById("qr-code"), {
+      text: qrCodeContent,
+      width: 500,
+      height: 500,
+    });
+
+    setTimeout(function () {
+      location.href = TEST_URL;
+    }, REDIRECT_TIME * 1000);
+  </script>
+</html>

@@ -76,6 +76,10 @@ def load(configuration_file_path):
         "wave", default_configuration["wave"]).get(
         "api_titles", default_configuration["wave"]["api_titles"])
 
+    configuration["pre_test_delay"] = configuration.get(
+        "wave", default_configuration["wave"]).get(
+        "pre_test_delay", default_configuration["wave"]["pre_test_delay"])
+
     return configuration
 
 

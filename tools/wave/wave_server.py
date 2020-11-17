@@ -109,7 +109,8 @@ class WaveServer(object):
             wpt_ssl_port=configuration["wpt_ssl_port"],
             hostname=configuration["hostname"],
             web_root=configuration["web_root"],
-            test_loader=test_loader
+            test_loader=test_loader,
+            pre_test_delay=configuration["pre_test_delay"]
         )
         devices_api_handler = DevicesApiHandler(
             devices_manager=devices_manager,

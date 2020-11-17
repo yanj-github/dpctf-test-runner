@@ -16,6 +16,7 @@ parameters and what they are used for.
    6. [API titles](#26-api-titles)
    7. [Enable listing all sessions](#27-enable-listing-all-sessions)
    8. [Event caching duration](#28-event-caching-duration)
+   9. [Pre test control page delay](#29-pre-test-control-page-delay)
 
 ## 1. Location and structure
 
@@ -299,6 +300,32 @@ accordingly.
 ```json
 {
   "event_cache_duration": 60000
+}
+```
+
+[🠑 top](#configuration---wave-test-runner)
+
+
+### 2.9 Pre test control page delay
+
+This parameter specifies how long the pre-test control pages is active before 
+redirecting to the actual test.
+
+**Parameters**:
+
+```json
+{
+  "pre_test_delay": "<Number>"
+}
+```
+
+- **event_cache_duration**: The duration the pre-test control pages is visible in seconds.
+
+**Default**:
+
+```json
+{
+  "pre_test_delay": 5
 }
 ```
 

@@ -7,6 +7,11 @@ try:
 except ImportError:
     from urlparse import urlunsplit
 
+try:
+    from urllib.parse import quote
+except ImportError:
+    from urllib import quote
+
 from .api_handler import ApiHandler
 from ...utils.serializer import serialize_session
 from ...data.session import PAUSED, COMPLETED, ABORTED, PENDING, RUNNING, DPCTF
@@ -24,7 +29,8 @@ class TestsApiHandler(ApiHandler):
         sessions_manager,
         hostname,
         web_root,
-        test_loader
+        test_loader,
+        pre_test_delay
     ):
         super(TestsApiHandler, self).__init__(web_root)
         self._tests_manager = tests_manager
@@ -34,6 +40,7 @@ class TestsApiHandler(ApiHandler):
         self._hostname = hostname
         self._web_root = web_root
         self._test_loader = test_loader
+        self._pre_test_delay = pre_test_delay
 
     def read_tests(self, response):
         tests = self._tests_manager.read_tests()
@@ -120,11 +127,22 @@ class TestsApiHandler(ApiHandler):
                 test=test, session=session)
 
             test = self._sessions_manager.get_test_path_with_query(test, session)
-            url = self._generate_test_url(
+
+            test_url = self._generate_test_url(
                 test=test,
                 token=token,
                 test_timeout=test_timeout,
                 hostname=hostname)
+            test_url = quote(test_url)
+            query = "web_root=" + self._web_root
+            query = "&redirect_time=" + str(self._pre_test_delay)
+            query = query + "&test_url=" + test_url
+            uri = "pre-test.html"
+            url = self._generate_wave_url(
+                hostname=hostname,
+                uri=uri,
+                token=token,
+                query=query)
 
             self.send_json({
                 "next_test": url
@@ -248,15 +266,18 @@ class TestsApiHandler(ApiHandler):
 
         response.status = 404
 
-    def _generate_wave_url(self, hostname, uri, token):
+    def _generate_wave_url(self, hostname, uri, token, query=None):
         if self._web_root is not None:
             uri = self._web_root + uri
+
+        if query is not None and not query.startswith("&"):
+            query = "&" + query
 
         return self._generate_url(
             hostname=hostname,
             uri=uri,
             port=self._wpt_port,
-            query="token=" + token
+            query="token=" + token + query
         )
 
     def _generate_test_url(self, hostname, test, token, test_timeout):

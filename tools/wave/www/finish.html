@@ -203,13 +203,11 @@
         }
       };
 
-      var match = location.search.match(/token=(.+)/);
-      var token = match[1];
       var tokenView = document.getElementById("token");
-      tokenView.innerText = token;
+      tokenView.innerText = TOKEN;
 
-      WaveService.readSession(token, displaySessionConfiguration);
-      WaveService.readSessionStatus(token, displaySessionStatus);
+      WaveService.readSession(TOKEN, displaySessionConfiguration);
+      WaveService.readSessionStatus(TOKEN, displaySessionStatus);
     </script>
   </body>
 </html>
