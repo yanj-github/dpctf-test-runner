@@ -80,6 +80,10 @@ def load(configuration_file_path):
         "wave", default_configuration["wave"]).get(
         "pre_test_delay", default_configuration["wave"]["pre_test_delay"])
 
+    configuration["execution_mode"] = configuration.get(
+        "wave", default_configuration["wave"]).get(
+        "execution_mode", default_configuration["wave"]["execution_mode"])
+
     return configuration
 
 

@@ -110,7 +110,8 @@ class WaveServer(object):
             hostname=configuration["hostname"],
             web_root=configuration["web_root"],
             test_loader=test_loader,
-            pre_test_delay=configuration["pre_test_delay"]
+            pre_test_delay=configuration["pre_test_delay"],
+            execution_mode=configuration["execution_mode"]
         )
         devices_api_handler = DevicesApiHandler(
             devices_manager=devices_manager,

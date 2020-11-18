@@ -30,7 +30,8 @@ class TestsApiHandler(ApiHandler):
         hostname,
         web_root,
         test_loader,
-        pre_test_delay
+        pre_test_delay,
+        execution_mode
     ):
         super(TestsApiHandler, self).__init__(web_root)
         self._tests_manager = tests_manager
@@ -41,6 +42,7 @@ class TestsApiHandler(ApiHandler):
         self._web_root = web_root
         self._test_loader = test_loader
         self._pre_test_delay = pre_test_delay
+        self._execution_mode = execution_mode
 
     def read_tests(self, response):
         tests = self._tests_manager.read_tests()
@@ -266,11 +268,11 @@ class TestsApiHandler(ApiHandler):
 
         response.status = 404
 
-    def _generate_wave_url(self, hostname, uri, token, query=None):
+    def _generate_wave_url(self, hostname, uri, token, query=""):
         if self._web_root is not None:
             uri = self._web_root + uri
 
-        if query is not None and not query.startswith("&"):
+        if query != "" and not query.startswith("&"):
             query = "&" + query
 
         return self._generate_url(
@@ -294,11 +296,12 @@ class TestsApiHandler(ApiHandler):
             test = split[0]
             test_query = split[1]
 
-        query = "token={}&timeout={}&https_port={}&web_root={}&{}".format(
+        query = "token={}&timeout={}&https_port={}&web_root={}&mode={}&{}".format(
                 token,
                 test_timeout,
                 self._wpt_ssl_port,
                 self._web_root,
+                self._execution_mode,
                 test_query
         )
 

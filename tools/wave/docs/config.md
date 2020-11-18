@@ -17,6 +17,7 @@ parameters and what they are used for.
    7. [Enable listing all sessions](#27-enable-listing-all-sessions)
    8. [Event caching duration](#28-event-caching-duration)
    9. [Pre test control page delay](#29-pre-test-control-page-delay)
+   10. [Test execution mode](#210-test-execution-mode)
 
 ## 1. Location and structure
 
@@ -326,6 +327,35 @@ redirecting to the actual test.
 ```json
 {
   "pre_test_delay": 5
+}
+```
+
+[🠑 top](#configuration---wave-test-runner)
+
+
+### 2.10 Test execution mode
+
+Specifies how tests are being executed.
+
+**Parameters**:
+
+```json
+{
+  "execution_mode": "<String>"
+}
+```
+
+- **execution_mode**: The mode to execute tests. Can be any of the following:
+  - `auto`: All tests are executed without any external interaction necessary
+  - `manual`: Tests will pause after they have finished. Press Enter/OK to continue
+  - `programmatic`: Tests wait for external events that control the tests 
+flow. See [observation events](./rest-api/sessions-api/event-types.md#observation-ready)
+
+**Default**:
+
+```json
+{
+  "execution_mode": "auto"
 }
 ```
 

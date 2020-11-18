@@ -36,6 +36,7 @@ if (location.search && location.search.indexOf("token=") != -1) {
   var __WAVE__WEB_ROOT = queryParameters["web_root"] || "/_wave/";
   var __WAVE__TOKEN = queryParameters["token"] || null;
   var __WAVE__TEST = location.pathname;
+  var __WAVE__MODE = queryParameters["mode"];
   var nextUrl = null;
   var resultSent = false;
   var screenConsole;
@@ -121,7 +122,14 @@ if (location.search && location.search.indexOf("token=") != -1) {
     parent.appendChild(screenConsole);
     window.onerror = logToConsole;
 
-    finishWptTest(data);
+    if (__WAVE__MODE === "manual") {
+      document.addEventListener("keydown", function (event) {
+        if (event.keyCode !== 13) return;
+        finishWptTest(data);
+      });
+    } else {
+      finishWptTest(data);
+    }
   }
 
   function finishWptTest(data) {
