@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/main.css" />
     <script src="lib/davidshimjs/qrcode.js"></script>
+    <script src="lib/joseph_myers/md5.js"></script>
     <style>
       body {
         padding: 0;
@@ -20,6 +21,9 @@
       }
       .text {
         font-size: 26pt;
+      }
+      #token, #test-id {
+        font-family: monospace;
       }
     </style>
   </head>
@@ -36,6 +40,10 @@
         <div id="test-path">
           Folder1/fullscreen-playback-of-switching-sets-manual_ToS_MultiRate_fragmented.html
         </div>
+      </div>
+      <div class="detail">
+        <div>Test ID:</div>
+        <div id="test-id">014278a2-1eb9-11eb-be1f-0021ccd76152</div>
       </div>
     </div>
     <div id="qr-code" style="margin-top: 20px;"></div>
@@ -54,26 +62,37 @@
     var REDIRECT_TIME = match ? match[1] : null;
     if (!REDIRECT_TIME) REDIRECT_TIME = 5;
     match = QUERY.match(/test_url=([^&]+)/);
-    var TEST_URL = match ? match[1] : null;
-    TEST_URL = decodeURIComponent(TEST_URL);
-    var TEST_ID = TEST_URL.split("?")[0];
+    var REDIRECT_URL = match ? match[1] : null;
+    REDIRECT_URL = decodeURIComponent(REDIRECT_URL);
+    var TEST_ID = REDIRECT_URL.split("?")[0];
     var split = TEST_ID.split("/");
-    TEST_ID = "";
+    var TEST_URL = "";
     for (var i = 0; i < split.length; i++) {
       if (i < 3) continue;
-      TEST_ID += "/" + split[i];
+      TEST_URL += "/" + split[i];
     }
+
+    TEST_ID = split.pop();
+    split = TEST_ID.split(".");
+    split.pop();
+    TEST_ID = split.join(".");
+    split = TEST_ID.split("__");
+    TEST_ID = md5(split.join(""));
 
     var tokenElement = document.getElementById("token");
     tokenElement.innerText = TOKEN;
 
     var testUrlElement = document.getElementById("test-path");
-    testUrlElement.innerText = TEST_ID;
+    testUrlElement.innerText = TEST_URL;
+
+    var testIdElement = document.getElementById("test-id");
+    testIdElement.innerText = TEST_ID;
 
     var qrCodeContent = JSON.stringify({
       session_token: TOKEN,
-      test_url: TEST_ID,
+      test_id: TEST_ID,
     });
+
     new QRCode(document.getElementById("qr-code"), {
       text: qrCodeContent,
       width: 500,
@@ -81,7 +100,7 @@
     });
 
     setTimeout(function () {
-      location.href = TEST_URL;
+      location.href = REDIRECT_URL;
     }, REDIRECT_TIME * 1000);
   </script>
 </html>
