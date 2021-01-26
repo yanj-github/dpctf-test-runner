@@ -226,6 +226,7 @@ echo ""
 echo "Importing DPCTF tests ..."
 git clone https://github.com/cta-wave/dpctf-tests dpctf
 mv dpctf/generated/* .
+mv dpctf/test-config.json .
 rm -rf dpctf
 
 # build the MANIFEST.json
