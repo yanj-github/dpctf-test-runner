@@ -46,7 +46,7 @@
         <div id="test-id">014278a2-1eb9-11eb-be1f-0021ccd76152</div>
       </div>
     </div>
-    <div id="qr-code" style="margin-top: 20px;"></div>
+    <div id="qr-code" class="pre" style="margin-top: 20px;"></div>
   </body>
   <script>
     var HOSTNAME = location.hostname;
@@ -97,6 +97,8 @@
       text: qrCodeContent,
       width: 500,
       height: 500,
+      colorDark: "#ffffff",
+      colorLight: "#000000",
     });
 
     setTimeout(function () {

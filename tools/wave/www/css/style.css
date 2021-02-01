@@ -36,6 +36,11 @@ body {
   border-radius: 3px;
 }
 
+#qr-code.pre {
+  padding: 20px;
+  background-color: black;
+}
+
 #button-wrapper {
   display: flex;
   margin: 20px 0;
