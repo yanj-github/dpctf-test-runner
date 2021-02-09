@@ -18,6 +18,7 @@ parameters and what they are used for.
    8. [Event caching duration](#28-event-caching-duration)
    9. [Pre test control page delay](#29-pre-test-control-page-delay)
    10. [Test execution mode](#210-test-execution-mode)
+   11. [Host override](#211-host-override)
 
 ## 1. Location and structure
 
@@ -358,5 +359,29 @@ flow. See [observation events](./rest-api/sessions-api/event-types.md#observatio
   "execution_mode": "auto"
 }
 ```
+
+[🠑 top](#configuration---wave-test-runner)
+
+### 2.11 Host override
+
+The `host_override` parameter overrides the hostname of the wpt runner. This 
+can be used to configure the access to the test runner using a static IP 
+address. As it is just an override, a proper host file setup as described
+[here](https://web-platform-tests.org/running-tests/from-local-system.html#hosts-file-setup)
+is still required.
+
+**Parameters**:
+
+```json
+{
+  "host_override": "<String>"
+}
+```
+
+- **host_override**: The hostname used to override the existing configuration
+
+**Default**:
+
+None
 
 [🠑 top](#configuration---wave-test-runner)

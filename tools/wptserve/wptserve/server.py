@@ -166,6 +166,8 @@ class WebTestServer(ThreadingMixIn, BaseHTTPServer.HTTPServer):
 
         self.latency = latency
 
+        server_address = ("0.0.0.0", server_address[1])
+
         if bind_address:
             hostname_port = server_address
         else:
