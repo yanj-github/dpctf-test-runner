@@ -18,19 +18,34 @@
         align-items: center;
         flex-direction: column;
         font-family: sans-serif;
+        font-size: 2vh;
       }
       .text {
-        font-size: 26pt;
+        font-size: 2em;
       }
-      #token, #test-id {
+      .detail {
+        font-size: 1em;
+      }
+      #token,
+      #test-id {
         font-family: monospace;
+        font-size: 1em;
+      }
+      #qr-code > img {
+        height: 25em;
+      }
+      #qr-code.pre {
+        padding: 1em;
+      }
+      #details-heading {
+        font-size: 1.5em;
       }
     </style>
   </head>
   <body>
     <div class="text">Next test is about to start</div>
     <div id="details-wrapper">
-      <h3 class="title is-5 is-spaced">Details</h3>
+      <h3 id="details-heading" class="title is-spaced">Details</h3>
       <div class="detail">
         <div>Session Token:</div>
         <div id="token">014278a2-1eb9-11eb-be1f-0021ccd76152</div>
@@ -46,7 +61,7 @@
         <div id="test-id">014278a2-1eb9-11eb-be1f-0021ccd76152</div>
       </div>
     </div>
-    <div id="qr-code" class="pre" style="margin-top: 20px;"></div>
+    <div id="qr-code" class="pre" style="margin-top: 2rem;"></div>
   </body>
   <script>
     var HOSTNAME = location.hostname;
