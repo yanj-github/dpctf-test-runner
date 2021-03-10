@@ -14,7 +14,7 @@
         width: 100vw;
         height: 100vh;
         display: flex;
-        justify-content: center;
+        /*justify-content: center;*/
         align-items: center;
         flex-direction: column;
         font-family: sans-serif;
@@ -31,8 +31,11 @@
         font-family: monospace;
         font-size: 1em;
       }
-      #qr-code > img {
-        height: 25em;
+      #test-path {
+        font-size: 1em;
+      }
+      #qr-code > img, #qr-code > canvas {
+        height: 22em;
       }
       #qr-code.pre {
         padding: 1em;
@@ -61,7 +64,7 @@
         <div id="test-id">014278a2-1eb9-11eb-be1f-0021ccd76152</div>
       </div>
     </div>
-    <div id="qr-code" class="pre" style="margin-top: 2rem;"></div>
+    <div id="qr-code" class="pre" style="margin-top: 1rem;"></div>
   </body>
   <script>
     var HOSTNAME = location.hostname;
