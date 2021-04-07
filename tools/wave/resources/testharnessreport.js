@@ -37,6 +37,7 @@ if (location.search && location.search.indexOf("token=") != -1) {
   var __WAVE__TOKEN = queryParameters["token"] || null;
   var __WAVE__TEST = location.pathname;
   var __WAVE__MODE = queryParameters["mode"];
+  var __WAVE__REDIRECT_TIME = queryParameters["redirect_time"] || 0;
   var nextUrl = null;
   var resultSent = false;
   var screenConsole;
@@ -156,7 +157,9 @@ if (location.search && location.search.indexOf("token=") != -1) {
       __WAVE__TOKEN,
       function (url) {
         logToConsole("Redirecting to " + url);
-        location.href = url;
+        setTimeout(function () {
+          location.href = url;
+        }, __WAVE__REDIRECT_TIME * 1000);
       },
       function () {
         logToConsole("Could not load next test.");

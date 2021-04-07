@@ -130,11 +130,13 @@ class TestsApiHandler(ApiHandler):
 
             test = self._sessions_manager.get_test_path_with_query(test, session)
 
+            test_query = "redirect_time=" + str(self._pre_test_delay)
             test_url = self._generate_test_url(
                 test=test,
                 token=token,
                 test_timeout=test_timeout,
-                hostname=hostname)
+                hostname=hostname,
+                query=test_query)
             test_url = quote(test_url)
             query = "web_root=" + self._web_root
             query = "&redirect_time=" + str(self._pre_test_delay)
@@ -282,7 +284,7 @@ class TestsApiHandler(ApiHandler):
             query="token=" + token + query
         )
 
-    def _generate_test_url(self, hostname, test, token, test_timeout):
+    def _generate_test_url(self, hostname, test, token, test_timeout, query):
         protocol = "http"
         port = self._wpt_port
 
@@ -295,6 +297,8 @@ class TestsApiHandler(ApiHandler):
         if len(split) > 1:
             test = split[0]
             test_query = split[1]
+        if query is not None:
+            test_query += "&" + query
 
         query = "token={}&timeout={}&https_port={}&web_root={}&mode={}&{}".format(
                 token,
