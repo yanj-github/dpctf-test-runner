@@ -19,6 +19,10 @@ from ...data.session import PAUSED, COMPLETED, ABORTED, PENDING, RUNNING, DPCTF
 DEFAULT_LAST_COMPLETED_TESTS_COUNT = 5
 DEFAULT_LAST_COMPLETED_TESTS_STATUS = ["ALL"]
 
+EXECUTION_MODE_AUTO = "auto"
+EXECUTION_MODE_MANUAL = "manual"
+EXECUTION_MODE_PROGRAMMATIC = "programmatic"
+
 
 class TestsApiHandler(ApiHandler):
     def __init__(
@@ -30,8 +34,7 @@ class TestsApiHandler(ApiHandler):
         hostname,
         web_root,
         test_loader,
-        pre_test_delay,
-        execution_mode
+        pre_test_delay
     ):
         super(TestsApiHandler, self).__init__(web_root)
         self._tests_manager = tests_manager
@@ -42,7 +45,7 @@ class TestsApiHandler(ApiHandler):
         self._web_root = web_root
         self._test_loader = test_loader
         self._pre_test_delay = pre_test_delay
-        self._execution_mode = execution_mode
+        self._execution_mode = EXECUTION_MODE_AUTO
 
     def read_tests(self, response):
         tests = self._tests_manager.read_tests()

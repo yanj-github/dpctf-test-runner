@@ -17,8 +17,8 @@ parameters and what they are used for.
    7. [Enable listing all sessions](#27-enable-listing-all-sessions)
    8. [Event caching duration](#28-event-caching-duration)
    9. [Pre test control page delay](#29-pre-test-control-page-delay)
-   10. [Test execution mode](#210-test-execution-mode)
-   11. [Host override](#211-host-override)
+   10. [Host override](#210-host-override)
+   11. [Enable test type selection](#211-enable-test-type-selection)
 
 ## 1. Location and structure
 
@@ -333,36 +333,7 @@ redirecting to the actual test.
 
 [🠑 top](#configuration---wave-test-runner)
 
-
-### 2.10 Test execution mode
-
-Specifies how tests are being executed.
-
-**Parameters**:
-
-```json
-{
-  "execution_mode": "<String>"
-}
-```
-
-- **execution_mode**: The mode to execute tests. Can be any of the following:
-  - `auto`: All tests are executed without any external interaction necessary
-  - `manual`: Tests will pause after they have finished. Press Enter/OK to continue
-  - `programmatic`: Tests wait for external events that control the tests 
-flow. See [observation events](./rest-api/sessions-api/event-types.md#observation-ready)
-
-**Default**:
-
-```json
-{
-  "execution_mode": "auto"
-}
-```
-
-[🠑 top](#configuration---wave-test-runner)
-
-### 2.11 Host override
+### 2.10 Host override
 
 The `host_override` parameter overrides the hostname of the wpt runner. This 
 can be used to configure the access to the test runner using a static IP 
@@ -383,5 +354,25 @@ is still required.
 **Default**:
 
 None
+
+[🠑 top](#configuration---wave-test-runner)
+
+### 2.11 Enable test type selection
+
+Sets display of test type configuration UI elements.
+
+**Parameters**:
+
+```json
+{
+  "enable_test_type_selection": "<Boolean>"
+}
+```
+
+- **enable_test_type_selection**: Whether or not test type UI controls are displayed
+
+**Default**:
+
+False
 
 [🠑 top](#configuration---wave-test-runner)

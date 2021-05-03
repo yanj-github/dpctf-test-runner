@@ -110,8 +110,7 @@ class WaveServer(object):
             hostname=configuration["hostname"],
             web_root=configuration["web_root"],
             test_loader=test_loader,
-            pre_test_delay=configuration["pre_test_delay"],
-            execution_mode=configuration["execution_mode"]
+            pre_test_delay=configuration["pre_test_delay"]
         )
         devices_api_handler = DevicesApiHandler(
             devices_manager=devices_manager,
@@ -129,7 +128,8 @@ class WaveServer(object):
             import_results_enabled=configuration["import_results_enabled"],
             reports_enabled=reports_enabled,
             version_string=VERSION_STRING,
-            dpctf_version_string=DPCTF_VERSION_STRING
+            dpctf_version_string=DPCTF_VERSION_STRING,
+            test_type_selection_enabled=configuration["enable_test_type_selection"]
         )
 
         # Initialize HTTP server
