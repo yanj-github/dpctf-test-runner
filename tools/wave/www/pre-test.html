@@ -86,7 +86,7 @@
     var split = TEST_ID.split("/");
     var TEST_URL = "";
     for (var i = 0; i < split.length; i++) {
-      if (i < 1) continue;
+      if (i < 3) continue;
       TEST_URL += "/" + split[i];
     }
     TEST_ID = md5(TEST_URL.substr(1));
