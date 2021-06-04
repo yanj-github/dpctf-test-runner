@@ -86,16 +86,10 @@
     var split = TEST_ID.split("/");
     var TEST_URL = "";
     for (var i = 0; i < split.length; i++) {
-      if (i < 3) continue;
+      if (i < 1) continue;
       TEST_URL += "/" + split[i];
     }
-
-    TEST_ID = split.pop();
-    split = TEST_ID.split(".");
-    split.pop();
-    TEST_ID = split.join(".");
-    split = TEST_ID.split("__");
-    TEST_ID = md5(split.join(""));
+    TEST_ID = md5(TEST_URL.substr(1));
 
     var tokenElement = document.getElementById("token");
     tokenElement.innerText = TOKEN;
