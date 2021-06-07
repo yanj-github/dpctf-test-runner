@@ -1,3 +1,10 @@
+DPCTF Test Runner
+=================
+
+The DPCTF Test Runner is based on the W3Cs [web-platform-tests project](https://github.com/web-platform-tests/wpt) ([e431163eb](https://github.com/web-platform-tests/wpt/tree/e431163eb7e1a2411801ca35f6f4a9d6e0d3bed4)).  
+For more details on how to use the test runner to execute tests, see the [dpctf-deploy](https://github.com/cta-wave/dpctf-deploy) repository.  
+For more details on the tests and how to customize their behavior, see the [dpctf-tests](https://github.com/cta-wave/dpctf-tests) repository.
+
 The web-platform-tests Project
 ==============================
 
@@ -71,13 +78,6 @@ commands are:
   webdriver server on the local machine.
 * `wpt serve-wave` - For starting the wpt http server and the WMAS test runner
   (requires to generate MANIFEST.json using `wpt manifest`). More details on how to use the WMAS test runner see the [documentation](./tools/wptserve/wptserve/wave/docs/usage/usage.md).
-
-DPCTF Info
-==========
-
-The DPCTF Test Runner can be run by checking out this repository and using the start command `wpt serve-wave`. However, we recommend using the deploy method provided by the [DPCTF deploy repository](https://github.com/cta-wave/dpctf-deploy/https://github.com/cta-wave/dpctf-deploy/).
-
-Currently, the DPCTF tests are under development. To skip the communication with the observation framework press `Enter`.
 
 <span id="windows-notes">Windows Notes</span>
 =============================================
