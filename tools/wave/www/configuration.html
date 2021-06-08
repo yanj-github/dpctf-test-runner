@@ -258,7 +258,7 @@
           var tests = state.configuration.tests;
           if (state.tests && state.tests[path.substr(1)]) {
             tests.include = tests.include.filter(function (test) {
-              return !test.match(new RegExp("^" + path));
+              return !test.match(new RegExp("^" + path + "/"));
             });
             tests.include = tests.include.concat(state.tests[path.substr(1)]);
           } else {
@@ -271,7 +271,7 @@
 
           if (state.tests && state.tests[path.substr(1)]) {
             tests.include = tests.include.filter(function (test) {
-              return !test.match(new RegExp("^" + path));
+              return !test.match(new RegExp("^" + path + "/"));
             });
           } else {
             var index = tests.include.findIndex((test) => test === path);
@@ -392,7 +392,11 @@
           apiErrorElement.innerHTML = "";
           if (!isTestListValid()) {
             apiErrorElement.appendChild(
-              UI.createElement(createErrorMessage("Select at least one API"))
+              UI.createElement(
+                createErrorMessage(
+                  "Select at least one API or at least one test within an API"
+                )
+              )
             );
           }
           renderButtonsField();
@@ -972,6 +976,20 @@
                   renderApiList(api);
                 },
               },
+              detailedTestSelectionEnabled
+                ? {
+                    element: "span",
+                    style:
+                      "display: inline-block;vertical-align: middle;margin-left:0.3em",
+                    children: {
+                      element: "i",
+                      className:
+                        state.expandedApis && state.expandedApis[api.path]
+                          ? "fas fa-angle-down"
+                          : "fas fa-angle-right",
+                    },
+                  }
+                : null,
               {
                 style:
                   "display: inline-block;vertical-align: middle;margin-left:0.3em;width: 90%",
@@ -992,7 +1010,6 @@
             WaveService.readTestList(
               function (readTests) {
                 state.tests = readTests;
-                var tests = state.configuration.tests;
                 for (var api in state.tests) {
                   if (hasIncludedTest("/" + api)) {
                     handleRemoveIncludedTest("/" + api);
