@@ -980,7 +980,7 @@
                 ? {
                     element: "span",
                     style:
-                      "display: inline-block;vertical-align: middle;margin-left:0.3em",
+                      "display: inline-block;vertical-align: middle;margin-left:0.3em;width: 0.7em",
                     children: {
                       element: "i",
                       className:
@@ -1028,34 +1028,36 @@
             };
 
             testListView.children = testListView.children.concat(
-              tests.map(function (test) {
-                return {
-                  element: "li",
-                  onclick: function (event) {
-                    handleIncludedTestToggle(test);
-                    renderApiList(api);
-                  },
-                  children: [
-                    {
-                      element: "a",
-                      children: [
-                        {
-                          element: "input",
-                          type: "checkbox",
-                          style:
-                            "width: 1.3em; height: 1.3em;vertical-align: middle;",
-                          checked: hasIncludedTest(test),
-                        },
-                        {
-                          style:
-                            "display: inline-block;vertical-align: middle;margin-left:0.3em;max-width: 90%",
-                          text: test,
-                        },
-                      ],
+              tests
+                .sort()
+                .map(function (test) {
+                  return {
+                    element: "li",
+                    onclick: function (event) {
+                      handleIncludedTestToggle(test);
+                      renderApiList(api);
                     },
-                  ],
-                };
-              })
+                    children: [
+                      {
+                        element: "a",
+                        children: [
+                          {
+                            element: "input",
+                            type: "checkbox",
+                            style:
+                              "width: 1.3em; height: 1.3em;vertical-align: middle;",
+                            checked: hasIncludedTest(test),
+                          },
+                          {
+                            style:
+                              "display: inline-block;vertical-align: middle;margin-left:0.3em;max-width: 90%",
+                            text: test,
+                          },
+                        ],
+                      },
+                    ],
+                  };
+                })
             );
             return UI.createElement(testListView);
           }
