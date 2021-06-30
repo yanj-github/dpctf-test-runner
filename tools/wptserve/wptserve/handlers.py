@@ -169,8 +169,10 @@ class FileHandler(object):
                         raise
             else:
                 byte_ranges = None
+            headers = [("Access-Control-Allow-Origin", "*")]
             data = self.get_data(response, path, byte_ranges)
             response.content = data
+            response.headers = headers
             response = wrap_pipeline(path, request, response)
             return response
 
