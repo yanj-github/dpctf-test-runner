@@ -45,6 +45,7 @@
     "event_cache_duration": 60000,
     "pre_test_delay": 5,
     "execution_mode": "auto",
-    "enable_test_type_selection": false
+    "enable_test_type_selection": false,
+    "tests_base_url": ""
   }
 }

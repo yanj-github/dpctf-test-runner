@@ -88,6 +88,10 @@ def load(configuration_file_path):
     if "wave" in configuration and "host_override" in configuration["wave"]:
         configuration["hostname"] = configuration["wave"]["host_override"]
 
+    configuration["tests_base_url"] = configuration.get(
+        "wave", default_configuration["wave"]).get(
+        "tests_base_url", default_configuration["wave"]["tests_base_url"])
+
     return configuration
 
 

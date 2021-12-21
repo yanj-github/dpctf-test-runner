@@ -19,6 +19,7 @@ parameters and what they are used for.
    9. [Pre test control page delay](#29-pre-test-control-page-delay)
    10. [Host override](#210-host-override)
    11. [Enable test type selection](#211-enable-test-type-selection)
+   12. [Tests base URL](#212-tests-base-url)
 
 ## 1. Location and structure
 
@@ -374,5 +375,25 @@ Sets display of test type configuration UI elements.
 **Default**:
 
 False
+
+[🠑 top](#configuration---wave-test-runner)
+
+### 2.12 Tests base URL
+
+Sets the base URL for links to test implementation URLs in generated reports
+
+**Parameters**:
+
+```json
+{
+  "tests_base_url": "<String>"
+}
+```
+
+- **tests_base_url**: String to prepend to relative test urls
+
+**Default**:
+
+Empty String
 
 [🠑 top](#configuration---wave-test-runner)
