@@ -9,7 +9,7 @@ import zipfile
 import time
 
 from ..utils.user_agent_parser import parse_user_agent, abbreviate_browser_name
-from ..utils.serializer import serialize_session
+from ..utils.serializer import serialize_session, millis_to_iso
 from ..utils.deserializer import deserialize_session
 from ..data.exceptions.invalid_data_exception import InvalidDataException
 from ..data.exceptions.duplicate_exception import DuplicateException
@@ -82,6 +82,8 @@ class ResultsManager(object):
             return
         self._sessions_manager.complete_session(token)
         self.create_info_file(session)
+        for api in apis:
+            self.update_results_meta(token, api)
 
     def read_results(self, token, filter_path=None):
         filter_api = None
@@ -371,6 +373,12 @@ class ResultsManager(object):
 
         return os.path.join(api_directory, file_name)
 
+    def get_results_meta(self, session):
+        return {
+            "date_session_started": millis_to_iso(session.date_started),
+            "date_session_finished": millis_to_iso(session.date_finished)
+        }
+
     def save_api_results(self, token, api):
         results = self._read_from_cache(token)
         if api not in results:
@@ -391,10 +399,31 @@ class ResultsManager(object):
                 api_results = {"results": []}
 
             api_results["results"] = api_results["results"] + results
+            api_results["meta"] = self.get_results_meta(session)
 
             file.seek(0)
             file.truncate()
             file.write(json.dumps(api_results, indent=4, separators=(',', ': ')))
+
+    def update_results_meta(self, token, api):
+        session = self._sessions_manager.read_session(token)
+        file_path = self.get_json_path(token, api)
+        file_exists = os.path.isfile(file_path)
+
+        with open(file_path, "r+" if file_exists else "w") as file:
+            api_results = None
+            if file_exists:
+                data = file.read()
+                api_results = json.loads(data)
+            else:
+                api_results = {"results": []}
+
+            api_results["meta"] = self.get_results_meta(session)
+
+            file.seek(0)
+            file.truncate()
+            file.write(json.dumps(api_results, indent=4, separators=(',', ': ')))
+        self.generate_report(token, api)
 
     def _ensure_results_directory_existence(self, api, token, session):
         directory = os.path.join(self._results_directory_path, token, api)
