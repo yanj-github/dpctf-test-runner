@@ -46,6 +46,6 @@
     "pre_test_delay": 5,
     "execution_mode": "auto",
     "enable_test_type_selection": false,
-    "tests_base_url": ""
+    "tests_base_url": "https://github.com/cta-wave/dpctf-tests/tree/master/generated"
   }
 }
