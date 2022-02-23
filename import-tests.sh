@@ -222,9 +222,15 @@ rm -rf $WPTBASEDIR/xhr
 # delete old MANIFEST.json
 rm MANIFEST.json
 
+branch="master"
+
+if [ -n $1 ]; then
+	branch="$1";
+fi;
+
 echo ""
 echo "Importing DPCTF tests ..."
-git clone https://github.com/cta-wave/dpctf-tests dpctf
+git clone -b $branch --single-branch https://github.com/cta-wave/dpctf-tests dpctf
 mv dpctf/generated/* .
 mv dpctf/test-config.json .
 rm -rf dpctf
