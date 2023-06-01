@@ -97,12 +97,20 @@ class HttpHandler(object):
         port = str(self._http_port)
         uri = request.url_parts.path
         uri = uri + "?" + request.url_parts.query
-        data = request.raw_input.read(request.headers.get('Content-Length'))
+        content_length = request.headers.get('Content-Length')
+        data = ""
+        if content_length is not None:
+            data = request.raw_input.read(int(content_length))
         method = request.method
+
+        headers = {}
+        for key in request.headers:
+            value = request.headers[key]
+            headers[key.decode("utf-8")] = value.decode("utf-8")
 
         try:
             proxy_connection = httplib.HTTPConnection(host, port)
-            proxy_connection.request(method, uri, data, request.headers)
+            proxy_connection.request(method, uri, data, headers)
             proxy_response = proxy_connection.getresponse()
             response.content = proxy_response.read()
             response.headers = proxy_response.getheaders()
