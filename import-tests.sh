@@ -224,7 +224,7 @@ rm MANIFEST.json
 
 branch="master"
 
-if [ -n $1 ]; then
+if [[ -n "$1" ]]; then
 	branch="$1";
 fi;
 
