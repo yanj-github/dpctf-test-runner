@@ -41,6 +41,7 @@ if (location.search && location.search.indexOf("token=") != -1) {
   var nextUrl = null;
   var resultSent = false;
   var screenConsole;
+  var logs = [];
 
   try {
     var documentRoot = document.body ? document.body : document.documentElement;
@@ -74,8 +75,10 @@ if (location.search && location.search.indexOf("token=") != -1) {
     for (var i = 0; i < arguments.length; i++) {
       text += arguments[i] + " ";
     }
+    logs.push(text);
     if (console && console.log) {
-      console.log(text);
+      //console.log(text);
+      consoleLog(text);
     }
     if (screenConsole) {
       try {
@@ -86,6 +89,12 @@ if (location.search && location.search.indexOf("token=") != -1) {
         screenConsole.innerText += "\n" + text;
       }
     }
+  }
+
+  var consoleLog;
+  if (console && console.log) {
+    consoleLog = console.log;
+    console.log = logToConsole;
   }
 
   function dump_and_report_test_results(tests, status) {
@@ -121,7 +130,10 @@ if (location.search && location.search.indexOf("token=") != -1) {
     if (!screenConsole) {
       screenConsole = document.createElement("div");
       screenConsole.setAttribute("id", "console");
-      screenConsole.setAttribute("style", "font-family: monospace; padding: 5px");
+      screenConsole.setAttribute(
+        "style",
+        "font-family: monospace; padding: 5px"
+      );
       parent.appendChild(screenConsole);
     }
     window.onerror = logToConsole;
@@ -139,6 +151,7 @@ if (location.search && location.search.indexOf("token=") != -1) {
   function finishWptTest(data) {
     logToConsole("Creating result ...");
     data.test = __WAVE__TEST;
+    data.logs = logs;
     createResult(
       __WAVE__TOKEN,
       data,
