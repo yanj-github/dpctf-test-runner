@@ -67,7 +67,11 @@ if (location.search && location.search.indexOf("token=") != -1) {
   } catch (err) {}
 
   setTimeout(function () {
-    sendLogs(__WAVE__TOKEN, function() {}, function() {});
+    sendLogs(
+      __WAVE__TOKEN,
+      function () {},
+      function () {}
+    );
     loadNext();
   }, __WAVE__TIMEOUT - 10000);
 
@@ -91,6 +95,10 @@ if (location.search && location.search.indexOf("token=") != -1) {
       }
     }
   }
+
+  window.addEventListener("error", function (event) {
+    logToConsole(JSON.stringify(event));
+  });
 
   var consoleLog;
   if (console && console.log) {
