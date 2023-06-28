@@ -67,8 +67,9 @@ if (location.search && location.search.indexOf("token=") != -1) {
   } catch (err) {}
 
   setTimeout(function () {
+    sendLogs(__WAVE__TOKEN, function() {}, function() {});
     loadNext();
-  }, __WAVE__TIMEOUT);
+  }, __WAVE__TIMEOUT - 10000);
 
   function logToConsole() {
     var text = "";
@@ -211,6 +212,22 @@ if (location.search && location.search.indexOf("token=") != -1) {
         "Content-Type": "application/json",
       },
       JSON.stringify(result),
+      function () {
+        onSuccess();
+      },
+      onError
+    );
+  }
+
+  function sendLogs(token, onSuccess, onError) {
+    let data = { logs: logs };
+    sendRequest(
+      "POST",
+      "api/tests/" + token + "/logs",
+      {
+        "Content-Type": "application/json",
+      },
+      JSON.stringify(data),
       function () {
         onSuccess();
       },

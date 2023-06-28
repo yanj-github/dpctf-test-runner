@@ -226,6 +226,25 @@ class TestsApiHandler(ApiHandler):
             self.handle_exception("Failed to update malfunctioning tests")
             response.status = 500
 
+    def add_logs(self, request, response):
+        try:
+            uri_parts = self.parse_uri(request)
+            token = uri_parts[2]
+
+            data = None
+            body = request.body.decode("utf-8")
+            if body != "":
+                data = json.loads(body)
+
+            logs = []
+            if "logs" in data:
+                logs = data["logs"]
+
+            self._tests_manager.add_logs(token, logs)
+        except Exception:
+            self.handle_exception("Failed to add logs")
+            response.status = 500
+
     def read_available_apis(self, request, response):
         try:
             apis = self._test_loader.get_apis()
@@ -269,6 +288,10 @@ class TestsApiHandler(ApiHandler):
             if method == "PUT":
                 if function == "malfunctioning":
                     self.update_malfunctioning(request, response)
+                    return
+            if method == "POST":
+                if function == "logs":
+                    self.add_logs(request, response)
                     return
 
         response.status = 404

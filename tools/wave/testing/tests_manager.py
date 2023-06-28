@@ -24,6 +24,7 @@ class TestsManager(object):
         self._event_dispatcher = event_dispatcher
 
         self._timeouts = []
+        self._logs = {}
 
     def next_test(self, session):
         if session.status == COMPLETED or session.status == ABORTED:
@@ -278,6 +279,9 @@ class TestsManager(object):
         return test_timeout
 
     def _on_test_timeout(self, token, test):
+        logs = []
+        if token in self._logs:
+            logs = self._logs[token]
         data = {
             "test": test,
             "status": "TIMEOUT",
@@ -287,7 +291,8 @@ class TestsManager(object):
                     "status": "TIMEOUT",
                     "xstatus": "SERVERTIMEOUT"
                 }
-            ]
+            ],
+            "logs": logs
         }
 
         self._results_manager.create_result(token, data)
@@ -367,3 +372,13 @@ class TestsManager(object):
             pending_tests = self.skip_to(pending_tests, last_completed_test)
 
         return pending_tests
+
+    def add_logs(self, token, logs):
+        if token not in self._logs:
+            self._logs[token] = []
+        self._logs[token] = self._logs[token] + logs
+
+    def get_logs(self, token):
+        if token not in self._logs:
+            return []
+        return self._logs[token]
