@@ -828,6 +828,8 @@ var WaveService = {
     var lastEventNumber = WaveService._sessionEventNumbers[token];
     if (lastEventNumber) {
       url += "?last_event=" + lastEventNumber;
+    } else {
+      lastEventNumber = 0;
     }
     WaveService.listenHttpPolling(
       url,
@@ -836,7 +838,6 @@ var WaveService = {
           WaveService.listenSessionEvents(token);
           return;
         }
-        var lastEventNumber = 0;
         for (var listener of listeners[token]) {
           for (var event of response) {
             if (event.number > lastEventNumber) {
@@ -850,7 +851,7 @@ var WaveService = {
       },
       function () {
         setTimeout(function () {
-          WaveService.listenSessionEvents();
+          WaveService.listenSessionEvents(token);
         }, 1000);
       }
     );

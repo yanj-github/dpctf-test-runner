@@ -259,7 +259,7 @@
           var tests = state.configuration.tests;
           if (state.tests && state.tests[path.substr(1)]) {
             tests.include = tests.include.filter(function (test) {
-              return !test.match(new RegExp("^" + path + "/"));
+              return !test.match(new RegExp("^" + path));
             });
             tests.include = tests.include.concat(state.tests[path.substr(1)]);
           } else {
@@ -272,7 +272,7 @@
 
           if (state.tests && state.tests[path.substr(1)]) {
             tests.include = tests.include.filter(function (test) {
-              return !test.match(new RegExp("^" + path + "/"));
+              return !test.match(new RegExp("^" + path));
             });
           } else {
             var index = tests.include.findIndex((test) => test === path);
