@@ -229,7 +229,7 @@ if [[ -n "$1" ]]; then
 fi;
 
 echo ""
-echo "Importing DPCTF tests ..."
+echo "Importing WAVE SMTS Devices tests ..."
 git clone -b $branch --single-branch https://github.com/cta-wave/dpctf-tests dpctf
 mv dpctf/generated/* .
 mv dpctf/test-config.json .

@@ -34,7 +34,7 @@ Contains the test case that completed.
 
 ## Test Ready
 
-DPCTF only
+WAVE Streaming Media Test Suite only
 
 **Type identifier**: `test_ready`  
 
@@ -59,7 +59,7 @@ An object, that contains information of the test case that finished loading.
 }
 ```
 
-- **path**: The path of the test, relative to the DPCTF Test Runner root
+- **path**: The path of the test, relative to the SMTS Devices Test Runner root
 - **title**: The name of the test
 - **description**: A description of the test
 - **params**: A key-value object containing all query parameters and its values
@@ -73,7 +73,7 @@ observation framework to be ready.
 
 ## Observation Ready
 
-DPCTF only
+WAVE Streaming Media Test Suite only
 
 **Type identifier**: `observation_ready`  
 
@@ -88,14 +88,14 @@ is ready to observe.
 }
 ```
 
-- **test_path**: The path of the test, relative to the DPCTF Test Runner root
+- **test_path**: The path of the test, relative to the SMTS Devices Test Runner root
 
 **Description**: Triggered by an external framework that is ready to perform 
 observations for a specific test.
 
 ## Observation Completed
 
-DPCTF only
+WAVE Streaming Media Test Suite only
 
 **Type identifier**: `observation_completed`  
 
@@ -128,7 +128,7 @@ a requested observation.
 
 ## Playback event
 
-DPCTF only
+WAVE Streaming Media Test Suite only
 
 **Type identifier**: `playback`
 
